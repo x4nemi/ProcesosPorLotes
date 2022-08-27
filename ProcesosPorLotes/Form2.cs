@@ -15,7 +15,10 @@ namespace ProcesosPorLotes
         private int counter;
         public Form2( string counter_text)
         {
+         
             InitializeComponent();
+            this.BackColor = Color.FromArgb(255, 182, 193);
+            this.CenterToScreen();
             counter = Int32.Parse(counter_text);
             label5.Text = "#" + counter.ToString();
         }
