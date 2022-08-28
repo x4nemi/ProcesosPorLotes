@@ -21,16 +21,28 @@ namespace ProcesosPorLotes
             this.CenterToScreen();
             counter = Int32.Parse(counter_text);
             label5.Text = "#" + counter.ToString();
+            //Queue<Procesos> q = new Queue<Procesos>(Int32.Parse(cajita.Text));
+            
         }
 
+        AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
+       
         private void button1_Click(object sender, EventArgs e)
         {
-            counter++;
-            label5.Text = "#" + counter.ToString();
+            Procesos pc = new Procesos(1, cajita2.Text, Int32.Parse(cajita3.Text),Double.Parse(cajita4.Text),
+                Double.Parse(cajita5.Text), "Resta", Int32.Parse(cajita6.Text));
+            q.Agregar(pc);
+
+            nombre.Text = q.Cola.Dequeue().Nombre.ToString();
         }
         
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cajita_TextChanged(object sender, EventArgs e)
         {
 
         }

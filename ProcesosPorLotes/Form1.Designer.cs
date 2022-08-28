@@ -86,6 +86,6 @@
 
         private Button ok_button;
         private Label label1;
-        private TextBox text1;
+        public TextBox text1;
     }
 }
