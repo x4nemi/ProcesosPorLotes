@@ -25,6 +25,8 @@ namespace ProcesosPorLotes
             {
                 Form2 form2 = new Form2(text1.Text);
                 form2.Show();
+                form2.cajita.Text = text1.Text;
+
             }
         }
 

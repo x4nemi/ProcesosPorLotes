@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.cajita6 = new System.Windows.Forms.TextBox();
+            this.cajita2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.cajita3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -40,57 +40,63 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.cajita = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cajita4 = new System.Windows.Forms.TextBox();
+            this.cajita5 = new System.Windows.Forms.TextBox();
+            this.nombre = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(28, 110);
+            this.label1.Location = new System.Drawing.Point(562, 230);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 28);
             this.label1.TabIndex = 0;
             this.label1.Text = "# de programa";
             // 
-            // textBox1
+            // cajita6
             // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(28, 141);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(143, 31);
-            this.textBox1.TabIndex = 1;
+            this.cajita6.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cajita6.Location = new System.Drawing.Point(562, 261);
+            this.cajita6.Name = "cajita6";
+            this.cajita6.Size = new System.Drawing.Size(143, 31);
+            this.cajita6.TabIndex = 1;
             // 
-            // textBox2
+            // cajita2
             // 
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox2.Location = new System.Drawing.Point(201, 141);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(240, 31);
-            this.textBox2.TabIndex = 3;
+            this.cajita2.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cajita2.Location = new System.Drawing.Point(85, 139);
+            this.cajita2.Name = "cajita2";
+            this.cajita2.Size = new System.Drawing.Size(240, 31);
+            this.cajita2.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(201, 110);
+            this.label2.Location = new System.Drawing.Point(85, 108);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(240, 28);
             this.label2.TabIndex = 2;
             this.label2.Text = "Nombre del programador";
             // 
-            // textBox3
+            // cajita3
             // 
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox3.Location = new System.Drawing.Point(466, 141);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(239, 31);
-            this.textBox3.TabIndex = 5;
+            this.cajita3.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cajita3.Location = new System.Drawing.Point(350, 139);
+            this.cajita3.Name = "cajita3";
+            this.cajita3.Size = new System.Drawing.Size(239, 31);
+            this.cajita3.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(466, 110);
+            this.label3.Location = new System.Drawing.Point(350, 108);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(239, 28);
             this.label3.TabIndex = 4;
@@ -145,7 +151,7 @@
             "División",
             "Residuo",
             "Potencia"});
-            this.comboBox1.Location = new System.Drawing.Point(28, 259);
+            this.comboBox1.Location = new System.Drawing.Point(361, 259);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(167, 31);
             this.comboBox1.TabIndex = 10;
@@ -156,28 +162,84 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(28, 224);
+            this.label6.Location = new System.Drawing.Point(361, 224);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(103, 28);
             this.label6.TabIndex = 11;
             this.label6.Text = "Operación";
+            // 
+            // cajita
+            // 
+            this.cajita.Location = new System.Drawing.Point(507, 325);
+            this.cajita.Name = "cajita";
+            this.cajita.Size = new System.Drawing.Size(100, 23);
+            this.cajita.TabIndex = 12;
+            this.cajita.ReadOnlyChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cajita.TextChanged += new System.EventHandler(this.cajita_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(38, 224);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(103, 28);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Operación";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(181, 224);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(103, 28);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Operación";
+            // 
+            // cajita4
+            // 
+            this.cajita4.Location = new System.Drawing.Point(38, 267);
+            this.cajita4.Name = "cajita4";
+            this.cajita4.Size = new System.Drawing.Size(100, 23);
+            this.cajita4.TabIndex = 15;
+            // 
+            // cajita5
+            // 
+            this.cajita5.Location = new System.Drawing.Point(184, 267);
+            this.cajita5.Name = "cajita5";
+            this.cajita5.Size = new System.Drawing.Size(100, 23);
+            this.cajita5.TabIndex = 16;
+            // 
+            // nombre
+            // 
+            this.nombre.Location = new System.Drawing.Point(214, 335);
+            this.nombre.Name = "nombre";
+            this.nombre.Size = new System.Drawing.Size(100, 23);
+            this.nombre.TabIndex = 17;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.nombre);
+            this.Controls.Add(this.cajita5);
+            this.Controls.Add(this.cajita4);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.cajita);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.cajita3);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.cajita2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cajita6);
             this.Controls.Add(this.label1);
             this.Name = "Form2";
             this.Text = "Form2";
@@ -189,9 +251,9 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox cajita6;
+        private TextBox cajita2;
+        private TextBox cajita3;
         private Label label2;
         private Label label3;
         private Label label4;
@@ -200,5 +262,11 @@
         private ProgressBar progressBar1;
         private ComboBox comboBox1;
         private Label label6;
+        private Label label7;
+        private Label label8;
+        public TextBox cajita4;
+        public TextBox cajita5;
+        public TextBox cajita;
+        private TextBox nombre;
     }
 }
