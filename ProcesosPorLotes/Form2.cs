@@ -78,7 +78,7 @@ namespace ProcesosPorLotes
             if (ValidarLlenado())
             {
                 LimpiarTextBoxes();
-                //cajita2 = nombre
+                // cajita2 = nombre
                 // cajita3 = tme
                 // cajita4 = num1
                 // cajita5 = num2
@@ -87,6 +87,7 @@ namespace ProcesosPorLotes
                 Procesos pc = new Procesos(1, cajita2.Text, Int32.Parse(cajita3.Text),Double.Parse(cajita4.Text),
                     Double.Parse(cajita5.Text), "Resta", Int32.Parse(cajita6.Text));
                 q.Agregar(pc);
+                counter++;
             }   
 
 
