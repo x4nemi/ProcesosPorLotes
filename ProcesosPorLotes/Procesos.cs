@@ -54,5 +54,7 @@ namespace ProcesosPorLotes
             Cola.Enqueue(obj);
             I++;
         }
+
+        public Queue Regresar()
     }
 }

@@ -29,7 +29,7 @@ namespace ProcesosPorLotes
             
         }
 
-        AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
+        static AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
        
         //TODO
         //private bool IDValido(string aidi)
