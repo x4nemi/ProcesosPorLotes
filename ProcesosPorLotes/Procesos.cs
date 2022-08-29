@@ -55,6 +55,9 @@ namespace ProcesosPorLotes
             I++;
         }
 
-        public Queue Regresar()
+        public T Regresar()
+        {
+            return Cola.Dequeue();
+        }
     }
 }
