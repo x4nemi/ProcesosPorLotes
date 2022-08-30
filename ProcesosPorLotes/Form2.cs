@@ -26,11 +26,18 @@ namespace ProcesosPorLotes
             progressBar1.Value = counter;
             progressBar1.Maximum = totalProcesos;
             progressBar1.Minimum = 0;
-            
+
         }
 
-        static AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
-       
+
+        static AlmacenProcesos<Procesos> qu = new AlmacenProcesos<Procesos>();
+        static List<int> lista = new List<int>();
+        
+        Form4 form4 = new Form4();
+        
+        
+
+
         //TODO
         //private bool IDValido(string aidi)
         //{
@@ -75,23 +82,46 @@ namespace ProcesosPorLotes
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             if (ValidarLlenado())
             {
-                LimpiarTextBoxes();
-                // cajita2 = nombre
-                // cajita3 = tme
-                // cajita4 = num1
-                // cajita5 = num2
-                // cajita6 = id
 
-                Procesos pc = new Procesos(1, cajita2.Text, Int32.Parse(cajita3.Text),Double.Parse(cajita4.Text),
-                    Double.Parse(cajita5.Text), "Resta", Int32.Parse(cajita6.Text));
-                q.Agregar(pc);
-                counter++;
+                string id = cajita6.Text;
+                int idm = Int32.Parse(id);
+                string tm = cajita3.Text;
+                int tm2 = Int32.Parse(tm);
+                string n1 = cajita4.Text;
+                string n2 = cajita5.Text;
+                Double nn1 = Double.Parse(n1);
+                Double nn2 = Double.Parse(n2);
+
+
+
+                int[] ids = lista.ToArray();
+                Procesos pc = new Procesos(counter, cajita2.Text, tm2, nn1, nn2, comboBox1.Text, idm);
+                bool existe = ids.Contains(idm);
+
+                if (existe == true)
+                {
+                    MessageBox.Show("Este id ya existe");
+                    LimpiarTextBoxes();
+                }
+                else
+                {
+                    //MessageBox.Show("Este id no existe");
+                    //ids.Append(idm);
+                    qu.Agregar(pc);
+                    form4.tabla.Rows.Add(idm, cajita2.Text, nn1, nn2, comboBox1.Text, tm2, counter);
+                    counter++;
+                    LimpiarTextBoxes();
+                    form4.Show();
+                    lista.Add(idm);
+                    //LimpiarTextBoxes();
+                }
             }   
-
-
         }
+
+        
         
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
