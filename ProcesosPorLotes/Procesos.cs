@@ -57,6 +57,12 @@ namespace ProcesosPorLotes
 
         public T Regresar()
         {
+
+            return Cola.Peek();
+        }
+
+        public T Ejecutar()
+        {
             return Cola.Dequeue();
         }
     }
