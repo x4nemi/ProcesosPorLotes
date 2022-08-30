@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ProcesosPorLotes
 {
     
-    class Procesos
+    public class Procesos
     {
         private int numpro;
         private int tiempo;
@@ -37,7 +37,7 @@ namespace ProcesosPorLotes
         }
     }
 
-    class AlmacenProcesos<T>
+    public class AlmacenProcesos<T>
     {
         private Queue<T> cola;
         private int i;
