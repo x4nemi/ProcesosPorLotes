@@ -23,7 +23,7 @@ namespace ProcesosPorLotes
         public Form3()
         {
             InitializeComponent();
-            AlmacenarProcesos();
+            //AlmacenarProcesos();
             EnProceso();
         }
 
@@ -91,9 +91,9 @@ namespace ProcesosPorLotes
             int i = 1, j = 1;
             foreach (Procesos p in q.Cola)
             {
-
                 seconds = p.Tiempo;
                 timer1.Start();
+                label6.Text = Resultado(p.Num1, p.Num2, p.Operacion).ToString();
                 label5.Text = i.ToString();
                 label4.Text = p.Nombre;
 
@@ -120,6 +120,34 @@ namespace ProcesosPorLotes
             limpiarLabels();
         }
 
+        private double Resultado (double num1, double num2, string op)
+        {
+            double resOp = 0;
+            switch (op)
+            {
+                case "Suma":
+                    resOp = num1 + num2;
+                    break;
+                case "Resta":
+                    resOp = num1 - num2;
+                    break;
+                case "Multiplicación":
+                    resOp = num1 * num2;
+                    break;
+                case "División":
+                    resOp = num1 / num2;
+                    break;
+                case "Residuo":
+                    resOp = num1 % num2;
+                    break;
+                case "Potencia":
+                    resOp = Math.Pow(num1, num2);
+                    break;
+            }
+
+            return resOp;
+        }
+
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
@@ -138,6 +166,9 @@ namespace ProcesosPorLotes
             //timer1.Start();
         }
 
-     
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
