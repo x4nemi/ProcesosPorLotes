@@ -98,7 +98,7 @@ namespace ProcesosPorLotes
         {
             if(counter == totalProcesos)
             {
-                Form3 form3 = new Form3();
+                Form3 form3 = new Form3(qu);
                 form3.Show();
                 this.Close();
             }
