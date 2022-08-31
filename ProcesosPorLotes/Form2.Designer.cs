@@ -92,6 +92,7 @@
             this.cajita3.Name = "cajita3";
             this.cajita3.Size = new System.Drawing.Size(239, 31);
             this.cajita3.TabIndex = 5;
+            this.cajita3.TextChanged += new System.EventHandler(this.cajita3_TextChanged);
             this.cajita3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cajita3_KeyPress);
             // 
             // label3

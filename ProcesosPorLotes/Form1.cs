@@ -27,6 +27,8 @@ namespace ProcesosPorLotes
                 form2.Show();
                 //Form3 form3 = new Form3();
                 //form3.Show();
+                text1.Enabled = false;
+               
                 
 
             }

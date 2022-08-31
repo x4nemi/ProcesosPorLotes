@@ -23,7 +23,7 @@ namespace ProcesosPorLotes
             totalProcesos = Int32.Parse(counter_text);
             label5.Text = "#" + counter.ToString() + " de " + totalProcesos;
 
-            progressBar1.Value = counter;
+            progressBar1.Value = counter - 1;
             progressBar1.Maximum = totalProcesos;
             progressBar1.Minimum = 0;
 
@@ -242,7 +242,7 @@ namespace ProcesosPorLotes
 
         private void cajita5_TextChanged(object sender, EventArgs e)
         {
-            if (cajita5.Text == "0")
+            if (cajita5.Text == "0" && (comboBox1.Text == "División" || comboBox1.Text == "Residuo"))
             {
                 MessageBox.Show("No se puede dividir entre 0");
                 cajita5.Text = "";
@@ -252,6 +252,15 @@ namespace ProcesosPorLotes
         private void progressBar1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cajita3_TextChanged(object sender, EventArgs e)
+        {
+            if(cajita3.Text == "0")
+            {
+                MessageBox.Show("El tiempo tiene que ser mayor a 0");
+                cajita3.Text = "";
+            }
         }
     }
 }

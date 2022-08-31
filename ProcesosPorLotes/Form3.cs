@@ -40,7 +40,7 @@ namespace ProcesosPorLotes
         }
 
         
-        AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
+        AlmacenProcesos<Procesos> Lote = new AlmacenProcesos<Procesos>();
 
 
 
@@ -54,10 +54,28 @@ namespace ProcesosPorLotes
             }
         }
 
-        private void procesosEnEjecucion()
+        private void AgregarEnProceso(int lote)
         {
+            int i = (lote - 1) * 3;
+            int limit = i > q.Cola.Count ? q.Cola.Count : i + 3;
+            int j = 0;
 
+            listBox2.Items.Add("Lote " + lote);
+            label12.Text = "Lote en proceso: " + lote;
+            
+            foreach (Procesos p in q.Cola)
+            {
+
+                if(j >= i && j < limit)
+                {
+                    listBox3.Items.Add(p.Nombre+ "\t" + "ID: " + p.Id.ToString());
+                }
+
+                j++;
+
+             }
         }
+        
 
         private string operador (string op)
         {
@@ -94,9 +112,11 @@ namespace ProcesosPorLotes
         {
             AgregarItemsListBox();
             int i = 1, j = 1;
+            int procesosNumero = q.Cola.Count % 3 == 0 ? q.Cola.Count / 3 : q.Cola.Count / 3 + 1;
 
             TiempoGlob = 0;
             timer2.Start();
+            AgregarEnProceso(1);
             foreach (Procesos p in q.Cola)
             {
                 seconds = p.Tiempo;
@@ -105,22 +125,21 @@ namespace ProcesosPorLotes
                 label10.Text = "ID: " + p.Id.ToString();
                 label5.Text = "Resultado: " + Resultado(p.Num1, p.Num2, p.Operacion).ToString();
                 label4.Text = "Nombre: "+p.Nombre;
-                label9.Text = "Operación: " + p.Operacion + " " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString() ;
+                label9.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString() ;
 
                 await Task.Delay(seconds * 1000 + 1000);
 
-                if(i % 3 > 0)
-                {
+                listBox2.Items.Add("Nombre: " + p.Nombre + "\t" + "ID: " + p.Id.ToString());
 
-                }
-
-
+                listBox3.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
                 if(i % 3 == 0)
                 {
                     listBox1.Items.Remove("Lote " + j);
-                    listBox2.Items.Add("Lote " + j);
+                    listBox2.Items.Add("---------------------");
                     i = 0;
                     j++;
+                    AgregarEnProceso(j);
+                    
                 }    
                 i++;
             }
@@ -128,7 +147,6 @@ namespace ProcesosPorLotes
             if(i != 1)
             {
                 listBox1.Items.Remove("Lote " + j);
-                listBox2.Items.Add("Lote " + j);
             }
             timer2.Stop();
 
