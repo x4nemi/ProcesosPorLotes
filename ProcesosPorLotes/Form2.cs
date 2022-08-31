@@ -35,14 +35,12 @@ namespace ProcesosPorLotes
         static List<int> lista = new List<int>();
         
         //Form4 form4 = new Form4(qu);
-        
-        
         public void Barra()
         {
             //totalProcesos = Int32.Parse(counter_text);
             label5.Text = "#" + counter.ToString() + " de " + totalProcesos;
 
-            progressBar1.Value = counter;
+            progressBar1.Value = counter-1;
             progressBar1.Maximum = totalProcesos;
             progressBar1.Minimum = 0;
         }
@@ -96,14 +94,7 @@ namespace ProcesosPorLotes
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(counter == totalProcesos)
-            {
-                Form3 form3 = new Form3(qu);
-                form3.Show();
-                this.Close();
-            }
-            else
-            {
+            
                 if (ValidarLlenado())
                 {
                     string id = cajita6.Text;
@@ -119,34 +110,38 @@ namespace ProcesosPorLotes
                     Procesos pc = new Procesos(counter, cajita2.Text, tm2, nn1, nn2, comboBox1.Text, idm);
                     bool existe = ids.Contains(idm);
 
-                    if (existe == true)
+                if (existe == true)
+                {
+                    MessageBox.Show("Este id ya existe");
+                    cajita6.Text = "";
+                    cajita6.Focus();
+                }
+                else if (tm2 <= 0)
+                {
+                    MessageBox.Show("El tiempo debe de mayor de cero");
+                    cajita3.Text = "";
+                    cajita3.Focus();
+                }
+                else
+                {
+                    qu.Agregar(pc);
+                    //form4.tabla.Rows.Add(qu.Regresar().Id, qu.Regresar().Nombre, qu.Regresar().Num1, qu.Regresar().Num2,qu.Regresar().Operacion, qu.Regresar().Tiempo, qu.Regresar().Numpro);
+                    //qu.Ejecutar();
+                    counter++;
+                    Barra();
+                    LimpiarTextBoxes();
+                    //form4.Show();
+                    lista.Add(idm);
+                    
+                    if (counter > totalProcesos)
                     {
-                        MessageBox.Show("Este id ya existe");
-                        cajita6.Text = "";
-                        cajita6.Focus();
-                    }
-                    else if(tm2 <= 0)
-                    {
-                        MessageBox.Show("El tiempo debe de mayor de cero");
-                        cajita3.Text = "";
-                        cajita3.Focus();
-                    }
-                    else
-                    {
-                        qu.Agregar(pc);
-                        //form4.tabla.Rows.Add(qu.Regresar().Id, qu.Regresar().Nombre, qu.Regresar().Num1, qu.Regresar().Num2,qu.Regresar().Operacion, qu.Regresar().Tiempo, qu.Regresar().Numpro);
-                        //qu.Ejecutar();
-                        counter++;
-                        LimpiarTextBoxes();
-                        //form4.Show();
-                        lista.Add(idm);
-                        Barra();
-                        //LimpiarTextBoxes();
-
+                        Form3 form3 = new Form3(qu);
+                        form3.Show();
+                        this.Close();
                     }
                 }
+                }
             }   
-        }
 
         
         
