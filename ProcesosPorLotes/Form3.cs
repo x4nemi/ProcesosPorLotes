@@ -34,6 +34,9 @@ namespace ProcesosPorLotes
             label4.Text = "";
             label5.Text = "";
             label6.Text = "";
+            label8.Text = "";
+            label9.Text = "";
+            label10.Text = "";
         }
 
         
@@ -51,21 +54,65 @@ namespace ProcesosPorLotes
             }
         }
 
+        private void procesosEnEjecucion()
+        {
+
+        }
+
+        private string operador (string op)
+        {
+            string res = "";
+            switch (op)
+            {
+                case "Suma":
+                    res = "+";
+                    break;
+                case "Resta":
+                    res = "-";
+                    break;
+                case "Multiplicación":
+                    res = "*";
+                    break;
+                case "División":
+                    res = "/";
+                    break;
+                case "Residuo":
+                    res = "%";
+                    break;
+                case "Potencia":
+                    res = "^";
+                    break;
+            }
+            return res;
+        }
+
         int seconds;
+        int TR;
+        int TiempoGlob;
         
         private async void EnProceso()
         {
             AgregarItemsListBox();
             int i = 1, j = 1;
+
+            TiempoGlob = 0;
+            timer2.Start();
             foreach (Procesos p in q.Cola)
             {
                 seconds = p.Tiempo;
+                TR = 0;
                 timer1.Start();
-                label5.Text ="Resultado = " + Resultado(p.Num1, p.Num2, p.Operacion).ToString();
-                label4.Text = p.Nombre;
+                label10.Text = "ID: " + p.Id.ToString();
+                label5.Text = "Resultado: " + Resultado(p.Num1, p.Num2, p.Operacion).ToString();
+                label4.Text = "Nombre: "+p.Nombre;
+                label9.Text = "Operación: " + p.Operacion + " " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString() ;
 
-                
                 await Task.Delay(seconds * 1000 + 1000);
+
+                if(i % 3 > 0)
+                {
+
+                }
 
 
                 if(i % 3 == 0)
@@ -83,6 +130,7 @@ namespace ProcesosPorLotes
                 listBox1.Items.Remove("Lote " + j);
                 listBox2.Items.Add("Lote " + j);
             }
+            timer2.Stop();
 
             limpiarLabels();
         }
@@ -118,7 +166,8 @@ namespace ProcesosPorLotes
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            label6.Text = seconds--.ToString();
+            label6.Text = "TT: "+ seconds--.ToString();
+            label8.Text = "TR: " + TR++.ToString();
             if (seconds < 0)
             {
                 timer1.Stop();
@@ -141,6 +190,16 @@ namespace ProcesosPorLotes
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            label11.Text = "Tiempo Global: " +TiempoGlob++.ToString();
         }
     }
 }

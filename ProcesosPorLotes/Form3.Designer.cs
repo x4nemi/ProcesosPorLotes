@@ -33,6 +33,9 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -42,9 +45,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label7 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label12 = new System.Windows.Forms.Label();
+            this.listBox3 = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -53,7 +62,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 80);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(187, 426);
+            this.panel1.Size = new System.Drawing.Size(187, 231);
             this.panel1.TabIndex = 0;
             // 
             // listBox1
@@ -64,7 +73,7 @@
             this.listBox1.ItemHeight = 21;
             this.listBox1.Location = new System.Drawing.Point(12, 68);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(162, 340);
+            this.listBox1.Size = new System.Drawing.Size(162, 130);
             this.listBox1.TabIndex = 1;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -80,41 +89,79 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(218, 80);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(187, 426);
+            this.panel2.Size = new System.Drawing.Size(187, 231);
             this.panel2.TabIndex = 1;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(70, 56);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(34, 28);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "10";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(14, 186);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(23, 28);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "9";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(14, 102);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(23, 28);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "8";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(55, 124);
+            this.label6.Location = new System.Drawing.Point(14, 130);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 28);
+            this.label6.Size = new System.Drawing.Size(23, 28);
             this.label6.TabIndex = 4;
+            this.label6.Text = "6";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(55, 96);
+            this.label5.Location = new System.Drawing.Point(14, 158);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 28);
+            this.label5.Size = new System.Drawing.Size(23, 28);
             this.label5.TabIndex = 3;
+            this.label5.Text = "5";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(55, 68);
+            this.label4.Location = new System.Drawing.Point(14, 74);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 28);
+            this.label4.Size = new System.Drawing.Size(23, 28);
             this.label4.TabIndex = 2;
+            this.label4.Text = "4";
             // 
             // label2
             // 
@@ -132,7 +179,7 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(422, 80);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(187, 426);
+            this.panel3.Size = new System.Drawing.Size(187, 425);
             this.panel3.TabIndex = 2;
             // 
             // listBox2
@@ -171,12 +218,58 @@
             this.label7.TabIndex = 3;
             this.label7.Text = "Lotes";
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.panel4.Controls.Add(this.listBox3);
+            this.panel4.Controls.Add(this.label12);
+            this.panel4.Location = new System.Drawing.Point(12, 317);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(393, 188);
+            this.panel4.TabIndex = 4;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.label11.Location = new System.Drawing.Point(436, 31);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(84, 15);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "Tiempo Global";
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(12, 16);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(206, 37);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Lote en proceso";
+            // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.ItemHeight = 15;
+            this.listBox3.Location = new System.Drawing.Point(12, 66);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.Size = new System.Drawing.Size(355, 94);
+            this.listBox3.TabIndex = 1;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(620, 517);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -190,6 +283,8 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,5 +305,13 @@
         private System.Windows.Forms.Timer timer1;
         private ListBox listBox2;
         private Label label7;
+        private Panel panel4;
+        private Label label8;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private System.Windows.Forms.Timer timer2;
+        private ListBox listBox3;
+        private Label label12;
     }
 }
