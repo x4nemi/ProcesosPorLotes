@@ -37,13 +37,10 @@ namespace ProcesosPorLotes
             label8.Text = "";
             label9.Text = "";
             label10.Text = "";
+            label12.Text = "Lote en proceso: ";
         }
 
-        
-        AlmacenProcesos<Procesos> Lote = new AlmacenProcesos<Procesos>();
-
-
-
+     
         private void AgregarItemsListBox()
         {
             int procesosNumero = q.Cola.Count % 3 == 0 ? q.Cola.Count / 3 : q.Cola.Count / 3 + 1;
@@ -138,7 +135,10 @@ namespace ProcesosPorLotes
                     listBox2.Items.Add("---------------------");
                     i = 0;
                     j++;
-                    AgregarEnProceso(j);
+                    if(j <= procesosNumero)
+                    {
+                        AgregarEnProceso(j);
+                    }
                     
                 }    
                 i++;
