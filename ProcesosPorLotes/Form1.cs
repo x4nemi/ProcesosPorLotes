@@ -16,7 +16,7 @@ namespace ProcesosPorLotes
             {
                 MessageBox.Show("ingresa un numero por favor");
             }
-            else if (Int32.Parse(dato) < 10)
+            else if (Int32.Parse(dato) < 9)
             {
                 MessageBox.Show("Solo puedes ingresar numeros mayores a 10");
                 text1.Text = "";

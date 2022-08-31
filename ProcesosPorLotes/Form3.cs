@@ -39,39 +39,6 @@ namespace ProcesosPorLotes
         AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
 
 
-        private void AlmacenarProcesos()
-        {
-            Procesos pc = new Procesos(1, "Ximena", Int32.Parse("3"), Double.Parse("3"),
-                    Double.Parse("3"), "Resta", Int32.Parse("1"));
-
-            q.Agregar(pc);
-
-            Procesos pc1 = new Procesos(1, "Jorge", Int32.Parse("2"), Double.Parse("3"),
-                    Double.Parse("3"), "Resta", Int32.Parse("1"));
-
-            q.Agregar(pc1);
-            Procesos pc2 = new Procesos(1, "Kevin", Int32.Parse("1"), Double.Parse("3"),
-                    Double.Parse("3"), "Resta", Int32.Parse("1"));
-
-            q.Agregar(pc2);
-
-            //Procesos pc3 = new Procesos(1, "POtax", Int32.Parse("6"), Double.Parse("3"),
-            //        Double.Parse("3"), "Resta", Int32.Parse("1"));
-
-            //q.Agregar(pc3);
-
-            //Procesos pc4 = new Procesos(1, "Kiki", Int32.Parse("2"), Double.Parse("3"),
-            //        Double.Parse("3"), "Resta", Int32.Parse("1"));
-
-            //q.Agregar(pc4);
-
-
-            //Procesos pc5 = new Procesos(1, "Conie", Int32.Parse("2"), Double.Parse("3"),
-            //        Double.Parse("3"), "Resta", Int32.Parse("1"));
-
-            //q.Agregar(pc5);
-
-        }
 
         private void AgregarItemsListBox()
         {
@@ -167,6 +134,11 @@ namespace ProcesosPorLotes
         }
 
         private void Form3_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
