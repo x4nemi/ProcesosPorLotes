@@ -71,7 +71,12 @@ namespace ProcesosPorLotes
             cajita2.Text = "";
             cajita4.Text = "";
             cajita5.Text = "";
+            comboBox1.Text = "Selecciona uno...";
+            label7.Text = "Esperando a elección de operación...";
+            label8.Text = "";
 
+            cajita4.Enabled = false;
+            cajita5.Enabled = false;
         }
 
         private bool ValidarLlenado()
@@ -117,7 +122,14 @@ namespace ProcesosPorLotes
                     if (existe == true)
                     {
                         MessageBox.Show("Este id ya existe");
-                        LimpiarTextBoxes();
+                        cajita6.Text = "";
+                        cajita6.Focus();
+                    }
+                    else if(tm2 <= 0)
+                    {
+                        MessageBox.Show("El tiempo debe de mayor de cero");
+                        cajita3.Text = "";
+                        cajita3.Focus();
                     }
                     else
                     {
@@ -161,14 +173,14 @@ namespace ProcesosPorLotes
                     break;
                 case "División":
                     label8.Text = "/";
-                   
                     break;
                 case "Residuo":
-                    label8.Text = "//";
+                    label8.Text = "%";
                     break;
                 case "Potencia":
                     label8.Text = "^";
                     break;
+                
                 default:
                     label8.Text = "";
 

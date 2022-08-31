@@ -40,11 +40,9 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.cajita = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cajita4 = new System.Windows.Forms.TextBox();
             this.cajita5 = new System.Windows.Forms.TextBox();
-            this.nombre = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -129,7 +127,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(305, 400);
+            this.button1.Location = new System.Drawing.Point(305, 361);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(159, 38);
             this.button1.TabIndex = 8;
@@ -173,15 +171,6 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "Operación";
             // 
-            // cajita
-            // 
-            this.cajita.Location = new System.Drawing.Point(331, 357);
-            this.cajita.Name = "cajita";
-            this.cajita.Size = new System.Drawing.Size(100, 23);
-            this.cajita.TabIndex = 12;
-            this.cajita.ReadOnlyChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            this.cajita.TextChanged += new System.EventHandler(this.cajita_TextChanged);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -214,13 +203,6 @@
             this.cajita5.TextChanged += new System.EventHandler(this.cajita5_TextChanged);
             this.cajita5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cajita5_KeyPress);
             // 
-            // nombre
-            // 
-            this.nombre.Location = new System.Drawing.Point(38, 367);
-            this.nombre.Name = "nombre";
-            this.nombre.Size = new System.Drawing.Size(100, 23);
-            this.nombre.TabIndex = 17;
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Info;
@@ -246,10 +228,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(748, 450);
+            this.ClientSize = new System.Drawing.Size(748, 419);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.nombre);
-            this.Controls.Add(this.cajita);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.progressBar1);
@@ -289,8 +269,6 @@
         private Label label7;
         public TextBox cajita4;
         public TextBox cajita5;
-        public TextBox cajita;
-        private TextBox nombre;
         private Panel panel1;
         private Label label8;
     }
