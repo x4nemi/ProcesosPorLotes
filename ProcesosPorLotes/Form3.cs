@@ -19,10 +19,12 @@ namespace ProcesosPorLotes
     public partial class Form3 : Form
 
     {
+        AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
 
-        public Form3()
+        public Form3(AlmacenProcesos<Procesos> qu)
         {
             InitializeComponent();
+            q = qu;
             //AlmacenarProcesos();
             EnProceso();
         }
@@ -34,8 +36,7 @@ namespace ProcesosPorLotes
             label6.Text = "";
         }
 
-        AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
-
+        
         AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
 
 
@@ -60,8 +61,7 @@ namespace ProcesosPorLotes
             {
                 seconds = p.Tiempo;
                 timer1.Start();
-                label6.Text = Resultado(p.Num1, p.Num2, p.Operacion).ToString();
-                label5.Text = i.ToString();
+                label5.Text ="Resultado = " + Resultado(p.Num1, p.Num2, p.Operacion).ToString();
                 label4.Text = p.Nombre;
 
                 
