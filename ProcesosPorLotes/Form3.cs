@@ -184,23 +184,15 @@ namespace ProcesosPorLotes
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            label6.Text = "TT: "+ seconds--.ToString();
-            label8.Text = "TR: " + TR++.ToString();
+            label6.Text = "TR: " + seconds--.ToString();
+            label8.Text = "TT: " + TR++.ToString();
             if (seconds < 0)
             {
                 timer1.Stop();
-                //txtSeconds.Enabled = true;
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //seconds = Convert.ToInt32("5");
-            ////txtSeconds.Enabled = false;
-            //timer1.Start();
-        }
-
-        private void Form3_Load(object sender, EventArgs e)
+            private void Form3_Load(object sender, EventArgs e)
         {
 
         }
