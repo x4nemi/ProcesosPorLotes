@@ -28,16 +28,10 @@ namespace ProcesosPorLotes
                 //Form3 form3 = new Form3();
                 //form3.Show();
                 text1.Enabled = false;
-               
-                
 
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void text1_KeyPress(object sender, KeyPressEventArgs e)
         {

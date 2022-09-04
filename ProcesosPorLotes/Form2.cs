@@ -45,23 +45,6 @@ namespace ProcesosPorLotes
             progressBar1.Minimum = 0;
         }
 
-        //TODO
-        //private bool IDValido(string aidi)
-        //{
-        //    AlmacenProcesos<Procesos> auxiliar = q;
-
-        //    while(auxiliar.Cola.)
-        //    {
-        //        Procesos pAux = auxiliar.Cola.Dequeue();
-        //        if(aidi == pAux.Id)
-        //        {
-
-        //        }
-        //    }
-        //    return false;
-        //}
-
-
         private void LimpiarTextBoxes()
         {
             cajita6.Text = "";
@@ -187,16 +170,6 @@ namespace ProcesosPorLotes
 
         }
 
-        private void cajita_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void cajita6_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
@@ -249,10 +222,6 @@ namespace ProcesosPorLotes
             }
         }
 
-        private void progressBar1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void cajita3_TextChanged(object sender, EventArgs e)
         {

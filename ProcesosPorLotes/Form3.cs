@@ -25,7 +25,6 @@ namespace ProcesosPorLotes
         {
             InitializeComponent();
             q = qu;
-            //AlmacenarProcesos();
             EnProceso();
         }
 
@@ -191,22 +190,7 @@ namespace ProcesosPorLotes
                 timer1.Stop();
             }
         }
-
-            private void Form3_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+     
         private void timer2_Tick(object sender, EventArgs e)
         {
             label11.Text = "Tiempo Global: " +TiempoGlob++.ToString();
