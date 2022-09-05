@@ -119,7 +119,7 @@ namespace ProcesosPorLotes
                 TR = 0;
                 timer1.Start();
                 label10.Text = "ID: " + p.Id.ToString();
-                label5.Text = "Resultado: " + Resultado(p.Num1, p.Num2, p.Operacion).ToString();
+                label5.Text = "Resultado: " + Resultado(p.Num1, p.Num2, p.Operacion).ToString("#.00");
                 label4.Text = "Nombre: "+p.Nombre;
                 label9.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString() ;
 
