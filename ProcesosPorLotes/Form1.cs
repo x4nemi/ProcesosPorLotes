@@ -29,9 +29,16 @@ namespace ProcesosPorLotes
                 AgregarProcesosRandom(Int32.Parse(text1.Text));
                 //Form2 form2 = new Form2(text1.Text);
                 //form2.Show();
-                Form3 form3 = new Form3(qu);
-                form3.Show();
+                //Form3 form3 = new Form3(qu);
+                //form3.Show();
+                
+                // KEVIN!! Este form es para mostrar los datos, si quieres lo dejamos, sino ps a csm
+                Form5 form5 = new Form5(qu);
+                form5.Show();
+                
                 text1.Enabled = false;
+                ok_button.Enabled = false;
+                
 
             }
         }

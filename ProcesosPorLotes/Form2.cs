@@ -121,6 +121,7 @@ namespace ProcesosPorLotes
                         Form3 form3 = new Form3(qu);
                         form3.Show();
                         this.Close();
+                        button1.Enabled = false;
                     }
                 }
                 }
