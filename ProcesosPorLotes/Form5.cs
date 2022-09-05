@@ -65,5 +65,15 @@ namespace ProcesosPorLotes
             form3.Show();
             button1.Enabled = false;
         }
+
+        private void Form5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MessageBox.Show(e.KeyChar.ToString());
+        }
+
+        private void Form5_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            MessageBox.Show("Hola");
+        }
     }
 }

@@ -50,6 +50,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -58,6 +60,7 @@
             this.Column3});
             this.dataGridView1.Location = new System.Drawing.Point(26, 91);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(443, 440);
             this.dataGridView1.TabIndex = 5;
@@ -66,18 +69,21 @@
             // 
             this.Column1.HeaderText = "Nombre";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             this.Column1.Width = 150;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "Operación";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Width = 150;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "Tiempo";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // button1
             // 
@@ -103,6 +109,8 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form5";
             this.Text = "Form5";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form5_KeyPress);
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form5_PreviewKeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
