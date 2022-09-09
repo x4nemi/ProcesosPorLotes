@@ -66,7 +66,7 @@ namespace ProcesosPorLotes
 
                 if(j >= i && j < limit)
                 {
-                    listBox3.Items.Add(p.Nombre+ "\t" + "ID: " + p.Id.ToString());
+                    listBox3.Items.Add( "ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
                 }
 
                 j++;
@@ -105,8 +105,6 @@ namespace ProcesosPorLotes
         int seconds;
         int TR;
         int TiempoGlob;
-
-        int interrupcion = 0;
 
         bool error = false;
         bool pause = false;
