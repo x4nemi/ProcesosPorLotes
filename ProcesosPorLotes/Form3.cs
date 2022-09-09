@@ -25,6 +25,8 @@ namespace ProcesosPorLotes
         {
             InitializeComponent();
             q = qu;
+
+            this.KeyPreview = true;
             EnProceso();
         }
 
@@ -103,6 +105,10 @@ namespace ProcesosPorLotes
         int seconds;
         int TR;
         int TiempoGlob;
+
+        int interrupcion = 0;
+
+        bool error = false;
         
         private async void EnProceso()
         {
@@ -123,9 +129,14 @@ namespace ProcesosPorLotes
                 label4.Text = "Nombre: "+p.Nombre;
                 label9.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString() ;
 
-                await Task.Delay(seconds * 1000 + 1000);
+                await Task.Delay(seconds * 1000 + 1000 + interrupcion);
 
-                listBox2.Items.Add("Nombre: " + p.Nombre + "\t" + "ID: " + p.Id.ToString());
+                string res = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#.00");
+
+                error = false;
+                label13.Text = "";
+
+                listBox2.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado: " + res);
 
                 listBox3.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
                 if(i % 3 == 0)
@@ -194,6 +205,47 @@ namespace ProcesosPorLotes
         private void timer2_Tick(object sender, EventArgs e)
         {
             label11.Text = "Tiempo Global: " +TiempoGlob++.ToString();
+        }
+
+        private void Form3_KeyDown(object sender, KeyEventArgs e)
+        {
+            //            E Interrupción
+            //por entradasalida
+            //El proceso que está en uso del procesador(ejecución) debe salir
+            //de este e ir a la cola de los procesos del lote en ejecución(actual).
+            //W Error El proceso que se esté ejecutando en ese momento terminara por
+            //error, es decir saldrá del procesador y se mostrara en terminados,
+            //para este caso como el proceso no termino normalmente se
+            //desplegara error en lugar de un resultado.
+            //P Pausa Detiene la ejecución de su programa momentáneamente, la
+            //simulación se reanuda cuando se presione la tecla “C”.
+            //C Continuar Al presionar esta tecla se reanudará el programa pausado
+            //previamente con “P”.
+
+            label13.Text = "Se presionó " + e.KeyCode;
+
+            if (e.KeyCode == Keys.E)
+            {
+                label14.Text = "Interrupción";
+                interrupcion = 10000;
+            }
+
+            if (e.KeyCode == Keys.W)
+            {
+                label14.Text = "Error";
+                error = true;
+            }
+            
+            if (e.KeyCode == Keys.P)
+            {
+                label14.Text = "Pause";
+            }
+            
+            if (e.KeyCode == Keys.C)
+            {
+                label14.Text = "Continuar";
+            }
+         
         }
     }
 }
