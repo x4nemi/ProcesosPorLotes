@@ -109,7 +109,8 @@ namespace ProcesosPorLotes
         int interrupcion = 0;
 
         bool error = false;
-        
+        bool pause = false;
+
         private async void EnProceso()
         {
             AgregarItemsListBox();
@@ -125,18 +126,38 @@ namespace ProcesosPorLotes
                 TR = 0;
                 timer1.Start();
                 label10.Text = "ID: " + p.Id.ToString();
-                label5.Text = "Resultado: " + Resultado(p.Num1, p.Num2, p.Operacion).ToString("#.00");
+                label5.Text = "Resultado:  " + Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
                 label4.Text = "Nombre: "+p.Nombre;
                 label9.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString() ;
 
-                await Task.Delay(seconds * 1000 + 1000 + interrupcion);
+                int k = 0;
+                while(k <= p.Tiempo + 1)
+                {
+                    if (pause)
+                    {
+                        timer1.Stop();
+                        timer2.Stop();
+                        while (pause)
+                        {
+                            await Task.Delay(1000);
+                        }
+                        timer1.Start();
+                        timer2.Start();
+                    }
+                    else
+                    {
+                        Task delay = Task.Delay(1000);
+                        await delay;
+                        k++;
+                    }
+                }
 
-                string res = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#.00");
+                string res = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
 
                 error = false;
-                label13.Text = "";
+                label14.Text = "";
 
-                listBox2.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado: " + res);
+                listBox2.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado:  " + res);
 
                 listBox3.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
                 if(i % 3 == 0)
@@ -196,6 +217,12 @@ namespace ProcesosPorLotes
         {
             label6.Text = "TR: " + seconds--.ToString();
             label8.Text = "TT: " + TR++.ToString();
+
+            if (pause)
+            {
+                timer1.Stop();
+            }
+            
             if (seconds < 0)
             {
                 timer1.Stop();
@@ -206,7 +233,7 @@ namespace ProcesosPorLotes
         {
             label11.Text = "Tiempo Global: " +TiempoGlob++.ToString();
         }
-
+        
         private void Form3_KeyDown(object sender, KeyEventArgs e)
         {
             //            E Interrupción
@@ -224,28 +251,30 @@ namespace ProcesosPorLotes
 
             label13.Text = "Se presionó " + e.KeyCode;
 
-            if (e.KeyCode == Keys.E)
+            if(pause && e.KeyCode == Keys.C)
             {
-                label14.Text = "Interrupción";
-                interrupcion = 10000;
-            }
-
-            if (e.KeyCode == Keys.W)
-            {
-                label14.Text = "Error";
-                error = true;
-            }
-            
-            if (e.KeyCode == Keys.P)
-            {
-                label14.Text = "Pause";
-            }
-            
-            if (e.KeyCode == Keys.C)
-            {
+                pause = false;
                 label14.Text = "Continuar";
             }
-         
+            
+            if(!pause)
+            {
+                if (e.KeyCode == Keys.P)
+                {
+                    label14.Text = "Pause";
+                    pause = true;
+                }
+                if (e.KeyCode == Keys.E)
+                {
+                    label14.Text = "Interrupción";
+                }
+
+                if (e.KeyCode == Keys.W)
+                {
+                    label14.Text = "Error";
+                    error = true;
+                }
+            }         
         }
     }
 }
