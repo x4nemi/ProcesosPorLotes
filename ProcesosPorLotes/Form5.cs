@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//using static ProcesosPorLotes.AlmacenProcesos<T>;
 
 namespace ProcesosPorLotes
 {
@@ -20,6 +21,7 @@ namespace ProcesosPorLotes
             InitializeComponent();
             q = qu;
             AgregarLista();
+            Dividir();
         }
 
         private void AgregarLista()
@@ -58,6 +60,22 @@ namespace ProcesosPorLotes
             return res;
         }
 
+        private void Dividir()
+        {
+            Lotes<AlmacenProcesos<Procesos>> lotes = new Lotes<AlmacenProcesos<Procesos>>();
+
+            lotes.ProcesosPorLotes(q);
+
+            foreach( AlmacenProcesos<Procesos> AP in lotes.Cola)
+            {
+                foreach(Procesos p in AP.Cola)
+                {
+                    listBox1.Items.Add(p.Nombre);
+
+                }
+                listBox1.Items.Add("---------");
+            }
+        }
         
         private void button1_Click(object sender, EventArgs e)
         {
