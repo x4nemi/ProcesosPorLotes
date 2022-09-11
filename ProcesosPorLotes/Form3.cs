@@ -124,6 +124,7 @@ namespace ProcesosPorLotes
 
         bool error = false;
         bool pause = false;
+        bool interrupcion = false;
 
         private async void EnProceso()
         {
@@ -175,6 +176,11 @@ namespace ProcesosPorLotes
                             }
                             timer1.Start();
                             timer2.Start();
+                        }else if (interrupcion)
+                        {
+                            AP.Agregar(p);
+                            timer1.Stop();
+                            break;
                         }
                         else
                         {
@@ -184,15 +190,25 @@ namespace ProcesosPorLotes
                         }
                     }
 
+                    
 
-                    string res = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+                    if (interrupcion) {
+                        interrupcion = false;
+                        LoteEnProceso(AP);
+                    }
+                    else
+                    {
+                        string res = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+                        error = false;
+                        label14.Text = "";
 
-                    error = false;
-                    label14.Text = "";
+                        listBox2.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado:  " + res);
 
-                    listBox2.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado:  " + res);
+                        listBox3.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
+                    }
 
-                    listBox3.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
+
+
                 }
 
                 i++;
@@ -351,6 +367,7 @@ namespace ProcesosPorLotes
                 if (e.KeyCode == Keys.E)
                 {
                     label14.Text = "Interrupción";
+                    interrupcion = true;
                 }
 
                 if (e.KeyCode == Keys.W)
