@@ -21,7 +21,7 @@ namespace ProcesosPorLotes
             InitializeComponent();
             q = qu;
             AgregarLista();
-            Dividir();
+            //Dividir();
         }
 
         private void AgregarLista()
@@ -60,7 +60,7 @@ namespace ProcesosPorLotes
             return res;
         }
 
-        private void Dividir()
+        /*private void Dividir()
         {
             Lotes<AlmacenProcesos<Procesos>> lotes = new Lotes<AlmacenProcesos<Procesos>>();
 
@@ -75,7 +75,7 @@ namespace ProcesosPorLotes
                 }
                 listBox1.Items.Add("---------");
             }
-        }
+        }*/
         
         private void button1_Click(object sender, EventArgs e)
         {
