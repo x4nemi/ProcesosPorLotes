@@ -162,9 +162,10 @@ namespace ProcesosPorLotes
                     ////label4.Text = "Nombre: " + p.Nombre;
                     label9.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString();
 
+                    int tiempoWhile = p.TiempoR == -1 ? p.Tiempo : p.TiempoR;
 
                     int k = 0;
-                    while (k <= p.Tiempo + 1)
+                    while (k <= tiempoWhile + 1)
                     {
                         if (pause)
                         {
@@ -322,8 +323,12 @@ namespace ProcesosPorLotes
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            label6.Text = "Tiempo Restante: " + seconds--.ToString();
-            label8.Text = "Tiempo Total: " + TR++.ToString();
+            if(!interrupcion)
+            {
+                label6.Text = "Tiempo Restante: " + seconds--.ToString();
+                label8.Text = "Tiempo Total: " + TR++.ToString();
+
+            }
             
             if (seconds < 0)
             {
