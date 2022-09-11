@@ -20,6 +20,7 @@ namespace ProcesosPorLotes
 
     {
         AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
+        Lotes<AlmacenProcesos<Procesos>> lo = new Lotes<AlmacenProcesos<Procesos>>();
 
         public Form3(AlmacenProcesos<Procesos> qu)
         {
@@ -42,11 +43,16 @@ namespace ProcesosPorLotes
         }
 
      
-        private void AgregarItemsListBox()
+        private void AgregarItemsListBox(int numLotes)
         {
-            int procesosNumero = q.Cola.Count % 3 == 0 ? q.Cola.Count / 3 : q.Cola.Count / 3 + 1;
+            //int procesosNumero = q.Cola.Count % 3 == 0 ? q.Cola.Count / 3 : q.Cola.Count / 3 + 1;
  
-            for(int i = 1; i <= procesosNumero ; i++)
+            //for(int i = 1; i <= procesosNumero ; i++)
+            //{
+            //    listBox1.Items.Add("Lote " + i.ToString());
+            //}
+
+            for(int i = 1; i <= numLotes; i++)
             {
                 listBox1.Items.Add("Lote " + i.ToString());
             }
@@ -72,6 +78,16 @@ namespace ProcesosPorLotes
                 j++;
 
              }
+        }
+
+        private void LoteEnProceso(AlmacenProcesos<Procesos> Lote)
+        {
+            listBox3.Items.Clear();
+            foreach(Procesos p in Lote.Cola)
+            {
+                listBox3.Items.Add("ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
+            }
+
         }
         
 
@@ -108,75 +124,169 @@ namespace ProcesosPorLotes
 
         bool error = false;
         bool pause = false;
+        bool interrupcion = false;
 
         private async void EnProceso()
         {
-            AgregarItemsListBox();
-            int i = 1, j = 1;
-            int procesosNumero = q.Cola.Count % 3 == 0 ? q.Cola.Count / 3 : q.Cola.Count / 3 + 1;
-
             TiempoGlob = 0;
             timer2.Start();
-            AgregarEnProceso(1);
-            foreach (Procesos p in q.Cola)
-            {
-                seconds = p.Tiempo;
-                TR = 0;
-                timer1.Start();
-                label10.Text = "ID: " + p.Id.ToString();
-                label5.Text = "Resultado:  " + Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
-                label4.Text = "Nombre: "+p.Nombre;
-                label9.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString() ;
 
-                int k = 0;
-                while(k <= p.Tiempo + 1)
+            lo.ProcesosPorLotes(q);
+
+            AgregarItemsListBox(lo.Cola.Count);
+
+            int i = 1;
+
+
+            foreach (AlmacenProcesos<Procesos> AP in lo.Cola)
+            {
+                LoteEnProceso(AP);
+                listBox1.Items.Remove("Lote " + i.ToString());
+                label12.Text = "Lote en proceso: " + i;
+
+                while (!AP.EsVacia())
                 {
-                    if (pause)
+                    Procesos p = new Procesos(1, "", 1, 1, 1, "", 1);
+                    p = AP.Ejecutar();
+
+                    listBox3.Items.Remove("ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
+
+                    seconds = p.TiempoR == -1 ? p.Tiempo : p.TiempoR;
+                    TR = p.TiempoT == -1 ? 0 : p.TiempoT;
+                    timer1.Start();
+
+                    label10.Text = "ID: " + p.Id.ToString();
+                    label5.Text = "";
+                    label4.Text = "";
+                    //label5.Text = "Resultado:  " + Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+                    ////label4.Text = "Nombre: " + p.Nombre;
+                    label9.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString();
+
+                    int tiempoWhile = p.TiempoR == -1 ? p.Tiempo : p.TiempoR;
+
+                    int k = 0;
+                    while (k <= tiempoWhile + 1)
                     {
-                        timer1.Stop();
-                        timer2.Stop();
-                        while (pause)
+                        if (pause)
                         {
-                            await Task.Delay(1000);
+                            timer1.Stop();
+                            timer2.Stop();
+                            while (pause)
+                            {
+                                await Task.Delay(1000);
+                            }
+                            timer1.Start();
+                            timer2.Start();
+                        } else if (interrupcion)
+                        {
+                            timer1.Stop();
+                            p.TiempoR = seconds;
+                            p.TiempoT = TR;
+                            AP.Agregar(p);
+                            break;
                         }
-                        timer1.Start();
-                        timer2.Start();
+                        else
+                        {
+                            Task delay = Task.Delay(1000);
+                            await delay;
+                            k++;
+                        }
+                    }
+
+                    
+
+                    if (interrupcion) {
+                        interrupcion = false;
+                        LoteEnProceso(AP);
                     }
                     else
                     {
-                        Task delay = Task.Delay(1000);
-                        await delay;
-                        k++;
+                        string res = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+                        error = false;
+                        label14.Text = "";
+
+                        listBox2.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado:  " + res);
+
+                        listBox3.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
                     }
+
+
+
                 }
 
-                string res = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
-
-                error = false;
-                label14.Text = "";
-
-                listBox2.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado:  " + res);
-
-                listBox3.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
-                if(i % 3 == 0)
-                {
-                    listBox1.Items.Remove("Lote " + j);
-                    listBox2.Items.Add("---------------------");
-                    i = 0;
-                    j++;
-                    if(j <= procesosNumero)
-                    {
-                        AgregarEnProceso(j);
-                    }
-                    
-                }    
                 i++;
+                    
+                listBox2.Items.Add("---------------------");
+               
             }
+                
+            // ------------------------------------------
 
-            if(i != 1)
-            {
-                listBox1.Items.Remove("Lote " + j);
-            }
+            //AgregarItemsListBox();
+            //int i = 1, j = 1;
+            //int procesosNumero = q.Cola.Count % 3 == 0 ? q.Cola.Count / 3 : q.Cola.Count / 3 + 1;
+
+            
+            //AgregarEnProceso(1);
+            //foreach (Procesos p in q.Cola)
+            //{
+            //    seconds = p.Tiempo;
+            //    TR = 0;
+            //    timer1.Start();
+            //    label10.Text = "ID: " + p.Id.ToString();
+            //    label5.Text = "Resultado:  " + Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+            //    label4.Text = "Nombre: " + p.Nombre;
+            //    label9.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString();
+
+            //    int k = 0;
+            //    while (k <= p.Tiempo + 1)
+            //    {
+            //        if (pause)
+            //        {
+            //            timer1.Stop();
+            //            timer2.Stop();
+            //            while (pause)
+            //            {
+            //                await Task.Delay(1000);
+            //            }
+            //            timer1.Start();
+            //            timer2.Start();
+            //        }
+            //        else
+            //        {
+            //            Task delay = Task.Delay(1000);
+            //            await delay;
+            //            k++;
+            //        }
+            //    }
+
+            //    string res = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+
+            //    error = false;
+            //    label14.Text = "";
+
+            //    listBox2.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado:  " + res);
+
+            //    listBox3.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
+            //    if (i % 3 == 0)
+            //    {
+            //        listBox1.Items.Remove("Lote " + j);
+            //        listBox2.Items.Add("---------------------");
+            //        i = 0;
+            //        j++;
+            //        if (j <= procesosNumero)
+            //        {
+            //            AgregarEnProceso(j);
+            //        }
+
+            //    }
+            //    i++;
+            //}
+
+            //if(i != 1)
+            //{
+            //    listBox1.Items.Remove("Lote " + j);
+            //}
             timer2.Stop();
 
             limpiarLabels();
@@ -213,12 +323,11 @@ namespace ProcesosPorLotes
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            label6.Text = "TR: " + seconds--.ToString();
-            label8.Text = "TT: " + TR++.ToString();
-
-            if (pause)
+            if(!interrupcion)
             {
-                timer1.Stop();
+                label6.Text = "Tiempo Restante: " + seconds--.ToString();
+                label8.Text = "Tiempo Total: " + TR++.ToString();
+
             }
             
             if (seconds < 0)
@@ -265,6 +374,7 @@ namespace ProcesosPorLotes
                 if (e.KeyCode == Keys.E)
                 {
                     label14.Text = "Interrupción";
+                    interrupcion = true;
                 }
 
                 if (e.KeyCode == Keys.W)
@@ -273,6 +383,11 @@ namespace ProcesosPorLotes
                     error = true;
                 }
             }         
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

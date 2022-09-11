@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProcesosPorLotes
 {
-    
+
     public class Procesos
     {
         private int numpro;
@@ -16,6 +16,8 @@ namespace ProcesosPorLotes
         private string operacion;
         private int id;
         private string nombre;
+        private int tr;
+        private int tt;
 
         public int Numpro { get => numpro; set => numpro = value; }
         public double Num1 { get => num1; set => num1 = value; }
@@ -25,7 +27,10 @@ namespace ProcesosPorLotes
         public string Nombre { get => nombre; set => nombre = value; }
         public int Tiempo { get => tiempo; set => tiempo = value; }
 
-        public Procesos(int np, string nm,int tm, double n1, double n2, string op, int aidi)
+        public int TiempoR { get => tr; set => tr = value; }
+        public int TiempoT { get => tt; set => tt = value; }
+
+        public Procesos(int np, string nm, int tm, double n1, double n2, string op, int aidi)
         {
             Numpro = np;
             Num1 = n1;
@@ -34,6 +39,8 @@ namespace ProcesosPorLotes
             Operacion = op;
             Id = aidi;
             Nombre = nm;
+            TiempoR = -1;
+            TiempoT = -1;
         }
     }
 
@@ -65,5 +72,83 @@ namespace ProcesosPorLotes
         {
             return Cola.Dequeue();
         }
+
+        public bool EsVacia()
+        {
+            return Cola.Count == 0;
+
+    }
+    }
+    //TreeList<T> : List<TreeList<T>>
+    public class Lotes<T> : Queue<AlmacenProcesos<Procesos>>
+    {
+        private Queue<AlmacenProcesos<Procesos>> cola;
+
+        public Queue<AlmacenProcesos<Procesos>> Cola { get => cola; set => cola = value; }
+        //public int I { get => i; set => i = value; }
+
+        public Lotes()
+        {
+            Cola = new Queue<AlmacenProcesos<Procesos>>();
+        }
+        //public void Agregar(T obj)
+        //{
+        //    Cola.Enqueue(obj);
+        //    I++;
+        //}
+
+        public void ProcesosPorLotes(AlmacenProcesos<Procesos> qu)
+        {
+            int i = 1;
+
+            AlmacenProcesos<Procesos> Lote = new AlmacenProcesos<Procesos>();
+            foreach (Procesos p in qu.Cola)
+            {
+                Procesos proceso = new Procesos(p.Id, p.Nombre, p.Tiempo, p.Num1, p.Num2, p.Operacion, p.Id);
+
+                
+                Lote.Cola.Enqueue(proceso);
+                //MessageBox.Show(Lote.Cola.Count.ToString());
+
+                if (i % 3 == 0)
+                {
+                    AlmacenProcesos<Procesos> LoteNuevo = new AlmacenProcesos<Procesos>();
+                    
+                    while (!Lote.EsVacia())
+                    {
+                        LoteNuevo.Cola.Enqueue(Lote.Ejecutar());
+                    }
+                    Cola.Enqueue(LoteNuevo);
+
+                    i = 0;
+                    
+                }
+                i++;
+
+            }
+
+            if(i > 1)
+            {
+                AlmacenProcesos<Procesos> LoteNuevo = new AlmacenProcesos<Procesos>();
+
+                while (!Lote.EsVacia())
+                {
+                    LoteNuevo.Cola.Enqueue(Lote.Ejecutar());
+                }
+                Cola.Enqueue(LoteNuevo);
+            }
+
+        }
+
+        //public <AlmacenProcesos<Procesos>> Regresar()
+        //{
+
+        //    return Cola.Peek();
+        //}
+
+        //public <T> private Ejecutar()
+        //{
+        //    return Cola.Dequeue();
+        //}
     }
 }
