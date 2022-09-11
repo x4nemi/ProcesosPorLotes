@@ -16,6 +16,8 @@ namespace ProcesosPorLotes
         private string operacion;
         private int id;
         private string nombre;
+        private int tr;
+        private int tt;
 
         public int Numpro { get => numpro; set => numpro = value; }
         public double Num1 { get => num1; set => num1 = value; }
@@ -24,6 +26,9 @@ namespace ProcesosPorLotes
         public int Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public int Tiempo { get => tiempo; set => tiempo = value; }
+
+        public int TiempoR { get => tr; set => tr = value; }
+        public int TiempoT { get => tt; set => tt = value; }
 
         public Procesos(int np, string nm, int tm, double n1, double n2, string op, int aidi)
         {
@@ -34,6 +39,8 @@ namespace ProcesosPorLotes
             Operacion = op;
             Id = aidi;
             Nombre = nm;
+            TiempoR = -1;
+            TiempoT = -1;
         }
     }
 

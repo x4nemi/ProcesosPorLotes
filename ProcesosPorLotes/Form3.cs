@@ -151,8 +151,8 @@ namespace ProcesosPorLotes
 
                     listBox3.Items.Remove("ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
 
-                    seconds = p.Tiempo;
-                    TR = 0;
+                    seconds = p.TiempoR == -1 ? p.Tiempo : p.TiempoR;
+                    TR = p.TiempoT == -1 ? 0 : p.TiempoT;
                     timer1.Start();
 
                     label10.Text = "ID: " + p.Id.ToString();
@@ -176,10 +176,12 @@ namespace ProcesosPorLotes
                             }
                             timer1.Start();
                             timer2.Start();
-                        }else if (interrupcion)
+                        } else if (interrupcion)
                         {
-                            AP.Agregar(p);
                             timer1.Stop();
+                            p.TiempoR = seconds;
+                            p.TiempoT = TR;
+                            AP.Agregar(p);
                             break;
                         }
                         else
