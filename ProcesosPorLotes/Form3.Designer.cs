@@ -30,28 +30,27 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lotesPendientesList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.IDLabel = new System.Windows.Forms.Label();
+            this.OperacionLabel = new System.Windows.Forms.Label();
+            this.TTLabel = new System.Windows.Forms.Label();
+            this.TRLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.lotesTerminadosList = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.loteEnProcesoList = new System.Windows.Forms.ListBox();
+            this.LoteEPLabel = new System.Windows.Forms.Label();
+            this.TiempoGlobalLabel = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.TeclaPresionadaLabel = new System.Windows.Forms.Label();
+            this.TeclaAccionLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -61,23 +60,23 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panel1.Controls.Add(this.listBox1);
+            this.panel1.Controls.Add(this.lotesPendientesList);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 80);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(187, 231);
             this.panel1.TabIndex = 0;
             // 
-            // listBox1
+            // lotesPendientesList
             // 
-            this.listBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.listBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 21;
-            this.listBox1.Location = new System.Drawing.Point(12, 68);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(162, 130);
-            this.listBox1.TabIndex = 1;
+            this.lotesPendientesList.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lotesPendientesList.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lotesPendientesList.FormattingEnabled = true;
+            this.lotesPendientesList.ItemHeight = 21;
+            this.lotesPendientesList.Location = new System.Drawing.Point(12, 68);
+            this.lotesPendientesList.Name = "lotesPendientesList";
+            this.lotesPendientesList.Size = new System.Drawing.Size(162, 130);
+            this.lotesPendientesList.TabIndex = 1;
             // 
             // label1
             // 
@@ -92,77 +91,66 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.IDLabel);
+            this.panel2.Controls.Add(this.OperacionLabel);
+            this.panel2.Controls.Add(this.TTLabel);
+            this.panel2.Controls.Add(this.TRLabel);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(205, 80);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(259, 231);
             this.panel2.TabIndex = 1;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(14, 48);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(34, 28);
-            this.label10.TabIndex = 7;
-            this.label10.Text = "10";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(14, 158);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(23, 28);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "9";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(14, 102);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(23, 28);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "8";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(14, 130);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 28);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "6";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(14, 186);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(23, 28);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "5";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(14, 74);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(14, 53);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 28);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "4";
+            this.label4.Size = new System.Drawing.Size(225, 19);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "____________________________________";
+            // 
+            // IDLabel
+            // 
+            this.IDLabel.AutoSize = true;
+            this.IDLabel.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.IDLabel.Location = new System.Drawing.Point(14, 73);
+            this.IDLabel.Name = "IDLabel";
+            this.IDLabel.Size = new System.Drawing.Size(34, 25);
+            this.IDLabel.TabIndex = 7;
+            this.IDLabel.Text = "ID:";
+            // 
+            // OperacionLabel
+            // 
+            this.OperacionLabel.AutoSize = true;
+            this.OperacionLabel.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.OperacionLabel.Location = new System.Drawing.Point(14, 98);
+            this.OperacionLabel.Name = "OperacionLabel";
+            this.OperacionLabel.Size = new System.Drawing.Size(103, 25);
+            this.OperacionLabel.TabIndex = 6;
+            this.OperacionLabel.Text = "Operación: ";
+            // 
+            // TTLabel
+            // 
+            this.TTLabel.AutoSize = true;
+            this.TTLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TTLabel.Location = new System.Drawing.Point(14, 134);
+            this.TTLabel.Name = "TTLabel";
+            this.TTLabel.Size = new System.Drawing.Size(156, 21);
+            this.TTLabel.TabIndex = 5;
+            this.TTLabel.Text = "Tiempo Transcurrido:";
+            // 
+            // TRLabel
+            // 
+            this.TRLabel.AutoSize = true;
+            this.TRLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TRLabel.Location = new System.Drawing.Point(14, 162);
+            this.TRLabel.Name = "TRLabel";
+            this.TRLabel.Size = new System.Drawing.Size(129, 21);
+            this.TRLabel.TabIndex = 4;
+            this.TRLabel.Text = "Tiempo Restante:";
             // 
             // label2
             // 
@@ -177,23 +165,23 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.Info;
-            this.panel3.Controls.Add(this.listBox2);
+            this.panel3.Controls.Add(this.lotesTerminadosList);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(470, 80);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(261, 425);
             this.panel3.TabIndex = 2;
             // 
-            // listBox2
+            // lotesTerminadosList
             // 
-            this.listBox2.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.listBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 21;
-            this.listBox2.Location = new System.Drawing.Point(12, 68);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(237, 340);
-            this.listBox2.TabIndex = 7;
+            this.lotesTerminadosList.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.lotesTerminadosList.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lotesTerminadosList.FormattingEnabled = true;
+            this.lotesTerminadosList.ItemHeight = 21;
+            this.lotesTerminadosList.Location = new System.Drawing.Point(12, 68);
+            this.lotesTerminadosList.Name = "lotesTerminadosList";
+            this.lotesTerminadosList.Size = new System.Drawing.Size(237, 340);
+            this.lotesTerminadosList.TabIndex = 7;
             // 
             // label3
             // 
@@ -223,69 +211,69 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.panel4.Controls.Add(this.listBox3);
-            this.panel4.Controls.Add(this.label12);
+            this.panel4.Controls.Add(this.loteEnProcesoList);
+            this.panel4.Controls.Add(this.LoteEPLabel);
             this.panel4.Location = new System.Drawing.Point(12, 317);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(452, 188);
             this.panel4.TabIndex = 4;
             // 
-            // listBox3
+            // loteEnProcesoList
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 15;
-            this.listBox3.Location = new System.Drawing.Point(12, 66);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(417, 94);
-            this.listBox3.TabIndex = 1;
+            this.loteEnProcesoList.FormattingEnabled = true;
+            this.loteEnProcesoList.ItemHeight = 15;
+            this.loteEnProcesoList.Location = new System.Drawing.Point(12, 66);
+            this.loteEnProcesoList.Name = "loteEnProcesoList";
+            this.loteEnProcesoList.Size = new System.Drawing.Size(417, 94);
+            this.loteEnProcesoList.TabIndex = 1;
             // 
-            // label12
+            // LoteEPLabel
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label12.Location = new System.Drawing.Point(12, 16);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(206, 37);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Lote en proceso";
+            this.LoteEPLabel.AutoSize = true;
+            this.LoteEPLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LoteEPLabel.Location = new System.Drawing.Point(12, 16);
+            this.LoteEPLabel.Name = "LoteEPLabel";
+            this.LoteEPLabel.Size = new System.Drawing.Size(206, 37);
+            this.LoteEPLabel.TabIndex = 0;
+            this.LoteEPLabel.Text = "Lote en proceso";
             // 
-            // label11
+            // TiempoGlobalLabel
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.ForeColor = System.Drawing.Color.LightSeaGreen;
-            this.label11.Location = new System.Drawing.Point(498, 34);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(121, 23);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "Tiempo Global";
+            this.TiempoGlobalLabel.AutoSize = true;
+            this.TiempoGlobalLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TiempoGlobalLabel.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.TiempoGlobalLabel.Location = new System.Drawing.Point(498, 34);
+            this.TiempoGlobalLabel.Name = "TiempoGlobalLabel";
+            this.TiempoGlobalLabel.Size = new System.Drawing.Size(121, 23);
+            this.TiempoGlobalLabel.TabIndex = 5;
+            this.TiempoGlobalLabel.Text = "Tiempo Global";
             // 
             // timer2
             // 
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // label13
+            // TeclaPresionadaLabel
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label13.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label13.Location = new System.Drawing.Point(12, 516);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(19, 21);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "...";
+            this.TeclaPresionadaLabel.AutoSize = true;
+            this.TeclaPresionadaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.TeclaPresionadaLabel.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.TeclaPresionadaLabel.Location = new System.Drawing.Point(12, 516);
+            this.TeclaPresionadaLabel.Name = "TeclaPresionadaLabel";
+            this.TeclaPresionadaLabel.Size = new System.Drawing.Size(19, 21);
+            this.TeclaPresionadaLabel.TabIndex = 6;
+            this.TeclaPresionadaLabel.Text = "...";
             // 
-            // label14
+            // TeclaAccionLabel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label14.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label14.Location = new System.Drawing.Point(630, 516);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(22, 21);
-            this.label14.TabIndex = 7;
-            this.label14.Text = "...";
+            this.TeclaAccionLabel.AutoSize = true;
+            this.TeclaAccionLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.TeclaAccionLabel.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.TeclaAccionLabel.Location = new System.Drawing.Point(630, 516);
+            this.TeclaAccionLabel.Name = "TeclaAccionLabel";
+            this.TeclaAccionLabel.Size = new System.Drawing.Size(22, 21);
+            this.TeclaAccionLabel.TabIndex = 7;
+            this.TeclaAccionLabel.Text = "...";
             // 
             // Form3
             // 
@@ -293,9 +281,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(743, 546);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.TeclaAccionLabel);
+            this.Controls.Add(this.TeclaPresionadaLabel);
+            this.Controls.Add(this.TiempoGlobalLabel);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.panel3);
@@ -303,7 +291,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "Form3";
             this.Text = "Form3";
-            this.Load += new System.EventHandler(this.Form3_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form3_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -321,27 +308,26 @@
         #endregion
 
         private Panel panel1;
-        private ListBox listBox1;
+        private ListBox lotesPendientesList;
         private Label label1;
         private Panel panel2;
-        private Label label6;
-        private Label label5;
-        private Label label4;
+        private Label TRLabel;
         private Label label2;
         private Panel panel3;
         private Label label3;
         private System.Windows.Forms.Timer timer1;
-        private ListBox listBox2;
+        private ListBox lotesTerminadosList;
         private Label label7;
         private Panel panel4;
-        private Label label8;
-        private Label label9;
-        private Label label10;
-        private Label label11;
+        private Label TTLabel;
+        private Label OperacionLabel;
+        private Label IDLabel;
+        private Label TiempoGlobalLabel;
         private System.Windows.Forms.Timer timer2;
-        private ListBox listBox3;
-        private Label label12;
-        private Label label13;
-        private Label label14;
+        private ListBox loteEnProcesoList;
+        private Label LoteEPLabel;
+        private Label TeclaPresionadaLabel;
+        private Label TeclaAccionLabel;
+        private Label label4;
     }
 }

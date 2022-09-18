@@ -30,15 +30,15 @@ namespace ProcesosPorLotes
         public int TiempoR { get => tr; set => tr = value; }
         public int TiempoT { get => tt; set => tt = value; }
 
-        public Procesos(int np, string nm, int tm, double n1, double n2, string op, int aidi)
+        public Procesos(int numProceso, string nombre, int tiempo, double num1, double num2, string operacion, int aidi)
         {
-            Numpro = np;
-            Num1 = n1;
-            Num2 = n2;
-            Tiempo = tm;
-            Operacion = op;
+            Numpro = numProceso;
+            Num1 = num1;
+            Num2 = num2;
+            Tiempo = tiempo;
+            Operacion = operacion;
             Id = aidi;
-            Nombre = nm;
+            Nombre = nombre;
             TiempoR = -1;
             TiempoT = -1;
         }
@@ -77,25 +77,19 @@ namespace ProcesosPorLotes
         {
             return Cola.Count == 0;
 
+        }
     }
-    }
-    //TreeList<T> : List<TreeList<T>>
+
     public class Lotes<T> : Queue<AlmacenProcesos<Procesos>>
     {
         private Queue<AlmacenProcesos<Procesos>> cola;
 
         public Queue<AlmacenProcesos<Procesos>> Cola { get => cola; set => cola = value; }
-        //public int I { get => i; set => i = value; }
 
         public Lotes()
         {
             Cola = new Queue<AlmacenProcesos<Procesos>>();
         }
-        //public void Agregar(T obj)
-        //{
-        //    Cola.Enqueue(obj);
-        //    I++;
-        //}
 
         public void ProcesosPorLotes(AlmacenProcesos<Procesos> qu)
         {
@@ -108,7 +102,6 @@ namespace ProcesosPorLotes
 
                 
                 Lote.Cola.Enqueue(proceso);
-                //MessageBox.Show(Lote.Cola.Count.ToString());
 
                 if (i % 3 == 0)
                 {
@@ -139,16 +132,5 @@ namespace ProcesosPorLotes
             }
 
         }
-
-        //public <AlmacenProcesos<Procesos>> Regresar()
-        //{
-
-        //    return Cola.Peek();
-        //}
-
-        //public <T> private Ejecutar()
-        //{
-        //    return Cola.Dequeue();
-        //}
     }
 }
