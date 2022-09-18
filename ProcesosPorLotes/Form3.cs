@@ -24,17 +24,18 @@ using System.Threading;
         TiempoGLabel (Global)
         TeclaPresionadaLabel (izquierda abajo)
         TeclaAccionLabel (derecha abajo)
+        ProcesosNuevosLabel
  */
 
 /*
     Nombres de listBoxes
-        lotesPendientesList
+        procesosListossList
             Los items de esta lista van como 
-            "Lote " + #deLote.ToString()
-        lotesTerminadosList
+            "ID: " + ID.toString() + "TME: " + TME.toString() + "\t" + "Tiempo T: " tt.toString()
+        terminadosList
             Los items de esta lista van como
             "ID: " + IDdelProceso.ToString() + "\t" + "Resultado:  " + resultadoOperacion
-        loteEnProcesoList
+        bloqueadosList
             Los items de esta lista van como
             "ID: " + IDdelProceso.ToString() + "\t" + "Tiempo: " + tiempoDelProceso.ToString()
             
@@ -54,6 +55,9 @@ namespace ProcesosPorLotes
     {
         AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
         Lotes<AlmacenProcesos<Procesos>> lo = new Lotes<AlmacenProcesos<Procesos>>();
+
+        AlmacenProcesos<Procesos> Listos = new AlmacenProcesos<Procesos>();
+        AlmacenProcesos<Procesos> Bloqueados = new AlmacenProcesos<Procesos>();
 
         public Form3(AlmacenProcesos<Procesos> qu)
         {
@@ -78,17 +82,17 @@ namespace ProcesosPorLotes
         {
             for(int i = 1; i <= numLotes; i++)
             {
-                lotesPendientesList.Items.Add("Lote " + i.ToString());
+                procesosListosList.Items.Add("Lote " + i.ToString());
             }
         }
 
 
         private void LoteEnProceso(AlmacenProcesos<Procesos> Lote)
         {
-            loteEnProcesoList.Items.Clear();
+            bloqueadosList.Items.Clear();
             foreach(Procesos p in Lote.Cola)
             {
-                loteEnProcesoList.Items.Add("ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
+                bloqueadosList.Items.Add("ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
             }
 
         }
@@ -144,7 +148,7 @@ namespace ProcesosPorLotes
             foreach (AlmacenProcesos<Procesos> AP in lo.Cola)
             {
                 LoteEnProceso(AP);
-                lotesPendientesList.Items.Remove("Lote " + i.ToString());
+                procesosListosList.Items.Remove("Lote " + i.ToString());
                 LoteEPLabel.Text = "Lote en proceso: " + i;
 
                 while (!AP.EsVacia())
@@ -152,7 +156,7 @@ namespace ProcesosPorLotes
                     Procesos p = new Procesos(1, "", 1, 1, 1, "", 1);
                     p = AP.Ejecutar();
 
-                    loteEnProcesoList.Items.Remove("ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
+                    bloqueadosList.Items.Remove("ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
 
                     TR = p.TiempoR == -1 ? p.Tiempo : p.TiempoR;
                     TT = p.TiempoT == -1 ? 0 : p.TiempoT;
@@ -204,9 +208,9 @@ namespace ProcesosPorLotes
                         error = false;
                         TeclaAccionLabel.Text = "";
 
-                        lotesTerminadosList.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado:  " + res);
+                        terminadosList.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado:  " + res);
 
-                        loteEnProcesoList.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
+                        bloqueadosList.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
                     }
 
 
@@ -215,7 +219,7 @@ namespace ProcesosPorLotes
 
                 i++;
                     
-                lotesTerminadosList.Items.Add("---------------------");
+                terminadosList.Items.Add("---------------------");
                
             }
                 
@@ -316,6 +320,11 @@ namespace ProcesosPorLotes
                     error = true;
                 }
             }         
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
         }
 
     }
