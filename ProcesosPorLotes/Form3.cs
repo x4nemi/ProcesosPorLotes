@@ -58,6 +58,7 @@ namespace ProcesosPorLotes
         AlmacenProcesos<Procesos> Listos = new AlmacenProcesos<Procesos>();
         List<Procesos> Bloqueado = new List<Procesos>();
         AlmacenProcesos<Procesos> Nuevos = new AlmacenProcesos<Procesos>();
+        AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
 
         public Form3(AlmacenProcesos<Procesos> qu)
         {
@@ -80,11 +81,11 @@ namespace ProcesosPorLotes
 
         private void limpiarLabels()
         {
-            TRLabel.Text = "";
-            TTLabel.Text = "";
-            OperacionLabel.Text = "";
-            IDLabel.Text = "";
-            tmeLabel.Text = "";
+            TRLabel.Text = "Tiempo Restante: 0 segundos";
+            TTLabel.Text = "Tiempo Transcurrido: 0 segundos";
+            //OperacionLabel.Text = "";
+            //IDLabel.Text = "";
+            //tmeLabel.Text = "";
         }
       
 
@@ -132,10 +133,7 @@ namespace ProcesosPorLotes
             for (int i = 0; i < q.Tam(); i++)
             {
                 tiempoBlocked.Add(-1);
-            }
-
-            MessageBox.Show(tiempoBlocked.Count.ToString());
-        
+            }      
         }
 
         private void DividirListosNuevos()
@@ -159,6 +157,7 @@ namespace ProcesosPorLotes
 
         private void AgregarTerminadosList(Procesos p)
         {
+            Terminados.Agregar(p);
             terminadosList.Items.Add(FormatoTerminados(p));
         }
 
@@ -220,10 +219,11 @@ namespace ProcesosPorLotes
                 TR = p.TiempoR == 0 ? p.Tiempo : p.TiempoR;
                 TT = p.TiempoT;
                 timer1.Start();
-                await Task.Delay(1000);
+
                 IDLabel.Text = "ID: " + p.Id.ToString();
                 OperacionLabel.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString();
-                tmeLabel.Text = "TME: " + p.Tiempo.ToString() + "seg";
+                tmeLabel.Text = "TME: " + p.Tiempo.ToString() + " segundos";
+                
                 int tiempoWhile = p.TiempoR == 0 ? p.Tiempo : p.TiempoR;
 
                 int k = 0;
@@ -236,7 +236,7 @@ namespace ProcesosPorLotes
                         if (!TerminoBloqueados()) timer3.Stop();
                         while (pause)
                         {
-                            await Task.Delay(1000);
+                            await Task.Delay(500);
                         }
                         timer1.Start();
                         timer2.Start();
@@ -247,7 +247,6 @@ namespace ProcesosPorLotes
                         timer1.Stop();
                         p.TiempoR = TR;
                         p.TiempoT = TT;
-                        //Listos.Ejecutar();
                         break;
 
                     }
@@ -256,7 +255,7 @@ namespace ProcesosPorLotes
                         timer1.Stop();
                         p.TiempoR = TR;
                         p.TiempoT = TT;
-                        //Listos.Ejecutar();
+
                         Bloqueado.Add(p);
                         tiempoBlocked[p.Id - 1] = 0;
                         timer3.Start();
@@ -270,22 +269,16 @@ namespace ProcesosPorLotes
                     }
                 }
 
-
-
                 TeclaAccionLabel.Text = "";
                 if (interrupcion)
                 {
                     interrupcion = false;
                 }
-                else if (error)
-                {
-                    error = false;
-                    p.Resultado = "Error";
-                    AgregarTerminadosList(p);
-                }
                 else
-                {
-                    p.Resultado = Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+                { 
+                    p.Resultado = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+                    error = false;
+                    
                     AgregarTerminadosList(p);
                     
                     //Listos.Ejecutar();
@@ -294,7 +287,6 @@ namespace ProcesosPorLotes
                 limpiarLabels();
             }
             running = false;
-            MessageBox.Show(running ? "Sí" : "Ni");
         }
 
         private double Resultado (double num1, double num2, string op)
@@ -327,14 +319,14 @@ namespace ProcesosPorLotes
 
         private bool TodoVacio()
         {
-            return Bloqueado.Count == 0 && Listos.Tam() == 0 && Nuevos.Tam() == 0;
+            return Bloqueado.Count == 0 && Listos.Tam() == 0 && Nuevos.Tam() == 0 && !running;
         }
 
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            TRLabel.Text = "Tiempo Restante: " + TR--.ToString() + "seg";
-            TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString() + "seg";
+            TRLabel.Text = "Tiempo Restante: " + TR--.ToString() + " segundos";
+            TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString() + " segundos";
             
             if (TR < 0)
             {
@@ -349,6 +341,9 @@ namespace ProcesosPorLotes
             {
                 timer2.Stop();
                 limpiarLabels();
+                Form4 form4 = new Form4(Terminados);
+                this.Close();
+                form4.Show();
             }
         }
 
@@ -365,12 +360,10 @@ namespace ProcesosPorLotes
                     AgregarBloqueadosList();
                 }
             }
-            //tiempoB++;
-            //if (tiempoB == 8) timer3.Stop();
+
             if (TerminoBloqueados())
             {
                 timer3.Stop();
-                //if (Listos.Tam() > 0) FirstComeFirstServer();
             }
         }
 

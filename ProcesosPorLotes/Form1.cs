@@ -19,7 +19,7 @@ namespace ProcesosPorLotes
             {
                 MessageBox.Show("ingresa un numero por favor");
             }
-            else if (Int32.Parse(dato) < 10)
+            else if (Int32.Parse(dato) < 1)
             {
                 MessageBox.Show("Solo puedes ingresar numeros mayores a 10");
                 text1.Text = "";
@@ -57,7 +57,7 @@ namespace ProcesosPorLotes
             {
                 int id = i + 1;
                 string nombre = "Proceso " + i.ToString();
-                int tiempo = new Random().Next(6, 16);
+                int tiempo = new Random().Next(2, 5);
                 int index = new Random().Next(0, 5);
                 string operacion = operaciones[index];
                 double num1;

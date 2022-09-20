@@ -50,9 +50,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(274, 28);
+            this.label1.Size = new System.Drawing.Size(263, 28);
             this.label1.TabIndex = 1;
-            this.label1.Text = "PROCESOS A CAPTURAR";
+            this.label1.Text = "PROCESOS A EJECUTAR";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // text1
