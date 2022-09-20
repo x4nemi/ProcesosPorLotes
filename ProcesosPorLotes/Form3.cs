@@ -68,9 +68,9 @@ namespace ProcesosPorLotes
             this.KeyPreview = true;
             //EnProceso();
 
+            LlenarTiemposBlocked();
             DividirListosNuevos();
 
-            LlenarTiemposBlocked();
             TiempoGlob = 0;
             timer2.Start();
             FirstComeFirstServer();
@@ -131,6 +131,8 @@ namespace ProcesosPorLotes
             {
                 tiempoBlocked.Add(-1);
             }
+
+            MessageBox.Show(tiempoBlocked.Count.ToString());
         
         }
 
@@ -175,7 +177,6 @@ namespace ProcesosPorLotes
                     Listos.Agregar(p);
                     AgregarListosList();
 
-                    if (Nuevos.Tam() > 0 && Nuevos.Tam() <= 3) FirstComeFirstServer();
                     i--;
                 }
                 else
@@ -209,7 +210,7 @@ namespace ProcesosPorLotes
             while (!Listos.EsVacia())
             {
                 Procesos p = new(1, "", 1, 1, 1, "", 1);
-                p = Listos.Regresar();
+                p = Listos.Ejecutar();
                 AgregarListosList();
                 procesosListosList.Items.Remove(FormatoListos(p));
 
@@ -243,7 +244,7 @@ namespace ProcesosPorLotes
                         timer1.Stop();
                         p.TiempoR = TR;
                         p.TiempoT = TT;
-                        Listos.Ejecutar();
+                        //Listos.Ejecutar();
                         break;
 
                     }
@@ -252,7 +253,7 @@ namespace ProcesosPorLotes
                         timer1.Stop();
                         p.TiempoR = TR;
                         p.TiempoT = TT;
-                        Listos.Ejecutar();
+                        //Listos.Ejecutar();
                         Bloqueado.Add(p);
                         tiempoBlocked[p.Id - 1] = 0;
                         timer3.Start();
@@ -272,22 +273,19 @@ namespace ProcesosPorLotes
                 if (interrupcion)
                 {
                     interrupcion = false;
-                    continue;
                 }
                 else if (error)
                 {
                     error = false;
                     p.Resultado = "Error";
                     AgregarTerminadosList(p);
-                    continue;
-
                 }
                 else
                 {
                     p.Resultado = Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
                     AgregarTerminadosList(p);
                     
-                    Listos.Ejecutar();
+                    //Listos.Ejecutar();
                     DividirListosNuevos();
                 }
             }
@@ -330,11 +328,8 @@ namespace ProcesosPorLotes
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            if(!interrupcion)
-            {
-                TRLabel.Text = "Tiempo Restante: " + TR--.ToString() + "seg";
-                TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString() + "seg";
-            }
+            TRLabel.Text = "Tiempo Restante: " + TR--.ToString() + "seg";
+            TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString() + "seg";
             
             if (TR < 0)
             {
@@ -354,13 +349,12 @@ namespace ProcesosPorLotes
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            
             AgregarBloqueadosList();
             for (int i = 0; i < tiempoBlocked.Count; i++)
             {
                 if (tiempoBlocked[i] != -1) tiempoBlocked[i]++;
 
-                if (tiempoBlocked[i] == 8)
+                if (tiempoBlocked[i] > 8)
                 {
                     tiempoBlocked[i] = -1;
                     AgregarBloqueadosList();
@@ -371,7 +365,7 @@ namespace ProcesosPorLotes
             if (TerminoBloqueados())
             {
                 timer3.Stop();
-                FirstComeFirstServer();
+                //if (Listos.Tam() > 0) FirstComeFirstServer();
             }
         }
 
