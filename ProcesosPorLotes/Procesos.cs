@@ -18,6 +18,7 @@ namespace ProcesosPorLotes
         private string nombre;
         private int tr;
         private int tt;
+        private string res;
 
         public int Numpro { get => numpro; set => numpro = value; }
         public double Num1 { get => num1; set => num1 = value; }
@@ -29,6 +30,7 @@ namespace ProcesosPorLotes
 
         public int TiempoR { get => tr; set => tr = value; }
         public int TiempoT { get => tt; set => tt = value; }
+        public string Resultado { get => res; set => res = value; }
 
         public Procesos(int numProceso, string nombre, int tiempo, double num1, double num2, string operacion, int aidi)
         {
@@ -39,8 +41,9 @@ namespace ProcesosPorLotes
             Operacion = operacion;
             Id = aidi;
             Nombre = nombre;
-            TiempoR = -1;
-            TiempoT = -1;
+            TiempoR = 0;
+            TiempoT = 0;
+            Resultado = "";
         }
     }
 
@@ -77,6 +80,11 @@ namespace ProcesosPorLotes
         {
             return Cola.Count == 0;
 
+        }
+
+        public int Tam()
+        {
+            return Cola.Count;
         }
     }
 

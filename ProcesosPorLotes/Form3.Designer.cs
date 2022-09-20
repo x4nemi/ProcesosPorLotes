@@ -53,6 +53,8 @@
             this.TeclaAccionLabel = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.ProcesosNuevosLabel = new System.Windows.Forms.Label();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.tmeLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -94,6 +96,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.panel2.Controls.Add(this.tmeLabel);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.IDLabel);
             this.panel2.Controls.Add(this.OperacionLabel);
@@ -297,6 +300,21 @@
             this.ProcesosNuevosLabel.TabIndex = 9;
             this.ProcesosNuevosLabel.Text = "Procesos nuevos: ";
             // 
+            // timer3
+            // 
+            this.timer3.Interval = 1000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // tmeLabel
+            // 
+            this.tmeLabel.AutoSize = true;
+            this.tmeLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tmeLabel.Location = new System.Drawing.Point(14, 189);
+            this.tmeLabel.Name = "tmeLabel";
+            this.tmeLabel.Size = new System.Drawing.Size(47, 21);
+            this.tmeLabel.TabIndex = 9;
+            this.tmeLabel.Text = "TME: ";
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -357,5 +375,7 @@
         private Label label4;
         private Panel panel5;
         private Label ProcesosNuevosLabel;
+        private System.Windows.Forms.Timer timer3;
+        private Label tmeLabel;
     }
 }

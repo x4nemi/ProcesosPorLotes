@@ -54,19 +54,29 @@ namespace ProcesosPorLotes
 
     {
         AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
-        Lotes<AlmacenProcesos<Procesos>> lo = new Lotes<AlmacenProcesos<Procesos>>();
 
         AlmacenProcesos<Procesos> Listos = new AlmacenProcesos<Procesos>();
-        AlmacenProcesos<Procesos> Bloqueados = new AlmacenProcesos<Procesos>();
+        List<Procesos> Bloqueado = new List<Procesos>();
+        AlmacenProcesos<Procesos> Nuevos = new AlmacenProcesos<Procesos>();
 
         public Form3(AlmacenProcesos<Procesos> qu)
         {
             InitializeComponent();
             q = qu;
+            Nuevos = qu;
 
             this.KeyPreview = true;
-            EnProceso();
+            //EnProceso();
+
+            DividirListosNuevos();
+
+            LlenarTiemposBlocked();
+            TiempoGlob = 0;
+            timer2.Start();
+            FirstComeFirstServer();
         }
+
+
 
         private void limpiarLabels()
         {
@@ -76,27 +86,7 @@ namespace ProcesosPorLotes
             IDLabel.Text = "";
             LoteEPLabel.Text = "Lote en proceso: ";
         }
-
-     
-        private void AgregarItemsListBox(int numLotes)
-        {
-            for(int i = 1; i <= numLotes; i++)
-            {
-                procesosListosList.Items.Add("Lote " + i.ToString());
-            }
-        }
-
-
-        private void LoteEnProceso(AlmacenProcesos<Procesos> Lote)
-        {
-            bloqueadosList.Items.Clear();
-            foreach(Procesos p in Lote.Cola)
-            {
-                bloqueadosList.Items.Add("ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
-            }
-
-        }
-        
+      
 
         private string operador (string op)
         {
@@ -132,101 +122,176 @@ namespace ProcesosPorLotes
         bool error = false;
         bool pause = false;
         bool interrupcion = false;
-
-        private async void EnProceso()
+        
+        List<int> tiempoBlocked = new List<int>();
+        
+        private void LlenarTiemposBlocked()
         {
-            TiempoGlob = 0;
-            timer2.Start();
-
-            lo.ProcesosPorLotes(q);
-
-            AgregarItemsListBox(lo.Cola.Count);
-
-            int i = 1;
-
-
-            foreach (AlmacenProcesos<Procesos> AP in lo.Cola)
+            for (int i = 0; i < q.Tam(); i++)
             {
-                LoteEnProceso(AP);
-                procesosListosList.Items.Remove("Lote " + i.ToString());
-                LoteEPLabel.Text = "Lote en proceso: " + i;
+                tiempoBlocked.Add(-1);
+            }
+        
+        }
 
-                while (!AP.EsVacia())
+        private void DividirListosNuevos()
+        //Es para dividir los procesos que estan en la lista de procesos listos en 'lotes'
+        {
+            while (Listos.Tam() + Bloqueado.Count < 3 && !Nuevos.EsVacia())
+            {
+                Listos.Agregar(Nuevos.Ejecutar());
+            }
+        }
+        
+        private void AgregarListosList()
+        {
+            procesosListosList.Items.Clear();
+            foreach (Procesos p in Listos.Cola)
+            {
+                procesosListosList.Items.Add(FormatoListos(p));
+            }
+            ProcesosNuevosLabel.Text = "Procesos nuevos: " + Nuevos.Tam().ToString();
+        }
+
+        private void AgregarTerminadosList(Procesos p)
+        {
+            terminadosList.Items.Add(FormatoTerminados(p));
+        }
+
+        private void AgregarBloqueadosList()
+        {
+            bloqueadosList.Items.Clear();
+
+            int i = 0;
+
+            while(Bloqueado.Count != 0 && i < Bloqueado.Count)
+            {
+                Procesos p = new(1, "", 1, 1, 1, "", 1);
+                p = Bloqueado[i];
+
+                if (tiempoBlocked[p.Id - 1] == -1)
                 {
-                    Procesos p = new Procesos(1, "", 1, 1, 1, "", 1);
-                    p = AP.Ejecutar();
+                    Bloqueado.Remove(p);
+                    Listos.Agregar(p);
+                    AgregarListosList();
 
-                    bloqueadosList.Items.Remove("ID: " + p.Id.ToString() + "\t" + "Tiempo: " + p.Tiempo.ToString());
-
-                    TR = p.TiempoR == -1 ? p.Tiempo : p.TiempoR;
-                    TT = p.TiempoT == -1 ? 0 : p.TiempoT;
-                    timer1.Start();
-                    await Task.Delay(1000);
-                    IDLabel.Text = "ID: " + p.Id.ToString();
-                    OperacionLabel.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString();
-
-                    int tiempoWhile = p.TiempoR == -1 ? p.Tiempo : p.TiempoR;
-
-                    int k = 0;
-                    while (k <= tiempoWhile )
-                    {
-                        if (pause)
-                        {
-                            timer1.Stop();
-                            timer2.Stop();
-                            while (pause)
-                            {
-                                await Task.Delay(1000);
-                            }
-                            timer1.Start();
-                            timer2.Start();
-                        } else if (interrupcion)
-                        {
-                            timer1.Stop();
-                            p.TiempoR = TR;
-                            p.TiempoT = TT;
-                            AP.Agregar(p);
-                            break;
-                        }
-                        else
-                        {
-                            Task delay = Task.Delay(1000);
-                            await delay;
-                            k++;
-                        }
-                    }
-
-                    
-
-                    if (interrupcion) {
-                        interrupcion = false;
-                        LoteEnProceso(AP);
-                    }
-                    else
-                    {
-                        string res = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
-                        error = false;
-                        TeclaAccionLabel.Text = "";
-
-                        terminadosList.Items.Add("ID: " + p.Id.ToString() + "\t" + "Resultado:  " + res);
-
-                        bloqueadosList.Items.Remove(p.Nombre + "\t" + "ID: " + p.Id.ToString());
-                    }
-
-
-
+                    if (Nuevos.Tam() > 0 && Nuevos.Tam() <= 3) FirstComeFirstServer();
+                    i--;
+                }
+                else
+                {
+                    bloqueadosList.Items.Add(FormatoBloqueados(p.Id));
                 }
 
                 i++;
-                    
-                terminadosList.Items.Add("---------------------");
-               
             }
-                
-           
-            timer2.Stop();
+        }
+        
+        private string FormatoListos(Procesos p)
+        {
+            return ("ID: " + p.Id.ToString() + "\t" + "TME: " + p.Tiempo.ToString() + "\t" + "TT: " + p.TiempoT.ToString());
+        }
+        
+        private string FormatoTerminados(Procesos p)
+        {
+            return ("ID: " + p.Id.ToString() + "\t" + "Operación: " + p.Num1 + " " + operador(p.Operacion) + " " + p.Num2 + " = " + p.Resultado);
+        }
 
-            limpiarLabels();
+        private string FormatoBloqueados(int id) 
+        {
+            return ("ID: " + id.ToString() + "\t" + "Tiempo Transcurrido: " + tiempoBlocked[id - 1].ToString());
+        }
+
+        private async void FirstComeFirstServer()
+        {
+            
+
+            while (!Listos.EsVacia())
+            {
+                Procesos p = new(1, "", 1, 1, 1, "", 1);
+                p = Listos.Regresar();
+                AgregarListosList();
+                procesosListosList.Items.Remove(FormatoListos(p));
+
+                TR = p.TiempoR == 0 ? p.Tiempo : p.TiempoR;
+                TT = p.TiempoT;
+                timer1.Start();
+                await Task.Delay(1000);
+                IDLabel.Text = "ID: " + p.Id.ToString();
+                OperacionLabel.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString();
+                tmeLabel.Text = "TME: " + p.Tiempo.ToString() + "seg";
+                int tiempoWhile = p.TiempoR == 0 ? p.Tiempo : p.TiempoR;
+
+                int k = 0;
+                while (k <= tiempoWhile)
+                {
+                    if (pause)
+                    {
+                        timer1.Stop();
+                        timer2.Stop();
+                        if (!TerminoBloqueados()) timer3.Stop();
+                        while (pause)
+                        {
+                            await Task.Delay(1000);
+                        }
+                        timer1.Start();
+                        timer2.Start();
+                        if (!TerminoBloqueados()) timer3.Start();
+                    }
+                    else if (error)
+                    {
+                        timer1.Stop();
+                        p.TiempoR = TR;
+                        p.TiempoT = TT;
+                        Listos.Ejecutar();
+                        break;
+
+                    }
+                    else if (interrupcion)
+                    {
+                        timer1.Stop();
+                        p.TiempoR = TR;
+                        p.TiempoT = TT;
+                        Listos.Ejecutar();
+                        Bloqueado.Add(p);
+                        tiempoBlocked[p.Id - 1] = 0;
+                        timer3.Start();
+                        break;
+                    }
+                    else
+                    {
+                        Task delay = Task.Delay(1000);
+                        await delay;
+                        k++;
+                    }
+                }
+
+
+
+                TeclaAccionLabel.Text = "";
+                if (interrupcion)
+                {
+                    interrupcion = false;
+                    continue;
+                }
+                else if (error)
+                {
+                    error = false;
+                    p.Resultado = "Error";
+                    AgregarTerminadosList(p);
+                    continue;
+
+                }
+                else
+                {
+                    p.Resultado = Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+                    AgregarTerminadosList(p);
+                    
+                    Listos.Ejecutar();
+                    DividirListosNuevos();
+                }
+            }
+
         }
 
         private double Resultado (double num1, double num2, string op)
@@ -257,14 +322,18 @@ namespace ProcesosPorLotes
             return resOp;
         }
 
+        private bool TodoVacio()
+        {
+            return Bloqueado.Count == 0 && Listos.Tam() == 0 && Nuevos.Tam() == 0;
+        }
+
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
             if(!interrupcion)
             {
-                TRLabel.Text = "Tiempo Restante: " + TR--.ToString();
-                TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString();
-
+                TRLabel.Text = "Tiempo Restante: " + TR--.ToString() + "seg";
+                TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString() + "seg";
             }
             
             if (TR < 0)
@@ -276,8 +345,46 @@ namespace ProcesosPorLotes
         private void timer2_Tick(object sender, EventArgs e)
         {
             TiempoGlobalLabel.Text = "Tiempo Global: " +TiempoGlob++.ToString();
+            if (TodoVacio())
+            {
+                timer2.Stop();
+                limpiarLabels();
+            }
         }
-        
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            
+            AgregarBloqueadosList();
+            for (int i = 0; i < tiempoBlocked.Count; i++)
+            {
+                if (tiempoBlocked[i] != -1) tiempoBlocked[i]++;
+
+                if (tiempoBlocked[i] == 8)
+                {
+                    tiempoBlocked[i] = -1;
+                    AgregarBloqueadosList();
+                }
+            }
+            //tiempoB++;
+            //if (tiempoB == 8) timer3.Stop();
+            if (TerminoBloqueados())
+            {
+                timer3.Stop();
+                FirstComeFirstServer();
+            }
+        }
+
+        private bool TerminoBloqueados()
+        {
+            foreach(int t in tiempoBlocked)
+            {
+                if (t != -1) return false;
+            }
+
+            return true;
+        }
+
         private void Form3_KeyDown(object sender, KeyEventArgs e)
         {
             //            E Interrupción
@@ -312,6 +419,7 @@ namespace ProcesosPorLotes
                 {
                     TeclaAccionLabel.Text = "Interrupción";
                     interrupcion = true;
+                    timer3.Start();
                 }
 
                 if (e.KeyCode == Keys.W)
@@ -327,5 +435,6 @@ namespace ProcesosPorLotes
 
         }
 
+        
     }
 }
