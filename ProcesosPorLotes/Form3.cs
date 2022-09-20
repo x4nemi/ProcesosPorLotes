@@ -84,7 +84,7 @@ namespace ProcesosPorLotes
             TTLabel.Text = "";
             OperacionLabel.Text = "";
             IDLabel.Text = "";
-            LoteEPLabel.Text = "Lote en proceso: ";
+            tmeLabel.Text = "";
         }
       
 
@@ -122,6 +122,8 @@ namespace ProcesosPorLotes
         bool error = false;
         bool pause = false;
         bool interrupcion = false;
+
+        bool running = false;
         
         List<int> tiempoBlocked = new List<int>();
         
@@ -176,6 +178,7 @@ namespace ProcesosPorLotes
                     Bloqueado.Remove(p);
                     Listos.Agregar(p);
                     AgregarListosList();
+                    if (!running) FirstComeFirstServer();
 
                     i--;
                 }
@@ -205,7 +208,7 @@ namespace ProcesosPorLotes
 
         private async void FirstComeFirstServer()
         {
-            
+            running = true;
 
             while (!Listos.EsVacia())
             {
@@ -288,8 +291,10 @@ namespace ProcesosPorLotes
                     //Listos.Ejecutar();
                     DividirListosNuevos();
                 }
+                limpiarLabels();
             }
-
+            running = false;
+            MessageBox.Show(running ? "Sí" : "Ni");
         }
 
         private double Resultado (double num1, double num2, string op)
