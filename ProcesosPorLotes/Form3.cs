@@ -141,7 +141,10 @@ namespace ProcesosPorLotes
         {
             while (Listos.Tam() + Bloqueado.Count < 3 && !Nuevos.EsVacia())
             {
-                Listos.Agregar(Nuevos.Ejecutar());
+                Procesos p = new();
+                p = Nuevos.Ejecutar();
+                p.TiempoLlegada = TiempoGlob;
+                Listos.Agregar(p);
             }
         }
         

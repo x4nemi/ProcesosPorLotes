@@ -18,6 +18,11 @@ namespace ProcesosPorLotes
         private string nombre;
         private int tr;
         private int tt;
+        private int tl; // Tiempo de llegada
+        private int tret; // Tiempo de retorno
+        private int tresp; // Tiempo de respuesta
+        private int tesp; // Tiempo de espera
+        private int ts; // Tiempo de servicio
         private string res;
 
         public int Numpro { get => numpro; set => numpro = value; }
@@ -30,8 +35,15 @@ namespace ProcesosPorLotes
 
         public int TiempoR { get => tr; set => tr = value; }
         public int TiempoT { get => tt; set => tt = value; }
+        public int TiempoLlegada { get => tl; set => tl = value; }
+        public int TiempoRetorno { get => tret; set => tret = value; }
+        public int TiempoRespuesta { get => tresp; set => tresp = value; }
+        public int TiempoEspera { get => tesp; set => tesp = value; }
+        public int TiempoServicio { get => ts; set => ts = value; }
+        public int TiempoFin { get => ts; set => ts = value; }
         public string Resultado { get => res; set => res = value; }
 
+        public Procesos() { }
         public Procesos(int numProceso, string nombre, int tiempo, double num1, double num2, string operacion, int aidi)
         {
             Numpro = numProceso;
@@ -43,7 +55,8 @@ namespace ProcesosPorLotes
             Nombre = nombre;
             TiempoR = 0;
             TiempoT = 0;
-            Resultado = "";
+
+            
         }
     }
 

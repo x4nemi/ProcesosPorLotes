@@ -26,11 +26,17 @@ namespace ProcesosPorLotes
         {
             foreach (Procesos p in q.Cola)
             {
-                string[] row = { p.Id.ToString(), p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), p.Tiempo.ToString() };
-                dataGridView1.Rows.Add(row);
+                dataGridView1.Rows.Add(Formato(p));
             }
         }
 
+        private string[] Formato(Procesos p)
+        {   //              ID                  Operación                                                               Resultado       TME                     Llegada              Finalización                //Retorno                       //Espera                   //Respuesta                 //Tiempo de Servicio
+            string[] row = { p.Id.ToString(), p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), p.Resultado, p.Tiempo.ToString(), p.TiempoLlegada.ToString(),"", "", "", "", "" };
+                //p.TiempoLlegada.ToString(), p.TiempoFin.ToString(), p.TiempoRetorno.ToString(), p.TiempoEspera.ToString(), p.TiempoRespuesta.ToString(), p.TiempoServicio.ToString() };
+            return row;
+           }
+        
         private string operador(string op)
         {
             string res = "";
