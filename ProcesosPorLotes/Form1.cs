@@ -17,7 +17,7 @@ namespace ProcesosPorLotes
             string dato = text1.Text;
             if (dato == "")
             {
-                MessageBox.Show("ingresa un numero por favor");
+                MessageBox.Show("Ingresa un numero por favor");
             }
             else if (Int32.Parse(dato) < 1)
             {
