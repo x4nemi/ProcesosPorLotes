@@ -57,7 +57,7 @@ namespace ProcesosPorLotes
             {
                 int id = i + 1;
                 string nombre = "Proceso " + i.ToString();
-                int tiempo = new Random().Next(2, 5);
+                int tiempo = new Random().Next(6, 15);
                 int index = new Random().Next(0, 5);
                 string operacion = operaciones[index];
                 double num1;

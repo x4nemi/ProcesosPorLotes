@@ -29,11 +29,11 @@ namespace ProcesosPorLotes
                 dataGridView1.Rows.Add(Formato(p));
             }
         }
-
+        //Retorno El tiempo de finalización - llegada(cuenta el de bloqueados)
         private string[] Formato(Procesos p)
         {   //              ID                  Operación                                                               Resultado       TME                     Llegada              Finalización                //Retorno                       //Espera                   //Respuesta                 //Tiempo de Servicio
-            string[] row = { p.Id.ToString(), p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), p.Resultado, p.Tiempo.ToString(), p.TiempoLlegada.ToString(),"", "", "", "", "" };
-                //p.TiempoLlegada.ToString(), p.TiempoFin.ToString(), p.TiempoRetorno.ToString(), p.TiempoEspera.ToString(), p.TiempoRespuesta.ToString(), p.TiempoServicio.ToString() };
+            p.TiempoRetorno = p.TiempoFin - p.TiempoLlegada;
+            string[] row = { p.Id.ToString(), p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), p.Resultado, p.Tiempo.ToString(), p.TiempoLlegada.ToString(), p.TiempoFin.ToString(), p.TiempoRetorno.ToString(), p.TiempoEspera.ToString(), p.TiempoRespuesta.ToString(), p.TiempoServicio.ToString() };
             return row;
            }
         

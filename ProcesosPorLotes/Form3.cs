@@ -144,6 +144,7 @@ namespace ProcesosPorLotes
                 Procesos p = new();
                 p = Nuevos.Ejecutar();
                 p.TiempoLlegada = TiempoGlob;
+                //p.TiempoR
                 Listos.Agregar(p);
             }
         }
@@ -158,8 +159,16 @@ namespace ProcesosPorLotes
             ProcesosNuevosLabel.Text = "Procesos nuevos: " + Nuevos.Tam().ToString();
         }
 
+        //Retorno El tiempo de finalización - llegada (cuenta el de bloqueados)
+        //Respuesta hasta que esté en ejecución 
+        //Espera el tiempo que no estuvo en ejecución (bloqueados y listos)
+        //
+        //Servicio TME o cuando termino por error (no calcula bloqueados)
+
         private void AgregarTerminadosList(Procesos p)
         {
+            p.TiempoFin = TiempoGlob;
+            p.TiempoServicio = TT;
             Terminados.Agregar(p);
             terminadosList.Items.Add(FormatoTerminados(p));
         }
@@ -178,6 +187,7 @@ namespace ProcesosPorLotes
                 if (tiempoBlocked[p.Id - 1] == -1)
                 {
                     Bloqueado.Remove(p);
+                    p.TiempoEspera += 7;
                     Listos.Agregar(p);
                     AgregarListosList();
                     if (!running) FirstComeFirstServer();
@@ -208,6 +218,10 @@ namespace ProcesosPorLotes
             return ("ID: " + id.ToString() + "\t" + "Tiempo Transcurrido: " + tiempoBlocked[id - 1].ToString());
         }
 
+        //Retorno El tiempo de finalización - llegada (cuenta el de bloqueados)
+        //-Respuesta hasta que esté en ejecución 
+        //-Espera el tiempo que no estuvo en ejecución (bloqueados y listos)
+        //-Servicio TME o cuando termino por error (no calcula bloqueados)
         private async void FirstComeFirstServer()
         {
             running = true;
@@ -216,6 +230,8 @@ namespace ProcesosPorLotes
             {
                 Procesos p = new(1, "", 1, 1, 1, "", 1);
                 p = Listos.Ejecutar();
+                p.TiempoRespuesta = TiempoGlob;
+                p.TiempoEspera += TiempoGlob;
                 AgregarListosList();
                 procesosListosList.Items.Remove(FormatoListos(p));
 
@@ -331,7 +347,7 @@ namespace ProcesosPorLotes
             TRLabel.Text = "Tiempo Restante: " + TR--.ToString() + " segundos";
             TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString() + " segundos";
             
-            if (TR < 0)
+            if (TR == 0)
             {
                 timer1.Stop();
             }
@@ -357,7 +373,7 @@ namespace ProcesosPorLotes
             {
                 if (tiempoBlocked[i] != -1) tiempoBlocked[i]++;
 
-                if (tiempoBlocked[i] > 8)
+                if (tiempoBlocked[i] > 7)
                 {
                     tiempoBlocked[i] = -1;
                     AgregarBloqueadosList();

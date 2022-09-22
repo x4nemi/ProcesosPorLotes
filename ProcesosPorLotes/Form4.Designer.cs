@@ -63,7 +63,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(821, 440);
+            this.dataGridView1.Size = new System.Drawing.Size(823, 542);
             this.dataGridView1.TabIndex = 6;
             // 
             // Column1
@@ -139,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 566);
+            this.ClientSize = new System.Drawing.Size(850, 566);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form4";
             this.Text = "Form4";
