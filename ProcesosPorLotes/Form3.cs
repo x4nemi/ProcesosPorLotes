@@ -83,9 +83,9 @@ namespace ProcesosPorLotes
         {
             TRLabel.Text = "Tiempo Restante: 0 segundos";
             TTLabel.Text = "Tiempo Transcurrido: 0 segundos";
-            //OperacionLabel.Text = "";
-            //IDLabel.Text = "";
-            //tmeLabel.Text = "";
+            OperacionLabel.Text = "Operación: ";
+            IDLabel.Text = "ID: ";
+            tmeLabel.Text = "TME: ";
         }
       
 
@@ -144,7 +144,6 @@ namespace ProcesosPorLotes
                 Procesos p = new();
                 p = Nuevos.Ejecutar();
                 p.TiempoLlegada = TiempoGlob;
-                //p.TiempoR
                 Listos.Agregar(p);
             }
         }
@@ -159,11 +158,6 @@ namespace ProcesosPorLotes
             ProcesosNuevosLabel.Text = "Procesos nuevos: " + Nuevos.Tam().ToString();
         }
 
-        //Retorno El tiempo de finalización - llegada (cuenta el de bloqueados)
-        //Respuesta hasta que esté en ejecución 
-        //Espera el tiempo que no estuvo en ejecución (bloqueados y listos)
-        //
-        //Servicio TME o cuando termino por error (no calcula bloqueados)
 
         private void AgregarTerminadosList(Procesos p)
         {
@@ -187,7 +181,6 @@ namespace ProcesosPorLotes
                 if (tiempoBlocked[p.Id - 1] == -1)
                 {
                     Bloqueado.Remove(p);
-                    p.TiempoEspera += 7;
                     Listos.Agregar(p);
                     AgregarListosList();
                     if (!running) FirstComeFirstServer();
@@ -218,10 +211,10 @@ namespace ProcesosPorLotes
             return ("ID: " + id.ToString() + "\t" + "Tiempo Transcurrido: " + tiempoBlocked[id - 1].ToString());
         }
 
-        //Retorno El tiempo de finalización - llegada (cuenta el de bloqueados)
-        //-Respuesta hasta que esté en ejecución 
-        //-Espera el tiempo que no estuvo en ejecución (bloqueados y listos)
-        //-Servicio TME o cuando termino por error (no calcula bloqueados)
+        //--Retorno El tiempo de finalización - llegada (cuenta el de bloqueados)
+        //--Respuesta hasta que esté en ejecución 
+        //--Espera el tiempo que no estuvo en ejecución (bloqueados y listos)
+        //--Servicio TME o cuando termino por error (no calcula bloqueados)
         private async void FirstComeFirstServer()
         {
             running = true;
@@ -230,8 +223,9 @@ namespace ProcesosPorLotes
             {
                 Procesos p = new(1, "", 1, 1, 1, "", 1);
                 p = Listos.Ejecutar();
-                p.TiempoRespuesta = TiempoGlob;
-                p.TiempoEspera += TiempoGlob;
+                
+                // Si es -1 significa que no se ha inicializado y si no, significa que ya se hizo y se tomará ese valor
+                p.TiempoRespuesta = p.TiempoRespuesta == -1 ? TiempoGlob - p.TiempoLlegada : p.TiempoRespuesta;
                 AgregarListosList();
                 procesosListosList.Items.Remove(FormatoListos(p));
 
@@ -303,8 +297,8 @@ namespace ProcesosPorLotes
                     //Listos.Ejecutar();
                     DividirListosNuevos();
                 }
-                limpiarLabels();
             }
+            limpiarLabels();
             running = false;
         }
 
@@ -335,7 +329,7 @@ namespace ProcesosPorLotes
 
             return resOp;
         }
-
+       
         private bool TodoVacio()
         {
             return Bloqueado.Count == 0 && Listos.Tam() == 0 && Nuevos.Tam() == 0 && !running;

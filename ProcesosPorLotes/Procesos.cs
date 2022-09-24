@@ -19,6 +19,7 @@ namespace ProcesosPorLotes
         private int tr;
         private int tt;
         private int tl; // Tiempo de llegada
+        private int tf; // Tiempo de finalización
         private int tret; // Tiempo de retorno
         private int tresp; // Tiempo de respuesta
         private int tesp; // Tiempo de espera
@@ -40,7 +41,7 @@ namespace ProcesosPorLotes
         public int TiempoRespuesta { get => tresp; set => tresp = value; }
         public int TiempoEspera { get => tesp; set => tesp = value; }
         public int TiempoServicio { get => ts; set => ts = value; }
-        public int TiempoFin { get => ts; set => ts = value; }
+        public int TiempoFin { get => tf; set => tf = value; }
         public string Resultado { get => res; set => res = value; }
         
         public Procesos() { }
@@ -57,6 +58,7 @@ namespace ProcesosPorLotes
             TiempoT = 0;
 
             TiempoEspera = 0;
+            TiempoRespuesta = -1; // No se ha inicializado
         }
     }
 
