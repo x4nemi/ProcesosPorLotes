@@ -341,7 +341,7 @@ namespace ProcesosPorLotes
             TRLabel.Text = "Tiempo Restante: " + TR--.ToString() + " segundos";
             TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString() + " segundos";
             
-            if (TR == 0)
+            if (TR < 0)
             {
                 timer1.Stop();
             }
