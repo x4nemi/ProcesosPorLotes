@@ -33,7 +33,7 @@ namespace ProcesosPorLotes
         private string[] Formato(Procesos p)
         {
             p.TiempoRetorno = p.TiempoFin - p.TiempoLlegada;
-            p.TiempoEspera = p.TiempoRetorno - p.TiempoServicio;
+            p.TiempoEspera = p.TiempoRetorno - p.TiempoServicio - 1;
             //              ID                  Operación                                                               Resultado       TME                     Llegada              Finalización                //Retorno                       //Espera                   //Respuesta                 //Tiempo de Servicio
             string[] row = { p.Id.ToString(), p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), p.Resultado, p.Tiempo.ToString(), p.TiempoLlegada.ToString(), p.TiempoFin.ToString(), p.TiempoRetorno.ToString(), p.TiempoEspera.ToString(), p.TiempoRespuesta.ToString(), p.TiempoServicio.ToString() };
             return row;

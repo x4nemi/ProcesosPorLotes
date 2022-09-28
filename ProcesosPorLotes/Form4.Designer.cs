@@ -92,6 +92,7 @@
             this.Column3.HeaderText = "Tiempo Máximo Estimado";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
+            this.Column3.Width = 80;
             // 
             // Column7
             // 
@@ -116,14 +117,14 @@
             // 
             // Column5
             // 
-            this.Column5.HeaderText = "Tiempo de Respuesta";
+            this.Column5.HeaderText = "Tiempo de Espera";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             this.Column5.Width = 80;
             // 
             // Column6
             // 
-            this.Column6.HeaderText = "Tiempo de Espera";
+            this.Column6.HeaderText = "Tiempo de Respuesta";
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
             this.Column6.Width = 80;
