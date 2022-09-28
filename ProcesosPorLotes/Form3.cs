@@ -162,7 +162,7 @@ namespace ProcesosPorLotes
         private void AgregarTerminadosList(Procesos p)
         {
             p.TiempoFin = TiempoGlob;
-            p.TiempoServicio = TT;
+            p.TiempoServicio = TT - 1;
             Terminados.Agregar(p);
             terminadosList.Items.Add(FormatoTerminados(p));
         }
