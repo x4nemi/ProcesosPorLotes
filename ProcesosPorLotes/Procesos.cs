@@ -18,7 +18,14 @@ namespace ProcesosPorLotes
         private string nombre;
         private int tr;
         private int tt;
-
+        private int tl; // Tiempo de llegada
+        private int tf; // Tiempo de finalización
+        private int tret; // Tiempo de retorno
+        private int tresp; // Tiempo de respuesta
+        private int tesp; // Tiempo de espera
+        private int ts; // Tiempo de servicio
+        private string res;
+        
         public int Numpro { get => numpro; set => numpro = value; }
         public double Num1 { get => num1; set => num1 = value; }
         public double Num2 { get => num2; set => num2 = value; }
@@ -29,7 +36,15 @@ namespace ProcesosPorLotes
 
         public int TiempoR { get => tr; set => tr = value; }
         public int TiempoT { get => tt; set => tt = value; }
-
+        public int TiempoLlegada { get => tl; set => tl = value; }
+        public int TiempoRetorno { get => tret; set => tret = value; }
+        public int TiempoRespuesta { get => tresp; set => tresp = value; }
+        public int TiempoEspera { get => tesp; set => tesp = value; }
+        public int TiempoServicio { get => ts; set => ts = value; }
+        public int TiempoFin { get => tf; set => tf = value; }
+        public string Resultado { get => res; set => res = value; }
+        
+        public Procesos() { }
         public Procesos(int numProceso, string nombre, int tiempo, double num1, double num2, string operacion, int aidi)
         {
             Numpro = numProceso;
@@ -39,8 +54,11 @@ namespace ProcesosPorLotes
             Operacion = operacion;
             Id = aidi;
             Nombre = nombre;
-            TiempoR = -1;
-            TiempoT = -1;
+            TiempoR = 0;
+            TiempoT = 0;
+
+            TiempoEspera = 0;
+            TiempoRespuesta = -1; // No se ha inicializado
         }
     }
 
@@ -77,6 +95,11 @@ namespace ProcesosPorLotes
         {
             return Cola.Count == 0;
 
+        }
+
+        public int Tam()
+        {
+            return Cola.Count;
         }
     }
 

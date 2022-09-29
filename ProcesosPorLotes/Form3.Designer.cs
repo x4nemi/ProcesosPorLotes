@@ -33,6 +33,7 @@
             this.procesosListosList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tmeLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.IDLabel = new System.Windows.Forms.Label();
             this.OperacionLabel = new System.Windows.Forms.Label();
@@ -53,6 +54,7 @@
             this.TeclaAccionLabel = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.ProcesosNuevosLabel = new System.Windows.Forms.Label();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -94,6 +96,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.panel2.Controls.Add(this.tmeLabel);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.IDLabel);
             this.panel2.Controls.Add(this.OperacionLabel);
@@ -102,8 +105,18 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(303, 80);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(247, 231);
+            this.panel2.Size = new System.Drawing.Size(301, 231);
             this.panel2.TabIndex = 1;
+            // 
+            // tmeLabel
+            // 
+            this.tmeLabel.AutoSize = true;
+            this.tmeLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tmeLabel.Location = new System.Drawing.Point(14, 189);
+            this.tmeLabel.Name = "tmeLabel";
+            this.tmeLabel.Size = new System.Drawing.Size(47, 21);
+            this.tmeLabel.TabIndex = 9;
+            this.tmeLabel.Text = "TME: ";
             // 
             // label4
             // 
@@ -111,9 +124,9 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.Location = new System.Drawing.Point(14, 53);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(225, 19);
+            this.label4.Size = new System.Drawing.Size(255, 19);
             this.label4.TabIndex = 8;
-            this.label4.Text = "____________________________________";
+            this.label4.Text = "_________________________________________";
             // 
             // IDLabel
             // 
@@ -170,9 +183,9 @@
             this.panel3.BackColor = System.Drawing.SystemColors.Info;
             this.panel3.Controls.Add(this.terminadosList);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(556, 80);
+            this.panel3.Location = new System.Drawing.Point(610, 80);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(419, 425);
+            this.panel3.Size = new System.Drawing.Size(365, 425);
             this.panel3.TabIndex = 2;
             // 
             // terminadosList
@@ -181,9 +194,9 @@
             this.terminadosList.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.terminadosList.FormattingEnabled = true;
             this.terminadosList.ItemHeight = 21;
-            this.terminadosList.Location = new System.Drawing.Point(12, 68);
+            this.terminadosList.Location = new System.Drawing.Point(14, 68);
             this.terminadosList.Name = "terminadosList";
-            this.terminadosList.Size = new System.Drawing.Size(392, 340);
+            this.terminadosList.Size = new System.Drawing.Size(337, 340);
             this.terminadosList.TabIndex = 7;
             // 
             // label3
@@ -218,7 +231,7 @@
             this.panel4.Controls.Add(this.LoteEPLabel);
             this.panel4.Location = new System.Drawing.Point(303, 317);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(247, 188);
+            this.panel4.Size = new System.Drawing.Size(301, 188);
             this.panel4.TabIndex = 4;
             // 
             // bloqueadosList
@@ -297,6 +310,11 @@
             this.ProcesosNuevosLabel.TabIndex = 9;
             this.ProcesosNuevosLabel.Text = "Procesos nuevos: ";
             // 
+            // timer3
+            // 
+            this.timer3.Interval = 1000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -357,5 +375,7 @@
         private Label label4;
         private Panel panel5;
         private Label ProcesosNuevosLabel;
+        private System.Windows.Forms.Timer timer3;
+        private Label tmeLabel;
     }
 }
