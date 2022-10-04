@@ -59,6 +59,7 @@ namespace ProcesosPorLotes
         List<Procesos> Bloqueado = new List<Procesos>();
         AlmacenProcesos<Procesos> Nuevos = new AlmacenProcesos<Procesos>();
         AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
+        Procesos Proceso = new Procesos();
 
         public Form3(AlmacenProcesos<Procesos> qu)
         {
@@ -221,23 +222,23 @@ namespace ProcesosPorLotes
 
             while (!Listos.EsVacia())
             {
-                Procesos p = new(1, "", 1, 1, 1, "", 1);
-                p = Listos.Ejecutar();
+                //Procesos p = new(1, "", 1, 1, 1, "", 1);
+                Proceso = Listos.Ejecutar();
                 
                 // Si es -1 significa que no se ha inicializado y si no, significa que ya se hizo y se tomará ese valor
-                p.TiempoRespuesta = p.TiempoRespuesta == -1 ? TiempoGlob - p.TiempoLlegada : p.TiempoRespuesta;
+                Proceso.TiempoRespuesta = Proceso.TiempoRespuesta == -1 ? TiempoGlob - Proceso.TiempoLlegada : Proceso.TiempoRespuesta;
                 AgregarListosList();
-                procesosListosList.Items.Remove(FormatoListos(p));
+                procesosListosList.Items.Remove(FormatoListos(Proceso));
 
-                TR = p.TiempoR == 0 ? p.Tiempo : p.TiempoR;
-                TT = p.TiempoT;
+                TR = Proceso.TiempoR == 0 ? Proceso.Tiempo : Proceso.TiempoR;
+                TT = Proceso.TiempoT;
                 timer1.Start();
 
-                IDLabel.Text = "ID: " + p.Id.ToString();
-                OperacionLabel.Text = "Operación: " + p.Num1.ToString() + operador(p.Operacion) + p.Num2.ToString();
-                tmeLabel.Text = "TME: " + p.Tiempo.ToString() + " segundos";
+                IDLabel.Text = "ID: " + Proceso.Id.ToString();
+                OperacionLabel.Text = "Operación: " + Proceso.Num1.ToString() + operador(Proceso.Operacion) + Proceso.Num2.ToString();
+                tmeLabel.Text = "TME: " + Proceso.Tiempo.ToString() + " segundos";
                 
-                int tiempoWhile = p.TiempoR == 0 ? p.Tiempo : p.TiempoR;
+                int tiempoWhile = Proceso.TiempoR == 0 ? Proceso.Tiempo : Proceso.TiempoR;
 
                 int k = 0;
                 while (k <= tiempoWhile)
@@ -258,19 +259,19 @@ namespace ProcesosPorLotes
                     else if (error)
                     {
                         timer1.Stop();
-                        p.TiempoR = TR;
-                        p.TiempoT = TT;
+                        Proceso.TiempoR = TR;
+                        Proceso.TiempoT = TT;
                         break;
 
                     }
                     else if (interrupcion)
                     {
                         timer1.Stop();
-                        p.TiempoR = TR;
-                        p.TiempoT = TT;
+                        Proceso.TiempoR = TR;
+                        Proceso.TiempoT = TT;
 
-                        Bloqueado.Add(p);
-                        tiempoBlocked[p.Id - 1] = 0;
+                        Bloqueado.Add(Proceso);
+                        tiempoBlocked[Proceso.Id - 1] = 0;
                         timer3.Start();
                         break;
                     }
@@ -289,10 +290,10 @@ namespace ProcesosPorLotes
                 }
                 else
                 { 
-                    p.Resultado = error ? "Error" : Resultado(p.Num1, p.Num2, p.Operacion).ToString("#0.00");
+                    Proceso.Resultado = error ? "Error" : Resultado(Proceso.Num1, Proceso.Num2, Proceso.Operacion).ToString("#0.00");
                     error = false;
                     
-                    AgregarTerminadosList(p);
+                    AgregarTerminadosList(Proceso);
                     
                     //Listos.Ejecutar();
                     DividirListosNuevos();
@@ -415,22 +416,29 @@ namespace ProcesosPorLotes
             
             if(!pause)
             {
-                if (e.KeyCode == Keys.P)
+                switch (e.KeyCode)
                 {
-                    TeclaAccionLabel.Text = "Pause";
-                    pause = true;
-                }
-                if (e.KeyCode == Keys.E)
-                {
-                    TeclaAccionLabel.Text = "Interrupción";
-                    interrupcion = true;
-                    timer3.Start();
-                }
-
-                if (e.KeyCode == Keys.W)
-                {
-                    TeclaAccionLabel.Text = "Error";
-                    error = true;
+                    case Keys.E:
+                        interrupcion = true;
+                        TeclaAccionLabel.Text = "Interrupción";
+                        break;
+                    case Keys.W:
+                        error = true;
+                        TeclaAccionLabel.Text = "Error";
+                        break;
+                    case Keys.P:
+                        pause = true;
+                        TeclaAccionLabel.Text = "Pausa";
+                        break;
+                    case Keys.N:
+                        TeclaAccionLabel.Text = "Nuevo proceso creado";
+                        break;
+                    case Keys.B:
+                        TeclaAccionLabel.Text = "Tabla de procesos";
+           
+                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso);
+                        form6.Show();
+                        break;
                 }
             }         
         }
