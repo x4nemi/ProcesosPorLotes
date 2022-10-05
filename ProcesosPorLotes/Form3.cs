@@ -126,24 +126,28 @@ namespace ProcesosPorLotes
         bool interrupcion = false;
 
         bool running = false;
-        
+
+        List<bool> visitados = new List<bool>();
         List<int> tiempoBlocked = new List<int>();
         
         private void LlenarTiemposBlocked()
         {
-            for (int i = 0; i < q.Tam(); i++)
+            for (int i = 0; i < 100; i++)
             {
                 tiempoBlocked.Add(-1);
+                visitados.Add(false);
             }      
         }
 
         private void DividirListosNuevos()
         //Es para dividir los procesos que estan en la lista de procesos listos en 'lotes'
         {
-            while (Listos.Tam() + Bloqueado.Count < 3 && !Nuevos.EsVacia())
+            int unProceso = running ? 1 : 0;
+            while (Listos.Tam() + Bloqueado.Count + unProceso < 3 && !Nuevos.EsVacia() )
             {
                 Procesos p = new();
                 p = Nuevos.Ejecutar();
+                visitados[p.Id - 1] = true;
                 p.TiempoLlegada = TiempoGlob;
                 Listos.Agregar(p);
             }
@@ -224,10 +228,10 @@ namespace ProcesosPorLotes
             {
                 //Procesos p = new(1, "", 1, 1, 1, "", 1);
                 Proceso = Listos.Ejecutar();
-                
+                DividirListosNuevos();
+                AgregarListosList();
                 // Si es -1 significa que no se ha inicializado y si no, significa que ya se hizo y se tomará ese valor
                 Proceso.TiempoRespuesta = Proceso.TiempoRespuesta == -1 ? TiempoGlob - Proceso.TiempoLlegada : Proceso.TiempoRespuesta;
-                AgregarListosList();
                 procesosListosList.Items.Remove(FormatoListos(Proceso));
 
                 TR = Proceso.TiempoR == 0 ? Proceso.Tiempo : Proceso.TiempoR;
@@ -284,6 +288,8 @@ namespace ProcesosPorLotes
                 }
 
                 TeclaAccionLabel.Text = "";
+                AgregarListosList();
+                DividirListosNuevos();
                 if (interrupcion)
                 {
                     interrupcion = false;
@@ -295,9 +301,8 @@ namespace ProcesosPorLotes
                     
                     AgregarTerminadosList(Proceso);
                     
-                    //Listos.Ejecutar();
-                    DividirListosNuevos();
                 }
+                
             }
             limpiarLabels();
             running = false;
@@ -423,8 +428,10 @@ namespace ProcesosPorLotes
                         TeclaAccionLabel.Text = "Interrupción";
                         break;
                     case Keys.W:
+                        if (running) { 
                         error = true;
                         TeclaAccionLabel.Text = "Error";
+                        }
                         break;
                     case Keys.P:
                         pause = true;
@@ -432,11 +439,22 @@ namespace ProcesosPorLotes
                         break;
                     case Keys.N:
                         TeclaAccionLabel.Text = "Nuevo proceso creado";
+                        AgregarProcesoNuevo();
+                        DividirListosNuevos();
+                        AgregarListosList();
+                        if (!running)
+                        {
+                            FirstComeFirstServer();
+                        }
                         break;
                     case Keys.B:
                         TeclaAccionLabel.Text = "Tabla de procesos";
-           
-                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso);
+
+                        //Proceso.TiempoBloqueado = tiempoBlocked[Proceso.Id - 1];
+                        
+                        //El tiempo de servicio es el tiempo transcurrido
+                        
+                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob);
                         form6.Show();
                         break;
                 }
@@ -448,6 +466,40 @@ namespace ProcesosPorLotes
 
         }
 
+        private void AgregarProcesoNuevo()
+        {
+            string[] operaciones = { "Suma", "Resta", "División", "Multiplicación", "Residuo", "Potencia" };
+            int id = Nuevos.EsVacia() ? ID() : Nuevos.Regresar().Id + 1;
+            string nombre = "Proceso " + id.ToString();
+            int tiempo = new Random().Next(6, 15);
+            int index = new Random().Next(0, 5);
+            string operacion = operaciones[index];
+            double num1;
+            double num2;
+            if (index == 5)
+            {
+                num1 = new Random().Next(1, 20);
+                num2 = new Random().Next(1, 20);
+            }
+            else
+            {
+                num2 = new Random().Next(1, 100);
+                num1 = new Random().Next(1, 100);
+            }
+
+
+            Procesos p = new Procesos(id, nombre, tiempo, num1, num2, operacion, id);
+            Nuevos.Agregar(p);
+        }
+
         
+        private int ID()
+        {
+            for (int i = 0; i < visitados.Count; i++)
+            {
+                if (!visitados[i]) return i + 1;
+            }
+            return -1;
+        }
     }
 }
