@@ -33,10 +33,11 @@ namespace ProcesosPorLotes
 
             label1.Text = "Tiempo Global: " + tiempoGlob.ToString() + "s";
 
-            if(!Terminados.EsVacia()) AgregarTerminadosLista();
-            if (!Listos.EsVacia()) AgregarListosLista();
-            if (!Nuevos.EsVacia()) AgregarNuevosLista();
             if (running) AgregarEnEjecucionLista();
+            if (!Nuevos.EsVacia()) AgregarNuevosLista();
+            if (!Listos.EsVacia()) AgregarListosLista();
+            if (Bloqueados.Count > 0) AgregarBloqueadosLista();
+            if(!Terminados.EsVacia()) AgregarTerminadosLista();
 
             this.KeyPreview = true;
 
@@ -70,6 +71,14 @@ namespace ProcesosPorLotes
                 dataGridView1.Rows.Add(FormatoNuevos(p));
             }
         }
+        
+        private void AgregarBloqueadosLista()
+        {
+            foreach(Procesos p in Bloqueados)
+            {
+                dataGridView1.Rows.Add(FormatoBloqueados(p));
+            }
+        }
 
         //Retorno El tiempo de finalización - llegada(cuenta el de bloqueados)
         private string[] FormatoTerminados(Procesos p)
@@ -77,7 +86,7 @@ namespace ProcesosPorLotes
             p.TiempoRetorno = p.TiempoFin - p.TiempoLlegada;
             p.TiempoEspera = p.TiempoRetorno - p.TiempoServicio;
             //              ID                  Estado            Operación                                                               Resultado       TME                     Llegada              Finalización                //Retorno                       //Espera                   //Respuesta                 //Tiempo de Servicio //Tiempo restante
-            string[] row = { p.Id.ToString(), "Terminados", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), p.Resultado, p.Tiempo.ToString(), p.TiempoLlegada.ToString(), p.TiempoFin.ToString(), p.TiempoRetorno.ToString(), p.TiempoEspera.ToString(), p.TiempoRespuesta.ToString(), p.TiempoServicio.ToString(), "0"};
+            string[] row = { p.Id.ToString(), "Terminado", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), p.Resultado, p.Tiempo.ToString(), p.TiempoLlegada.ToString(), p.TiempoFin.ToString(), p.TiempoRetorno.ToString(), p.TiempoEspera.ToString(), p.TiempoRespuesta.ToString(), p.TiempoServicio.ToString(), "0"};
             return row;
         }
         
@@ -91,7 +100,7 @@ namespace ProcesosPorLotes
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
 
             //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante
-            string[] row = { p.Id.ToString(), "Listos", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante };
+            string[] row = { p.Id.ToString(), "Listo", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante };
             return row;
         }
         
@@ -99,7 +108,7 @@ namespace ProcesosPorLotes
         {
             //              ID                  Operación                                                               Resultado               TME         Llegada/Finalización//Retorno//Espera//Respuesta//Tiempo de Servicio//Tiempo restante
             
-            string[] row = { p.Id.ToString(), "Nuevos", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), "Null", "Null", "Null",       "0", "Null", "Null", p.Tiempo.ToString() };
+            string[] row = { p.Id.ToString(), "Nuevo", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), "Null", "Null", "Null",       "0", "Null", "Null", p.Tiempo.ToString() };
             return row;
         }
         
@@ -111,6 +120,17 @@ namespace ProcesosPorLotes
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
             //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante
             string[] row = { p.Id.ToString(), "En ejecución", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante };
+            return row;
+        }
+
+        private string[] FormatoBloqueados(Procesos p)
+        {
+            string tiempoServicio = (p.TiempoT - 1).ToString();
+            p.TiempoEspera = (TiempoGlobal - p.TiempoLlegada - 1) - Int32.Parse(tiempoServicio);
+            string tiempoRespuesta = p.TiempoRespuesta == -1 ? "Null" : p.TiempoRespuesta.ToString();
+            string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
+            //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante
+            string[] row = { p.Id.ToString(), "Bloqueado", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante };
             return row;
         }
 

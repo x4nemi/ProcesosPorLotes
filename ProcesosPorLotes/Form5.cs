@@ -65,9 +65,9 @@ namespace ProcesosPorLotes
         {
             Form3 form3 = new Form3(q);
             form3.Show();
-            button1.Enabled = false;
+            this.Close();
         }
-
+        
         private void Form5_KeyPress(object sender, KeyPressEventArgs e)
         {
             MessageBox.Show(e.KeyChar.ToString());

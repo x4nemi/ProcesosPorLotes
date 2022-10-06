@@ -240,7 +240,7 @@
             this.bloqueadosList.ItemHeight = 15;
             this.bloqueadosList.Location = new System.Drawing.Point(12, 66);
             this.bloqueadosList.Name = "bloqueadosList";
-            this.bloqueadosList.Size = new System.Drawing.Size(227, 109);
+            this.bloqueadosList.Size = new System.Drawing.Size(272, 109);
             this.bloqueadosList.TabIndex = 1;
             // 
             // LoteEPLabel
