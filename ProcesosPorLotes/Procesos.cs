@@ -59,6 +59,7 @@ namespace ProcesosPorLotes
 
             TiempoEspera = 0;
             TiempoRespuesta = -1; // No se ha inicializado
+            TiempoServicio = -1;
         }
     }
 

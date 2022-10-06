@@ -346,7 +346,9 @@ namespace ProcesosPorLotes
         {
             TRLabel.Text = "Tiempo Restante: " + TR--.ToString() + " segundos";
             TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString() + " segundos";
-            
+            Proceso.TiempoT = TT;
+            Proceso.TiempoR = TR;
+
             if (TR < 0)
             {
                 timer1.Stop();
@@ -451,10 +453,14 @@ namespace ProcesosPorLotes
                         TeclaAccionLabel.Text = "Tabla de procesos";
 
                         //Proceso.TiempoBloqueado = tiempoBlocked[Proceso.Id - 1];
-                        
+
                         //El tiempo de servicio es el tiempo transcurrido
-                        
-                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob);
+                        if (running)
+                        {
+                            Proceso.TiempoR = TR;
+                            Proceso.TiempoT = TT;
+                        }
+                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob, running);
                         form6.Show();
                         break;
                 }
