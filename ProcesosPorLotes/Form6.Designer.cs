@@ -41,9 +41,9 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -156,23 +156,11 @@
             this.Column12.ReadOnly = true;
             this.Column12.Width = 80;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(386, 560);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(272, 44);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Cerrar Ventana";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(746, 16);
+            this.label1.Location = new System.Drawing.Point(730, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(159, 30);
             this.label1.TabIndex = 9;
@@ -189,19 +177,31 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Tabla de Procesos";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label3.Location = new System.Drawing.Point(369, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(214, 17);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Presiona Esc para cerrar la ventana";
+            // 
             // Form6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1065, 616);
+            this.ClientSize = new System.Drawing.Size(1015, 563);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form6";
-            this.Text = "Form6";
+            this.Text = "Tabla de Procesos";
             this.Load += new System.EventHandler(this.Form6_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form6_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -211,7 +211,6 @@
         #endregion
 
         private DataGridView dataGridView1;
-        private Button button1;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column11;
         private DataGridViewTextBoxColumn Column2;
@@ -226,5 +225,6 @@
         private DataGridViewTextBoxColumn Column12;
         private Label label1;
         private Label label2;
+        private Label label3;
     }
 }

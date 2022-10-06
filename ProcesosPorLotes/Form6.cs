@@ -38,6 +38,8 @@ namespace ProcesosPorLotes
             if (!Nuevos.EsVacia()) AgregarNuevosLista();
             if (running) AgregarEnEjecucionLista();
 
+            this.KeyPreview = true;
+
 
         }
         
@@ -73,7 +75,7 @@ namespace ProcesosPorLotes
         private string[] FormatoTerminados(Procesos p)
         {
             p.TiempoRetorno = p.TiempoFin - p.TiempoLlegada;
-            p.TiempoEspera = p.TiempoRetorno - p.TiempoServicio - 1;
+            p.TiempoEspera = p.TiempoRetorno - p.TiempoServicio;
             //              ID                  Estado            Operación                                                               Resultado       TME                     Llegada              Finalización                //Retorno                       //Espera                   //Respuesta                 //Tiempo de Servicio //Tiempo restante
             string[] row = { p.Id.ToString(), "Terminados", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), p.Resultado, p.Tiempo.ToString(), p.TiempoLlegada.ToString(), p.TiempoFin.ToString(), p.TiempoRetorno.ToString(), p.TiempoEspera.ToString(), p.TiempoRespuesta.ToString(), p.TiempoServicio.ToString(), "0"};
             return row;
@@ -145,9 +147,12 @@ namespace ProcesosPorLotes
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form6_KeyDown(object sender, KeyEventArgs e)
         {
-            this.Close();
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }

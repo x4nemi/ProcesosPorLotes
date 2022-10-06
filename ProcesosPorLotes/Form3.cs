@@ -475,7 +475,7 @@ namespace ProcesosPorLotes
         private void AgregarProcesoNuevo()
         {
             string[] operaciones = { "Suma", "Resta", "División", "Multiplicación", "Residuo", "Potencia" };
-            int id = Nuevos.EsVacia() ? ID() : Nuevos.Regresar().Id + 1;
+            int id = Nuevos.EsVacia() ? ID() : Nuevos.Ultimo().Id + 1;
             string nombre = "Proceso " + id.ToString();
             int tiempo = new Random().Next(6, 15);
             int index = new Random().Next(0, 5);
