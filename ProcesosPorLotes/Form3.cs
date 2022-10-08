@@ -460,8 +460,15 @@ namespace ProcesosPorLotes
                             Proceso.TiempoR = TR;
                             Proceso.TiempoT = TT;
                         }
+                        pause = true;
+                        this.Hide();
                         Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob, running);
-                        form6.Show();
+                        form6.ShowDialog();
+                        form6 = null;
+                        this.Show();
+
+                        pause = false;
+
                         break;
                 }
             }         

@@ -31,7 +31,7 @@ namespace ProcesosPorLotes
             TiempoGlobal = tiempoGlob;
             running = r;
 
-            label1.Text = "Tiempo Global: " + tiempoGlob.ToString() + "s";
+            label1.Text = "Tiempo Global: " + (tiempoGlob-1).ToString() + "s";
 
             if (running) AgregarEnEjecucionLista();
             if (!Nuevos.EsVacia()) AgregarNuevosLista();
@@ -169,7 +169,7 @@ namespace ProcesosPorLotes
 
         private void Form6_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.C)
             {
                 this.Close();
             }

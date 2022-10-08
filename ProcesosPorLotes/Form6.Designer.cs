@@ -184,9 +184,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
             this.label3.Location = new System.Drawing.Point(369, 25);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(214, 17);
+            this.label3.Size = new System.Drawing.Size(209, 17);
             this.label3.TabIndex = 11;
-            this.label3.Text = "Presiona Esc para cerrar la ventana";
+            this.label3.Text = "Presiona \'C\' para cerrar la ventana";
             // 
             // Form6
             // 
