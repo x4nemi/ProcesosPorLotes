@@ -461,6 +461,11 @@ namespace ProcesosPorLotes
                             Proceso.TiempoT = TT;
                         }
                         pause = true;
+                        if (!running)
+                        {
+                            timer2.Stop();
+                            timer3.Stop();
+                        }
                         this.Hide();
                         Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob, running);
                         form6.ShowDialog();
@@ -468,6 +473,11 @@ namespace ProcesosPorLotes
                         this.Show();
 
                         pause = false;
+                        if (!running)
+                        {
+                            timer2.Start();
+                            timer3.Start();
+                        }
 
                         break;
                 }
