@@ -70,6 +70,7 @@ namespace ProcesosPorLotes
             Nuevos = qu;
 
             quantum = Int32.Parse(quantumValue);
+            QuantumValueLabel.Text = "Valor de Quantum: " + quantumValue;
 
             this.KeyPreview = true;
             //EnProceso();
@@ -377,7 +378,7 @@ namespace ProcesosPorLotes
             {
                 timer2.Stop();
                 limpiarLabels();
-                Form4 form4 = new Form4(Terminados);
+                Form4 form4 = new Form4(Terminados, quantum);
                 this.Close();
                 form4.Show();
             }
@@ -482,7 +483,7 @@ namespace ProcesosPorLotes
                             timer3.Stop();
                         }
                         this.Hide();
-                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob, running, tiempoBlocked);
+                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob, running, tiempoBlocked, quantum);
                         form6.ShowDialog();
                         form6 = null;
                         this.Show();
@@ -493,7 +494,7 @@ namespace ProcesosPorLotes
                             timer2.Start();
                             timer3.Start();
                         }
-
+                        
                         break;
                 }
             }         

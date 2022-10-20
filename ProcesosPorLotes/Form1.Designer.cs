@@ -37,7 +37,7 @@
             // 
             // ok_button
             // 
-            this.ok_button.Location = new System.Drawing.Point(103, 202);
+            this.ok_button.Location = new System.Drawing.Point(103, 143);
             this.ok_button.Name = "ok_button";
             this.ok_button.Size = new System.Drawing.Size(91, 35);
             this.ok_button.TabIndex = 0;
@@ -50,19 +50,19 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 21);
+            this.label1.Location = new System.Drawing.Point(12, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(263, 28);
+            this.label1.Size = new System.Drawing.Size(188, 28);
             this.label1.TabIndex = 1;
-            this.label1.Text = "PROCESOS A EJECUTAR";
+            this.label1.Text = "No. de procesos:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // text1
             // 
             this.text1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.text1.Location = new System.Drawing.Point(103, 52);
+            this.text1.Location = new System.Drawing.Point(229, 24);
             this.text1.Name = "text1";
-            this.text1.Size = new System.Drawing.Size(91, 29);
+            this.text1.Size = new System.Drawing.Size(70, 29);
             this.text1.TabIndex = 2;
             this.text1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.text1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.text1_KeyPress);
@@ -70,22 +70,22 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(103, 145);
+            this.textBox1.Location = new System.Drawing.Point(229, 81);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(91, 29);
+            this.textBox1.Size = new System.Drawing.Size(70, 29);
             this.textBox1.TabIndex = 4;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 100);
+            this.label2.Location = new System.Drawing.Point(12, 84);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(251, 28);
+            this.label2.Size = new System.Drawing.Size(203, 27);
             this.label2.TabIndex = 3;
-            this.label2.Text = "VALOR DE QUANTUM:";
+            this.label2.Text = "Valor de Quantum:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
@@ -93,7 +93,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PowderBlue;
-            this.ClientSize = new System.Drawing.Size(292, 262);
+            this.ClientSize = new System.Drawing.Size(311, 197);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.text1);

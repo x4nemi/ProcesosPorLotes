@@ -33,6 +33,7 @@
             this.procesosListosList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.QuantumLabel = new System.Windows.Forms.Label();
             this.tmeLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.IDLabel = new System.Windows.Forms.Label();
@@ -55,7 +56,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.ProcesosNuevosLabel = new System.Windows.Forms.Label();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.QuantumLabel = new System.Windows.Forms.Label();
+            this.QuantumValueLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -109,6 +110,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(301, 231);
             this.panel2.TabIndex = 1;
+            // 
+            // QuantumLabel
+            // 
+            this.QuantumLabel.AutoSize = true;
+            this.QuantumLabel.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.QuantumLabel.Location = new System.Drawing.Point(139, 73);
+            this.QuantumLabel.Name = "QuantumLabel";
+            this.QuantumLabel.Size = new System.Drawing.Size(91, 25);
+            this.QuantumLabel.TabIndex = 10;
+            this.QuantumLabel.Text = "Quantum:";
             // 
             // tmeLabel
             // 
@@ -317,15 +328,16 @@
             this.timer3.Interval = 1000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
-            // QuantumLabel
+            // QuantumValueLabel
             // 
-            this.QuantumLabel.AutoSize = true;
-            this.QuantumLabel.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.QuantumLabel.Location = new System.Drawing.Point(139, 73);
-            this.QuantumLabel.Name = "QuantumLabel";
-            this.QuantumLabel.Size = new System.Drawing.Size(91, 25);
-            this.QuantumLabel.TabIndex = 10;
-            this.QuantumLabel.Text = "Quantum:";
+            this.QuantumValueLabel.AutoSize = true;
+            this.QuantumValueLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.QuantumValueLabel.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.QuantumValueLabel.Location = new System.Drawing.Point(745, 34);
+            this.QuantumValueLabel.Name = "QuantumValueLabel";
+            this.QuantumValueLabel.Size = new System.Drawing.Size(155, 23);
+            this.QuantumValueLabel.TabIndex = 9;
+            this.QuantumValueLabel.Text = "Valor de Quantum:";
             // 
             // Form3
             // 
@@ -333,6 +345,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(987, 546);
+            this.Controls.Add(this.QuantumValueLabel);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.TeclaAccionLabel);
             this.Controls.Add(this.TeclaPresionadaLabel);
@@ -390,5 +403,6 @@
         private System.Windows.Forms.Timer timer3;
         private Label tmeLabel;
         private Label QuantumLabel;
+        private Label QuantumValueLabel;
     }
 }

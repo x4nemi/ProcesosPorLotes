@@ -14,10 +14,12 @@ namespace ProcesosPorLotes
     {
 
         AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
-        public Form4(AlmacenProcesos<Procesos> qu)
+        int quantum;
+        public Form4(AlmacenProcesos<Procesos> qu, int quantumValue)
         {
             InitializeComponent();
             q = qu;
+            quantum = quantumValue;
             AgregarLista();
         }
 

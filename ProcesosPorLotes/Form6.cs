@@ -23,7 +23,9 @@ namespace ProcesosPorLotes
         int TiempoGlobal;
         bool running;
 
-        public Form6(AlmacenProcesos<Procesos> N, AlmacenProcesos<Procesos> L, AlmacenProcesos<Procesos> T, List<Procesos> Bloqueado, Procesos p, int tiempoGlob, bool r, List<int> tiempoB)
+        int quantum;
+
+        public Form6(AlmacenProcesos<Procesos> N, AlmacenProcesos<Procesos> L, AlmacenProcesos<Procesos> T, List<Procesos> Bloqueado, Procesos p, int tiempoGlob, bool r, List<int> tiempoB, int quantumValue)
         {
             InitializeComponent();
             Nuevos = N;
@@ -34,8 +36,10 @@ namespace ProcesosPorLotes
             TiempoGlobal = tiempoGlob;
             running = r;
             tiempoBloqueado = tiempoB;
+            quantum = quantumValue;
 
             label1.Text = "Tiempo Global: " + (tiempoGlob-1).ToString() + "s";
+            QuantumLabel.Text = "Valor de Quantum: " + quantum.ToString();
 
             if (running) AgregarEnEjecucionLista();
             if (!Nuevos.EsVacia()) AgregarNuevosLista();
@@ -118,7 +122,7 @@ namespace ProcesosPorLotes
         
         private string[] FormatoEnEjecucion(Procesos p)
         {
-            string tiempoServicio = (p.TiempoT-1).ToString();
+            string tiempoServicio = (p.TiempoT-1).ToString() == "-1" ? "0" : (p.TiempoT - 1).ToString();
             p.TiempoEspera = (TiempoGlobal - p.TiempoLlegada - 1) - Int32.Parse(tiempoServicio);
             string tiempoRespuesta = p.TiempoRespuesta == -1 ? "Null" : p.TiempoRespuesta.ToString();
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
@@ -133,7 +137,7 @@ namespace ProcesosPorLotes
             p.TiempoEspera = (TiempoGlobal - p.TiempoLlegada - 1) - Int32.Parse(tiempoServicio);
             string tiempoRespuesta = p.TiempoRespuesta == -1 ? "Null" : p.TiempoRespuesta.ToString();
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
-            //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante
+            //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante //Tiempo en bloqueado
             string[] row = { p.Id.ToString(), "Bloqueado", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante, tiempoBloqueado[p.Id - 1].ToString() };
             return row;
         }

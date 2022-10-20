@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +42,10 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.QuantumLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,38 +76,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(1069, 499);
             this.dataGridView1.TabIndex = 7;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(730, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 30);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Tiempo Global:";
-            this.label1.UseMnemonic = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(12, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(233, 37);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Tabla de Procesos";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label3.Location = new System.Drawing.Point(369, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(209, 17);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Presiona \'C\' para cerrar la ventana";
-            // 
             // Column1
             // 
             this.Column1.HeaderText = "ID";
@@ -116,6 +85,7 @@
             // 
             // Column11
             // 
+            this.Column11.FillWeight = 200F;
             this.Column11.HeaderText = "Estado";
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
@@ -196,12 +166,56 @@
             this.Column13.Name = "Column13";
             this.Column13.ReadOnly = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(572, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(159, 30);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Tiempo Global:";
+            this.label1.UseMnemonic = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(12, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(233, 37);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Tabla de Procesos";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label3.Location = new System.Drawing.Point(300, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(209, 17);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Presiona \'C\' para cerrar la ventana";
+            // 
+            // QuantumLabel
+            // 
+            this.QuantumLabel.AutoSize = true;
+            this.QuantumLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.QuantumLabel.Location = new System.Drawing.Point(822, 15);
+            this.QuantumLabel.Name = "QuantumLabel";
+            this.QuantumLabel.Size = new System.Drawing.Size(195, 30);
+            this.QuantumLabel.TabIndex = 12;
+            this.QuantumLabel.Text = "Valor de Quantum:";
+            this.QuantumLabel.UseMnemonic = false;
+            // 
             // Form6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1093, 563);
+            this.Controls.Add(this.QuantumLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -235,5 +249,6 @@
         private DataGridViewTextBoxColumn Column10;
         private DataGridViewTextBoxColumn Column12;
         private DataGridViewTextBoxColumn Column13;
+        private Label QuantumLabel;
     }
 }
