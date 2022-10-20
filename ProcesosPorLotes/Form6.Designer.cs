@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,9 +44,7 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,13 +66,46 @@
             this.Column5,
             this.Column6,
             this.Column10,
-            this.Column12});
+            this.Column12,
+            this.Column13});
             this.dataGridView1.Location = new System.Drawing.Point(12, 55);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(996, 499);
+            this.dataGridView1.Size = new System.Drawing.Size(1069, 499);
             this.dataGridView1.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(730, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(159, 30);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Tiempo Global:";
+            this.label1.UseMnemonic = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(12, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(233, 37);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Tabla de Procesos";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label3.Location = new System.Drawing.Point(369, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(209, 17);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Presiona \'C\' para cerrar la ventana";
             // 
             // Column1
             // 
@@ -156,44 +190,18 @@
             this.Column12.ReadOnly = true;
             this.Column12.Width = 80;
             // 
-            // label1
+            // Column13
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(730, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 30);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Tiempo Global:";
-            this.label1.UseMnemonic = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(12, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(233, 37);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Tabla de Procesos";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label3.Location = new System.Drawing.Point(369, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(209, 17);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Presiona \'C\' para cerrar la ventana";
+            this.Column13.HeaderText = "Tiempo en Bloqueado";
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
             // 
             // Form6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1015, 563);
+            this.ClientSize = new System.Drawing.Size(1093, 563);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -211,6 +219,9 @@
         #endregion
 
         private DataGridView dataGridView1;
+        private Label label1;
+        private Label label2;
+        private Label label3;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column11;
         private DataGridViewTextBoxColumn Column2;
@@ -223,8 +234,6 @@
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column10;
         private DataGridViewTextBoxColumn Column12;
-        private Label label1;
-        private Label label2;
-        private Label label3;
+        private DataGridViewTextBoxColumn Column13;
     }
 }

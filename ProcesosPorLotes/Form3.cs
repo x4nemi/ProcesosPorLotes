@@ -482,7 +482,7 @@ namespace ProcesosPorLotes
                             timer3.Stop();
                         }
                         this.Hide();
-                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob, running);
+                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob, running, tiempoBlocked);
                         form6.ShowDialog();
                         form6 = null;
                         this.Show();

@@ -17,10 +17,13 @@ namespace ProcesosPorLotes
         AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
         List<Procesos> Bloqueados = new List<Procesos>();
         Procesos ProcesoEnEjecucion = new Procesos();
+
+        List<int> tiempoBloqueado = new List<int>();
+
         int TiempoGlobal;
         bool running;
 
-        public Form6(AlmacenProcesos<Procesos> N, AlmacenProcesos<Procesos> L, AlmacenProcesos<Procesos> T, List<Procesos> Bloqueado, Procesos p, int tiempoGlob, bool r)
+        public Form6(AlmacenProcesos<Procesos> N, AlmacenProcesos<Procesos> L, AlmacenProcesos<Procesos> T, List<Procesos> Bloqueado, Procesos p, int tiempoGlob, bool r, List<int> tiempoB)
         {
             InitializeComponent();
             Nuevos = N;
@@ -30,6 +33,7 @@ namespace ProcesosPorLotes
             ProcesoEnEjecucion = p;
             TiempoGlobal = tiempoGlob;
             running = r;
+            tiempoBloqueado = tiempoB;
 
             label1.Text = "Tiempo Global: " + (tiempoGlob-1).ToString() + "s";
 
@@ -100,7 +104,7 @@ namespace ProcesosPorLotes
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
 
             //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante
-            string[] row = { p.Id.ToString(), "Listo", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante };
+            string[] row = { p.Id.ToString(), "Listo", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante, "Null" };
             return row;
         }
         
@@ -108,7 +112,7 @@ namespace ProcesosPorLotes
         {
             //              ID                  Operación                                                               Resultado               TME         Llegada/Finalización//Retorno//Espera//Respuesta//Tiempo de Servicio//Tiempo restante
             
-            string[] row = { p.Id.ToString(), "Nuevo", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), "Null", "Null", "Null",       "0", "Null", "Null", p.Tiempo.ToString() };
+            string[] row = { p.Id.ToString(), "Nuevo", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), "Null", "Null", "Null",       "0", "Null", "Null", p.Tiempo.ToString(), "Null" };
             return row;
         }
         
@@ -119,7 +123,7 @@ namespace ProcesosPorLotes
             string tiempoRespuesta = p.TiempoRespuesta == -1 ? "Null" : p.TiempoRespuesta.ToString();
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
             //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante
-            string[] row = { p.Id.ToString(), "En ejecución", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante };
+            string[] row = { p.Id.ToString(), "En ejecución", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante, "Null" };
             return row;
         }
 
@@ -130,7 +134,7 @@ namespace ProcesosPorLotes
             string tiempoRespuesta = p.TiempoRespuesta == -1 ? "Null" : p.TiempoRespuesta.ToString();
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
             //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante
-            string[] row = { p.Id.ToString(), "Bloqueado", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante };
+            string[] row = { p.Id.ToString(), "Bloqueado", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante, tiempoBloqueado[p.Id - 1].ToString() };
             return row;
         }
 
