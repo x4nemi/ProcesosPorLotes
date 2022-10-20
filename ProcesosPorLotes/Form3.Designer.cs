@@ -55,6 +55,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.ProcesosNuevosLabel = new System.Windows.Forms.Label();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.QuantumLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -96,6 +97,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.panel2.Controls.Add(this.QuantumLabel);
             this.panel2.Controls.Add(this.tmeLabel);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.IDLabel);
@@ -122,7 +124,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(14, 53);
+            this.label4.Location = new System.Drawing.Point(14, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(255, 19);
             this.label4.TabIndex = 8;
@@ -315,6 +317,16 @@
             this.timer3.Interval = 1000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
+            // QuantumLabel
+            // 
+            this.QuantumLabel.AutoSize = true;
+            this.QuantumLabel.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.QuantumLabel.Location = new System.Drawing.Point(139, 73);
+            this.QuantumLabel.Name = "QuantumLabel";
+            this.QuantumLabel.Size = new System.Drawing.Size(91, 25);
+            this.QuantumLabel.TabIndex = 10;
+            this.QuantumLabel.Text = "Quantum:";
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -377,5 +389,6 @@
         private Label ProcesosNuevosLabel;
         private System.Windows.Forms.Timer timer3;
         private Label tmeLabel;
+        private Label QuantumLabel;
     }
 }

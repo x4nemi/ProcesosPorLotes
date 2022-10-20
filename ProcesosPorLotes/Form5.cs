@@ -15,16 +15,19 @@ namespace ProcesosPorLotes
     {
 
         AlmacenProcesos<Procesos> q = new AlmacenProcesos<Procesos>();
+        string quantum;
 
-        public Form5(AlmacenProcesos<Procesos> qu)
+        public Form5(AlmacenProcesos<Procesos> qu, string quantumValue)
         {
             InitializeComponent();
+            quantum = quantumValue;
             q = qu;
             AgregarLista();
         }
 
         private void AgregarLista()
         {
+            label2.Text = "Valor de quantum: " + quantum;
             foreach (Procesos p in q.Cola)
             {
                 string[] row = {p.Id.ToString(), p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), p.Tiempo.ToString()};
@@ -63,7 +66,7 @@ namespace ProcesosPorLotes
         
         private void button1_Click(object sender, EventArgs e)
         {
-            Form3 form3 = new Form3(q);
+            Form3 form3 = new Form3(q, quantum);
             form3.Show();
             this.Close();
         }

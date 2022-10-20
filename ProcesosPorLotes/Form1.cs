@@ -15,11 +15,12 @@ namespace ProcesosPorLotes
         private void button1_Click(object sender, EventArgs e)
         {
             string dato = text1.Text;
-            if (dato == "")
+            string quantum = textBox1.Text;
+            if (dato == "" || quantum == "")
             {
                 MessageBox.Show("Ingresa un numero por favor");
             }
-            else if (Int32.Parse(dato) < 1)
+            else if (Int32.Parse(dato) < 1 || Int32.Parse(quantum) < 1)
             {
                 MessageBox.Show("Solo puedes ingresar numeros mayores a 10");
                 text1.Text = "";
@@ -33,7 +34,7 @@ namespace ProcesosPorLotes
                 //form3.Show();
 
                 // KEVIN!! Este form es para mostrar los datos, si quieres lo dejamos, sino ps a csm
-                Form5 form5 = new Form5(qu);
+                Form5 form5 = new Form5(qu, quantum);
                 form5.Show();
 
                 //Form4 form4 = new Form4();

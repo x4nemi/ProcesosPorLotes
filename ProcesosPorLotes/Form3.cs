@@ -61,11 +61,15 @@ namespace ProcesosPorLotes
         AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
         Procesos Proceso = new Procesos();
 
-        public Form3(AlmacenProcesos<Procesos> qu)
+        int quantum;
+
+        public Form3(AlmacenProcesos<Procesos> qu, string quantumValue)
         {
             InitializeComponent();
             q = qu;
             Nuevos = qu;
+
+            quantum = Int32.Parse(quantumValue);
 
             this.KeyPreview = true;
             //EnProceso();
@@ -120,6 +124,7 @@ namespace ProcesosPorLotes
         int TT;
         int TR;
         int TiempoGlob;
+        int TQ;
 
         bool error = false;
         bool pause = false;
@@ -236,6 +241,7 @@ namespace ProcesosPorLotes
 
                 TR = Proceso.TiempoR == 0 ? Proceso.Tiempo : Proceso.TiempoR;
                 TT = Proceso.TiempoT;
+                TQ = 0;
                 timer1.Start();
 
                 IDLabel.Text = "ID: " + Proceso.Id.ToString();
@@ -247,7 +253,15 @@ namespace ProcesosPorLotes
                 int k = 0;
                 while (k <= tiempoWhile)
                 {
-                    if (pause)
+                    if (TQ > quantum)
+                    {
+                        timer1.Stop();
+                        Proceso.TiempoR = TR + 1;
+                        Proceso.TiempoT = TT - 1;
+                        Listos.Agregar(Proceso);
+                        break;
+                    }
+                    else if (pause)
                     {
                         timer1.Stop();
                         timer2.Stop();
@@ -294,7 +308,7 @@ namespace ProcesosPorLotes
                 {
                     interrupcion = false;
                 }
-                else
+                if(k > tiempoWhile)
                 { 
                     Proceso.Resultado = error ? "Error" : Resultado(Proceso.Num1, Proceso.Num2, Proceso.Operacion).ToString("#0.00");
                     error = false;
@@ -348,6 +362,7 @@ namespace ProcesosPorLotes
             TTLabel.Text = "Tiempo Transcurrido: " + TT++.ToString() + " segundos";
             Proceso.TiempoT = TT;
             Proceso.TiempoR = TR;
+            QuantumLabel.Text = "Quantum: " + TQ++.ToString();
 
             if (TR < 0)
             {

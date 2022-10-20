@@ -31,11 +31,13 @@
             this.ok_button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.text1 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ok_button
             // 
-            this.ok_button.Location = new System.Drawing.Point(103, 151);
+            this.ok_button.Location = new System.Drawing.Point(103, 202);
             this.ok_button.Name = "ok_button";
             this.ok_button.Size = new System.Drawing.Size(91, 35);
             this.ok_button.TabIndex = 0;
@@ -48,7 +50,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 46);
+            this.label1.Location = new System.Drawing.Point(12, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(263, 28);
             this.label1.TabIndex = 1;
@@ -58,12 +60,33 @@
             // text1
             // 
             this.text1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.text1.Location = new System.Drawing.Point(103, 95);
+            this.text1.Location = new System.Drawing.Point(103, 52);
             this.text1.Name = "text1";
             this.text1.Size = new System.Drawing.Size(91, 29);
             this.text1.TabIndex = 2;
             this.text1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.text1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.text1_KeyPress);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox1.Location = new System.Drawing.Point(103, 145);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(91, 29);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(12, 100);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(251, 28);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "VALOR DE QUANTUM:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -71,6 +94,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PowderBlue;
             this.ClientSize = new System.Drawing.Size(292, 262);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.text1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ok_button);
@@ -86,5 +111,7 @@
         private Button ok_button;
         private Label label1;
         public TextBox text1;
+        public TextBox textBox1;
+        private Label label2;
     }
 }
