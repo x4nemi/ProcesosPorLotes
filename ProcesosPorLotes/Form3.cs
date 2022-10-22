@@ -209,7 +209,7 @@ namespace ProcesosPorLotes
         
         private string FormatoListos(Procesos p)
         {
-            return ("ID: " + p.Id.ToString() + "\t" + "TME: " + p.Tiempo.ToString() + "\t" + "TT: " + (p.TiempoT-1 < 0 ? 0 : p.TiempoT-1).ToString());
+            return ("ID: " + p.Id.ToString() + "\t" + "TME: " + p.Tiempo.ToString() + "\t" + "TT: " + (p.TiempoT).ToString());
         }
         
         private string FormatoTerminados(Procesos p)
@@ -257,8 +257,8 @@ namespace ProcesosPorLotes
                     if (TQ > quantum)
                     {
                         timer1.Stop();
-                        Proceso.TiempoR = TR;
-                        Proceso.TiempoT = TT;
+                        Proceso.TiempoR = TR+1;
+                        Proceso.TiempoT = TT-1;
                         Listos.Agregar(Proceso);
                         break;
                     }

@@ -102,7 +102,7 @@ namespace ProcesosPorLotes
         {
             //p.TiempoEspera = p.TiempoRetorno - p.TiempoServicio - 1;
             p.TiempoRetorno = TiempoGlobal - p.TiempoLlegada - 1;
-            string tiempoServicio = p.TiempoT == 0 ? "0" : (p.TiempoT-1).ToString();
+            string tiempoServicio = p.TiempoT == 0 ? "0" : (p.TiempoT).ToString();
             p.TiempoEspera = (TiempoGlobal - p.TiempoLlegada -1) - Int32.Parse(tiempoServicio);
             string tiempoRespuesta = p.TiempoRespuesta == -1 ? "Null" : p.TiempoRespuesta.ToString() ;
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
@@ -122,8 +122,8 @@ namespace ProcesosPorLotes
         
         private string[] FormatoEnEjecucion(Procesos p)
         {
-            string tiempoServicio = (p.TiempoT-1).ToString() == "-1" ? "0" : (p.TiempoT - 1).ToString();
-            p.TiempoEspera = (TiempoGlobal - p.TiempoLlegada - 1) - Int32.Parse(tiempoServicio);
+            string tiempoServicio = (p.TiempoT).ToString() == "-1" ? "0" : (p.TiempoT).ToString();
+            p.TiempoEspera = (TiempoGlobal - p.TiempoLlegada) - Int32.Parse(tiempoServicio);
             string tiempoRespuesta = p.TiempoRespuesta == -1 ? "Null" : p.TiempoRespuesta.ToString();
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
             //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante
@@ -133,7 +133,7 @@ namespace ProcesosPorLotes
 
         private string[] FormatoBloqueados(Procesos p)
         {
-            string tiempoServicio = (p.TiempoT - 1).ToString();
+            string tiempoServicio = (p.TiempoT -1).ToString();
             p.TiempoEspera = (TiempoGlobal - p.TiempoLlegada - 1) - Int32.Parse(tiempoServicio);
             string tiempoRespuesta = p.TiempoRespuesta == -1 ? "Null" : p.TiempoRespuesta.ToString();
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
