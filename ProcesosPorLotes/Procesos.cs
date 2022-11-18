@@ -26,6 +26,7 @@ namespace ProcesosPorLotes
         private int tesp; // Tiempo de espera
         private int ts; // Tiempo de servicio
         private string res;
+        private int tam;
         
         public int Numpro { get => numpro; set => numpro = value; }
         public double Num1 { get => num1; set => num1 = value; }
@@ -44,7 +45,8 @@ namespace ProcesosPorLotes
         public int TiempoServicio { get => ts; set => ts = value; }
         public int TiempoFin { get => tf; set => tf = value; }
         public string Resultado { get => res; set => res = value; }
-        
+        public int Tamanio { get => tam; set => tam = value; }
+
         public Procesos() { }
         public Procesos(int numProceso, string nombre, int tiempo, double num1, double num2, string operacion, int aidi)
         {

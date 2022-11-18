@@ -61,6 +61,7 @@ namespace ProcesosPorLotes
         AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
         Procesos Proceso = new Procesos();
 
+        Memoria<Marco> Memory = new();
         int quantum;
 
         public Form3(AlmacenProcesos<Procesos> qu, string quantumValue)
@@ -148,14 +149,31 @@ namespace ProcesosPorLotes
         private void DividirListosNuevos()
         //Es para dividir los procesos que estan en la lista de procesos listos en 'lotes'
         {
-            int unProceso = running ? 1 : 0;
-            while (Listos.Tam() + Bloqueado.Count + unProceso < 3 && !Nuevos.EsVacia() )
+            //int unProceso = running ? 1 : 0;
+            //while (Listos.Tam() + Bloqueado.Count + unProceso < 3 && !Nuevos.EsVacia() )
+
+            //MessageBox.Show(Memory.Disponibles().ToString());
+            while(Memory.Disponibles() > 0 && !Nuevos.EsVacia())
             {
                 Procesos p = new();
+                p = Nuevos.Regresar();
+                int nMarcos = p.Tamanio / 5 + (p.Tamanio % 5 > 0 ? 1 : 0);
+                if (Memory.Disponibles() < nMarcos) break;
                 p = Nuevos.Ejecutar();
                 visitados[p.Id - 1] = true;
                 p.TiempoLlegada = TiempoGlob;
                 Listos.Agregar(p);
+                Memory.AgregarProceso(p);
+            }
+            if (!Nuevos.EsVacia())
+            {
+                PorEntrarLabel.Show();
+            NuevoIDLabel.Text = "ID: " + Nuevos.Regresar().Id.ToString();
+            NuevoTamLabel.Text = "Tamaño: " + Nuevos.Regresar().Tamanio.ToString();
+            }
+            else
+            {
+                PorEntrarLabel.Hide();
             }
         }
         
@@ -164,6 +182,7 @@ namespace ProcesosPorLotes
             procesosListosList.Items.Clear();
             foreach (Procesos p in Listos.Cola)
             {
+                Memory.MarcoBlockListoProceso(p.Id, "Listo");
                 procesosListosList.Items.Add(FormatoListos(p));
             }
             ProcesosNuevosLabel.Text = "Procesos nuevos: " + Nuevos.Tam().ToString();
@@ -172,6 +191,7 @@ namespace ProcesosPorLotes
 
         private void AgregarTerminadosList(Procesos p)
         {
+            Memory.LiberarMarco(p.Id);
             p.TiempoFin = TiempoGlob;
             p.TiempoServicio = TT - 1;
             Terminados.Agregar(p);
@@ -188,6 +208,7 @@ namespace ProcesosPorLotes
             {
                 Procesos p = new(1, "", 1, 1, 1, "", 1);
                 p = Bloqueado[i];
+                Memory.MarcoBlockListoProceso(p.Id, "Bloqueado");
 
                 if (tiempoBlocked[p.Id - 1] == -1)
                 {
@@ -234,6 +255,7 @@ namespace ProcesosPorLotes
             {
                 //Procesos p = new(1, "", 1, 1, 1, "", 1);
                 Proceso = Listos.Ejecutar();
+                Memory.MarcoBlockListoProceso(Proceso.Id, "En Proceso");
                 DividirListosNuevos();
                 AgregarListosList();
                 // Si es -1 significa que no se ha inicializado y si no, significa que ya se hizo y se tomará ese valor
@@ -495,6 +517,34 @@ namespace ProcesosPorLotes
                             timer3.Start();
                         }
                         
+                        break;
+                    case Keys.T:
+                        TeclaAccionLabel.Text = "Tabla de páginas";
+
+                        if (running)
+                        {
+                            Proceso.TiempoR = TR;
+                            Proceso.TiempoT = TT;
+                        }
+                        pause = true;
+                        if (!running)
+                        {
+                            timer2.Stop();
+                            timer3.Stop();
+                        }
+                        this.Hide();
+                        TablaDePaginas formp = new TablaDePaginas(Memory);
+                        formp.ShowDialog();
+                        formp = null;
+                        this.Show();
+
+                        pause = false;
+                        if (!running)
+                        {
+                            timer2.Start();
+                            timer3.Start();
+                        }
+
                         break;
                 }
             }         

@@ -57,6 +57,9 @@
             this.ProcesosNuevosLabel = new System.Windows.Forms.Label();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.QuantumValueLabel = new System.Windows.Forms.Label();
+            this.PorEntrarLabel = new System.Windows.Forms.Label();
+            this.NuevoIDLabel = new System.Windows.Forms.Label();
+            this.NuevoTamLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -69,9 +72,9 @@
             this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel1.Controls.Add(this.procesosListosList);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(12, 148);
+            this.panel1.Location = new System.Drawing.Point(12, 214);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(285, 357);
+            this.panel1.Size = new System.Drawing.Size(285, 358);
             this.panel1.TabIndex = 0;
             // 
             // procesosListosList
@@ -80,7 +83,7 @@
             this.procesosListosList.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.procesosListosList.FormattingEnabled = true;
             this.procesosListosList.ItemHeight = 21;
-            this.procesosListosList.Location = new System.Drawing.Point(12, 68);
+            this.procesosListosList.Location = new System.Drawing.Point(12, 55);
             this.procesosListosList.Name = "procesosListosList";
             this.procesosListosList.Size = new System.Drawing.Size(255, 277);
             this.procesosListosList.TabIndex = 1;
@@ -89,7 +92,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 11);
+            this.label1.Location = new System.Drawing.Point(12, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(168, 32);
             this.label1.TabIndex = 0;
@@ -198,7 +201,7 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(610, 80);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(365, 425);
+            this.panel3.Size = new System.Drawing.Size(365, 492);
             this.panel3.TabIndex = 2;
             // 
             // terminadosList
@@ -209,7 +212,7 @@
             this.terminadosList.ItemHeight = 21;
             this.terminadosList.Location = new System.Drawing.Point(14, 68);
             this.terminadosList.Name = "terminadosList";
-            this.terminadosList.Size = new System.Drawing.Size(337, 340);
+            this.terminadosList.Size = new System.Drawing.Size(337, 403);
             this.terminadosList.TabIndex = 7;
             // 
             // label3
@@ -244,7 +247,7 @@
             this.panel4.Controls.Add(this.LoteEPLabel);
             this.panel4.Location = new System.Drawing.Point(303, 317);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(301, 188);
+            this.panel4.Size = new System.Drawing.Size(301, 255);
             this.panel4.TabIndex = 4;
             // 
             // bloqueadosList
@@ -253,7 +256,7 @@
             this.bloqueadosList.ItemHeight = 15;
             this.bloqueadosList.Location = new System.Drawing.Point(12, 66);
             this.bloqueadosList.Name = "bloqueadosList";
-            this.bloqueadosList.Size = new System.Drawing.Size(272, 109);
+            this.bloqueadosList.Size = new System.Drawing.Size(272, 169);
             this.bloqueadosList.TabIndex = 1;
             // 
             // LoteEPLabel
@@ -287,7 +290,7 @@
             this.TeclaPresionadaLabel.AutoSize = true;
             this.TeclaPresionadaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.TeclaPresionadaLabel.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.TeclaPresionadaLabel.Location = new System.Drawing.Point(12, 516);
+            this.TeclaPresionadaLabel.Location = new System.Drawing.Point(12, 575);
             this.TeclaPresionadaLabel.Name = "TeclaPresionadaLabel";
             this.TeclaPresionadaLabel.Size = new System.Drawing.Size(19, 21);
             this.TeclaPresionadaLabel.TabIndex = 6;
@@ -298,7 +301,7 @@
             this.TeclaAccionLabel.AutoSize = true;
             this.TeclaAccionLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.TeclaAccionLabel.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.TeclaAccionLabel.Location = new System.Drawing.Point(818, 516);
+            this.TeclaAccionLabel.Location = new System.Drawing.Point(818, 575);
             this.TeclaAccionLabel.Name = "TeclaAccionLabel";
             this.TeclaAccionLabel.Size = new System.Drawing.Size(22, 21);
             this.TeclaAccionLabel.TabIndex = 7;
@@ -307,10 +310,13 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Thistle;
+            this.panel5.Controls.Add(this.NuevoTamLabel);
+            this.panel5.Controls.Add(this.NuevoIDLabel);
+            this.panel5.Controls.Add(this.PorEntrarLabel);
             this.panel5.Controls.Add(this.ProcesosNuevosLabel);
             this.panel5.Location = new System.Drawing.Point(12, 80);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(285, 62);
+            this.panel5.Size = new System.Drawing.Size(285, 123);
             this.panel5.TabIndex = 8;
             // 
             // ProcesosNuevosLabel
@@ -339,12 +345,42 @@
             this.QuantumValueLabel.TabIndex = 9;
             this.QuantumValueLabel.Text = "Valor de Quantum:";
             // 
+            // PorEntrarLabel
+            // 
+            this.PorEntrarLabel.AutoSize = true;
+            this.PorEntrarLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.PorEntrarLabel.Location = new System.Drawing.Point(12, 55);
+            this.PorEntrarLabel.Name = "PorEntrarLabel";
+            this.PorEntrarLabel.Size = new System.Drawing.Size(76, 20);
+            this.PorEntrarLabel.TabIndex = 10;
+            this.PorEntrarLabel.Text = "Por entrar:";
+            // 
+            // NuevoIDLabel
+            // 
+            this.NuevoIDLabel.AutoSize = true;
+            this.NuevoIDLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.NuevoIDLabel.Location = new System.Drawing.Point(12, 75);
+            this.NuevoIDLabel.Name = "NuevoIDLabel";
+            this.NuevoIDLabel.Size = new System.Drawing.Size(27, 20);
+            this.NuevoIDLabel.TabIndex = 11;
+            this.NuevoIDLabel.Text = "ID:";
+            // 
+            // NuevoTamLabel
+            // 
+            this.NuevoTamLabel.AutoSize = true;
+            this.NuevoTamLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.NuevoTamLabel.Location = new System.Drawing.Point(97, 75);
+            this.NuevoTamLabel.Name = "NuevoTamLabel";
+            this.NuevoTamLabel.Size = new System.Drawing.Size(64, 20);
+            this.NuevoTamLabel.TabIndex = 12;
+            this.NuevoTamLabel.Text = "Tamaño:";
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(987, 546);
+            this.ClientSize = new System.Drawing.Size(987, 629);
             this.Controls.Add(this.QuantumValueLabel);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.TeclaAccionLabel);
@@ -404,5 +440,8 @@
         private Label tmeLabel;
         private Label QuantumLabel;
         private Label QuantumValueLabel;
+        private Label NuevoTamLabel;
+        private Label NuevoIDLabel;
+        private Label PorEntrarLabel;
     }
 }

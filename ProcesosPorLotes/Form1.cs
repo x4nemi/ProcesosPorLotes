@@ -63,6 +63,7 @@ namespace ProcesosPorLotes
                 string operacion = operaciones[index];
                 double num1;
                 double num2;
+                int tamanio = new Random().Next(6, 29);
                 if( index == 5)
                 {
                     num1 = new Random().Next(1, 20);
@@ -76,6 +77,7 @@ namespace ProcesosPorLotes
 
 
                 Procesos p = new Procesos(id, nombre, tiempo, num1, num2, operacion, id );
+                p.Tamanio = tamanio;
                 qu.Agregar(p);
             }
             
