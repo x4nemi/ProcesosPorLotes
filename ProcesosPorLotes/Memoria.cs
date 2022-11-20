@@ -67,8 +67,8 @@ namespace ProcesosPorLotes
                     {
                         m.ProcesoID = p.Id;
                         m.Estado = "Listo";
-                        m.Ocupados = (tam > 5 ? 5 : tam);
-
+                        m.Ocupados = (tam >= 5 ? 5 : tam);
+                        //MessageBox.Show("Ocupados" + m.Ocupados.ToString() + "E " + m.Estado);
                         tam -= 5;
                     }
                     else
@@ -112,6 +112,14 @@ namespace ProcesosPorLotes
             }
 
             return dis;
+        }
+
+        public bool HayEspacio(Procesos p)
+        {
+            int tam = p.Tamanio;
+            int nMarcos = tam / 5 + (tam % 5 == 0 ? 0 : 1);
+
+            return nMarcos <= Disponibles();
         }
         
     }

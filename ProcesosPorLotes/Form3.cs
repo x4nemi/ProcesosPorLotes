@@ -153,12 +153,12 @@ namespace ProcesosPorLotes
             //while (Listos.Tam() + Bloqueado.Count + unProceso < 3 && !Nuevos.EsVacia() )
 
             //MessageBox.Show(Memory.Disponibles().ToString());
-            while(Memory.Disponibles() > 0 && !Nuevos.EsVacia())
+            while(!Nuevos.EsVacia() && Memory.HayEspacio(Nuevos.Regresar()))
             {
+                PorEntrarLabel.Show();
+                NuevoIDLabel.Text = "ID: " + Nuevos.Cola.Peek().Id.ToString();
+                NuevoTamLabel.Text = "Tamaño: " + Nuevos.Cola.Peek().Tamanio.ToString();
                 Procesos p = new();
-                p = Nuevos.Regresar();
-                int nMarcos = p.Tamanio / 5 + (p.Tamanio % 5 > 0 ? 1 : 0);
-                if (Memory.Disponibles() < nMarcos) break;
                 p = Nuevos.Ejecutar();
                 visitados[p.Id - 1] = true;
                 p.TiempoLlegada = TiempoGlob;
@@ -168,12 +168,12 @@ namespace ProcesosPorLotes
             if (!Nuevos.EsVacia())
             {
                 PorEntrarLabel.Show();
-            NuevoIDLabel.Text = "ID: " + Nuevos.Regresar().Id.ToString();
-            NuevoTamLabel.Text = "Tamaño: " + Nuevos.Regresar().Tamanio.ToString();
-            }
-            else
-            {
+                NuevoIDLabel.Text = "ID: " + Nuevos.Cola.Peek().Id.ToString();
+                NuevoTamLabel.Text = "Tamaño: " + Nuevos.Cola.Peek().Tamanio.ToString();
+            } else{
                 PorEntrarLabel.Hide();
+                NuevoIDLabel.Hide();
+                NuevoTamLabel.Hide();
             }
         }
         
@@ -578,6 +578,7 @@ namespace ProcesosPorLotes
 
 
             Procesos p = new Procesos(id, nombre, tiempo, num1, num2, operacion, id);
+            p.Tamanio = new Random().Next(6, 29);
             Nuevos.Agregar(p);
         }
 
