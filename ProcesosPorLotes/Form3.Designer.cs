@@ -33,6 +33,7 @@
             this.procesosListosList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.TamanioLabel = new System.Windows.Forms.Label();
             this.QuantumLabel = new System.Windows.Forms.Label();
             this.tmeLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,12 +55,12 @@
             this.TeclaPresionadaLabel = new System.Windows.Forms.Label();
             this.TeclaAccionLabel = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.NuevoTamLabel = new System.Windows.Forms.Label();
+            this.NuevoIDLabel = new System.Windows.Forms.Label();
+            this.PorEntrarLabel = new System.Windows.Forms.Label();
             this.ProcesosNuevosLabel = new System.Windows.Forms.Label();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.QuantumValueLabel = new System.Windows.Forms.Label();
-            this.PorEntrarLabel = new System.Windows.Forms.Label();
-            this.NuevoIDLabel = new System.Windows.Forms.Label();
-            this.NuevoTamLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -101,6 +102,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.panel2.Controls.Add(this.TamanioLabel);
             this.panel2.Controls.Add(this.QuantumLabel);
             this.panel2.Controls.Add(this.tmeLabel);
             this.panel2.Controls.Add(this.label4);
@@ -113,6 +115,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(301, 231);
             this.panel2.TabIndex = 1;
+            // 
+            // TamanioLabel
+            // 
+            this.TamanioLabel.AutoSize = true;
+            this.TamanioLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TamanioLabel.Location = new System.Drawing.Point(154, 189);
+            this.TamanioLabel.Name = "TamanioLabel";
+            this.TamanioLabel.Size = new System.Drawing.Size(67, 21);
+            this.TamanioLabel.TabIndex = 11;
+            this.TamanioLabel.Text = "Tamaño:";
             // 
             // QuantumLabel
             // 
@@ -319,6 +331,36 @@
             this.panel5.Size = new System.Drawing.Size(285, 123);
             this.panel5.TabIndex = 8;
             // 
+            // NuevoTamLabel
+            // 
+            this.NuevoTamLabel.AutoSize = true;
+            this.NuevoTamLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.NuevoTamLabel.Location = new System.Drawing.Point(97, 75);
+            this.NuevoTamLabel.Name = "NuevoTamLabel";
+            this.NuevoTamLabel.Size = new System.Drawing.Size(64, 20);
+            this.NuevoTamLabel.TabIndex = 12;
+            this.NuevoTamLabel.Text = "Tamaño:";
+            // 
+            // NuevoIDLabel
+            // 
+            this.NuevoIDLabel.AutoSize = true;
+            this.NuevoIDLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.NuevoIDLabel.Location = new System.Drawing.Point(12, 75);
+            this.NuevoIDLabel.Name = "NuevoIDLabel";
+            this.NuevoIDLabel.Size = new System.Drawing.Size(27, 20);
+            this.NuevoIDLabel.TabIndex = 11;
+            this.NuevoIDLabel.Text = "ID:";
+            // 
+            // PorEntrarLabel
+            // 
+            this.PorEntrarLabel.AutoSize = true;
+            this.PorEntrarLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.PorEntrarLabel.Location = new System.Drawing.Point(12, 55);
+            this.PorEntrarLabel.Name = "PorEntrarLabel";
+            this.PorEntrarLabel.Size = new System.Drawing.Size(76, 20);
+            this.PorEntrarLabel.TabIndex = 10;
+            this.PorEntrarLabel.Text = "Por entrar:";
+            // 
             // ProcesosNuevosLabel
             // 
             this.ProcesosNuevosLabel.AutoSize = true;
@@ -344,36 +386,6 @@
             this.QuantumValueLabel.Size = new System.Drawing.Size(155, 23);
             this.QuantumValueLabel.TabIndex = 9;
             this.QuantumValueLabel.Text = "Valor de Quantum:";
-            // 
-            // PorEntrarLabel
-            // 
-            this.PorEntrarLabel.AutoSize = true;
-            this.PorEntrarLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.PorEntrarLabel.Location = new System.Drawing.Point(12, 55);
-            this.PorEntrarLabel.Name = "PorEntrarLabel";
-            this.PorEntrarLabel.Size = new System.Drawing.Size(76, 20);
-            this.PorEntrarLabel.TabIndex = 10;
-            this.PorEntrarLabel.Text = "Por entrar:";
-            // 
-            // NuevoIDLabel
-            // 
-            this.NuevoIDLabel.AutoSize = true;
-            this.NuevoIDLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.NuevoIDLabel.Location = new System.Drawing.Point(12, 75);
-            this.NuevoIDLabel.Name = "NuevoIDLabel";
-            this.NuevoIDLabel.Size = new System.Drawing.Size(27, 20);
-            this.NuevoIDLabel.TabIndex = 11;
-            this.NuevoIDLabel.Text = "ID:";
-            // 
-            // NuevoTamLabel
-            // 
-            this.NuevoTamLabel.AutoSize = true;
-            this.NuevoTamLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.NuevoTamLabel.Location = new System.Drawing.Point(97, 75);
-            this.NuevoTamLabel.Name = "NuevoTamLabel";
-            this.NuevoTamLabel.Size = new System.Drawing.Size(64, 20);
-            this.NuevoTamLabel.TabIndex = 12;
-            this.NuevoTamLabel.Text = "Tamaño:";
             // 
             // Form3
             // 
@@ -443,5 +455,6 @@
         private Label NuevoTamLabel;
         private Label NuevoIDLabel;
         private Label PorEntrarLabel;
+        private Label TamanioLabel;
     }
 }

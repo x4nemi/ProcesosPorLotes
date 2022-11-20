@@ -165,16 +165,7 @@ namespace ProcesosPorLotes
                 Listos.Agregar(p);
                 Memory.AgregarProceso(p);
             }
-            if (!Nuevos.EsVacia())
-            {
-                PorEntrarLabel.Show();
-                NuevoIDLabel.Text = "ID: " + Nuevos.Cola.Peek().Id.ToString();
-                NuevoTamLabel.Text = "Tamaño: " + Nuevos.Cola.Peek().Tamanio.ToString();
-            } else{
-                PorEntrarLabel.Hide();
-                NuevoIDLabel.Hide();
-                NuevoTamLabel.Hide();
-            }
+            
         }
         
         private void AgregarListosList()
@@ -186,6 +177,18 @@ namespace ProcesosPorLotes
                 procesosListosList.Items.Add(FormatoListos(p));
             }
             ProcesosNuevosLabel.Text = "Procesos nuevos: " + Nuevos.Tam().ToString();
+            if (!Nuevos.EsVacia())
+            {
+                PorEntrarLabel.Show();
+                NuevoIDLabel.Text = "ID: " + Nuevos.Cola.Peek().Id.ToString();
+                NuevoTamLabel.Text = "Tamaño: " + Nuevos.Cola.Peek().Tamanio.ToString();
+            }
+            else
+            {
+                PorEntrarLabel.Hide();
+                NuevoIDLabel.Hide();
+                NuevoTamLabel.Hide();
+            }
         }
 
 
@@ -270,7 +273,8 @@ namespace ProcesosPorLotes
                 IDLabel.Text = "ID: " + Proceso.Id.ToString();
                 OperacionLabel.Text = "Operación: " + Proceso.Num1.ToString() + operador(Proceso.Operacion) + Proceso.Num2.ToString();
                 tmeLabel.Text = "TME: " + Proceso.Tiempo.ToString() + " segundos";
-                
+                TamanioLabel.Text = "Tamaño: " + Proceso.Tamanio.ToString() + " frames";
+
                 int tiempoWhile = Proceso.TiempoR == 0 ? Proceso.Tiempo : Proceso.TiempoR;
 
                 int k = 0;

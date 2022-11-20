@@ -48,60 +48,34 @@ namespace ProcesosPorLotes
             foreach (Marco m in Memoria.Lista)
             {
                 index = j % 2 == 0 ? j / 2 : (j-1) / 2;
+                Color c = Color.White;
                 switch (m.Estado)
                 {
                     case "Bloqueado":
-                        if(j% 2 == 0)
-                        {
-                            dataGridView1.Rows[index].Cells[2].Style.BackColor = Color.Red;
-                        }
-                        else
-                        {
-                            dataGridView2.Rows[index].Cells[2].Style.BackColor = Color.Red; 
-                        }
+                        c = Color.Red;
                         break;
                     case "Disponible":
-                        if (j % 2 == 0)
-                        {
-                            dataGridView1.Rows[index].Cells[2].Style.BackColor = Color.Green;
-                        }
-                        else
-                        {
-                            dataGridView2.Rows[index].Cells[2].Style.BackColor = Color.Green;
-                        }
+                        c = Color.Green;
                         break;
                     case "SO":
-
-                        if (j % 2 == 0)
-                        {
-                            dataGridView1.Rows[index].Cells[2].Style.BackColor = Color.Blue;
-                        }
-                        else
-                        {
-                            dataGridView2.Rows[index].Cells[2].Style.BackColor = Color.Blue;
-                        }
+                        c = Color.Blue;
                         break;
                     case "Listo":
-                        if (j % 2 == 0)
-                        {
-                            dataGridView1.Rows[index].Cells[2].Style.BackColor = Color.Yellow;
-                        }
-                        else
-                        {
-                            dataGridView2.Rows[index].Cells[2].Style.BackColor = Color.Yellow;
-                        }
+                        c = Color.Yellow;
                         break;
                     case "En Proceso":
-                        if (j % 2 == 0)
-                        {
-                            dataGridView1.Rows[index].Cells[2].Style.BackColor = Color.Orange;
-                        }
-                        else
-                        {
-                            dataGridView2.Rows[index].Cells[2].Style.BackColor = Color.Orange;
-                        }
+                        c = Color.Orange;
                         break;
 
+                }
+
+                if (j % 2 == 0)
+                {
+                    dataGridView1.Rows[index].Cells[2].Style.BackColor = c;
+                }
+                else
+                {
+                    dataGridView2.Rows[index].Cells[2].Style.BackColor = c;
                 }
                 j++;
             }
