@@ -59,6 +59,7 @@ namespace ProcesosPorLotes
         List<Procesos> Bloqueado = new List<Procesos>();
         AlmacenProcesos<Procesos> Nuevos = new AlmacenProcesos<Procesos>();
         AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
+        AlmacenProcesos<Procesos> Suspendidos = new AlmacenProcesos<Procesos>();
         Procesos Proceso = new Procesos();
 
         Memoria<Marco> Memory = new();
@@ -131,6 +132,7 @@ namespace ProcesosPorLotes
         bool error = false;
         bool pause = false;
         bool interrupcion = false;
+        bool suspendido = false;
 
         bool running = false;
 
@@ -165,7 +167,19 @@ namespace ProcesosPorLotes
                 Listos.Agregar(p);
                 Memory.AgregarProceso(p);
             }
-            
+            if (!Nuevos.EsVacia())
+            {
+                PorEntrarLabel.Show();
+                NuevoIDLabel.Text = "ID: " + Nuevos.Cola.Peek().Id.ToString();
+                NuevoTamLabel.Text = "Tamaño: " + Nuevos.Cola.Peek().Tamanio.ToString();
+            }
+            else if (Nuevos.EsVacia())
+            {
+                PorEntrarLabel.Hide();
+                NuevoIDLabel.Text = "ID: ";
+                NuevoTamLabel.Text = "Tamaño: ";
+            }
+
         }
         
         private void AgregarListosList()
@@ -183,11 +197,11 @@ namespace ProcesosPorLotes
                 NuevoIDLabel.Text = "ID: " + Nuevos.Cola.Peek().Id.ToString();
                 NuevoTamLabel.Text = "Tamaño: " + Nuevos.Cola.Peek().Tamanio.ToString();
             }
-            else
+            else if (Nuevos.EsVacia())
             {
                 PorEntrarLabel.Hide();
-                NuevoIDLabel.Hide();
-                NuevoTamLabel.Hide();
+                NuevoIDLabel.Text = "ID: ";
+                NuevoTamLabel.Text = "Tamaño: ";
             }
         }
 
@@ -222,12 +236,55 @@ namespace ProcesosPorLotes
 
                     i--;
                 }
+                else if (suspendido && i == 0)//tiempoBlocked[p.Id - 1] == tiempoBlocked.Max())
+                {
+                    Bloqueado.Remove(p);
+                    Suspendidos.Agregar(p);
+                    IDSuspendidoLabel.Text = "ID: " + Suspendidos.Regresar().Id.ToString();
+                    TamSuspendidoLabel.Text = "Tam: " + Suspendidos.Regresar().Tamanio.ToString();
+                    Memory.LiberarMarco(p.Id);
+                    DividirListosNuevos();
+                    AgregarListosList();
+                    suspendido = false;
+                    AgregarSuspendidosTXT();
+                }
                 else
                 {
                     bloqueadosList.Items.Add(FormatoBloqueados(p.Id));
                 }
 
                 i++;
+            }
+        }
+
+        private void AgregarSuspendidosTXT()
+        {
+            string fileName = @"..\\..\\..\\Suspendidos.txt";
+
+            try
+            {
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+
+                using (StreamWriter sw = File.CreateText(fileName))
+                {
+                    sw.WriteLine("Procesos Suspendidos");
+                    sw.WriteLine("-------------------------------------------");
+                    foreach (Procesos p in Suspendidos.Cola)
+                    {
+                        sw.WriteLine("ID: " + p.Id.ToString());
+                        sw.WriteLine("Tamaño: " +p.Tamanio.ToString());
+                        sw.WriteLine("Operaciòn: " + p.Num1.ToString() + operador( p.Operacion) + p.Num2.ToString());
+                        sw.WriteLine("TME: " +p.Tiempo.ToString());
+                        sw.WriteLine("-------------------------------------------");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
         
@@ -273,7 +330,7 @@ namespace ProcesosPorLotes
                 IDLabel.Text = "ID: " + Proceso.Id.ToString();
                 OperacionLabel.Text = "Operación: " + Proceso.Num1.ToString() + operador(Proceso.Operacion) + Proceso.Num2.ToString();
                 tmeLabel.Text = "TME: " + Proceso.Tiempo.ToString() + " segundos";
-                TamanioLabel.Text = "Tamaño: " + Proceso.Tamanio.ToString() + " frames";
+                TamanioLabel.Text = "Tamaño: " + Proceso.Tamanio.ToString();
 
                 int tiempoWhile = Proceso.TiempoR == 0 ? Proceso.Tiempo : Proceso.TiempoR;
 
@@ -379,7 +436,7 @@ namespace ProcesosPorLotes
        
         private bool TodoVacio()
         {
-            return Bloqueado.Count == 0 && Listos.Tam() == 0 && Nuevos.Tam() == 0 && !running;
+            return Bloqueado.Count == 0 && Listos.Tam() == 0 && Nuevos.Tam() == 0 && !running && Suspendidos.Tam() == 0;
         }
 
 
@@ -547,6 +604,37 @@ namespace ProcesosPorLotes
                         {
                             timer2.Start();
                             timer3.Start();
+                        }
+                        break;
+
+                    case Keys.S:
+                        if (Bloqueado.Count > 0)
+                        {
+                            TeclaAccionLabel.Text = "Proceso suspendido";
+                            suspendido = true;
+                        }
+                        break;
+
+                    case Keys.R:
+                        if (Suspendidos.Tam() > 0 && Memory.HayEspacio(Suspendidos.Regresar()))
+                        {
+                            TeclaAccionLabel.Text = "Proceso regresado";
+                            Nuevos.Agregar(Suspendidos.Ejecutar());
+                            DividirListosNuevos();
+                            AgregarListosList();
+                            if(Suspendidos.Tam() > 0)
+                            {
+                                
+                            IDSuspendidoLabel.Text = "ID: " + Suspendidos.Regresar().Id.ToString();
+                            TamSuspendidoLabel.Text = "Tam: " + Suspendidos.Regresar().Tamanio.ToString();
+                            }
+                            else
+                            {
+                                IDSuspendidoLabel.Text = "ID: ";
+                                TamSuspendidoLabel.Text = "Tam: ";
+                            }
+                            AgregarSuspendidosTXT();
+
                         }
 
                         break;

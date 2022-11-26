@@ -61,11 +61,17 @@
             this.ProcesosNuevosLabel = new System.Windows.Forms.Label();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.QuantumValueLabel = new System.Windows.Forms.Label();
+            this.PorEntrarSLabel = new System.Windows.Forms.Panel();
+            this.NSuspendidosLabel = new System.Windows.Forms.Label();
+            this.TamSuspendidoLabel = new System.Windows.Forms.Label();
+            this.IDSuspendidoLabel = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.PorEntrarSLabel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -213,7 +219,7 @@
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(610, 80);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(365, 492);
+            this.panel3.Size = new System.Drawing.Size(365, 390);
             this.panel3.TabIndex = 2;
             // 
             // terminadosList
@@ -224,7 +230,7 @@
             this.terminadosList.ItemHeight = 21;
             this.terminadosList.Location = new System.Drawing.Point(14, 68);
             this.terminadosList.Name = "terminadosList";
-            this.terminadosList.Size = new System.Drawing.Size(337, 403);
+            this.terminadosList.Size = new System.Drawing.Size(337, 298);
             this.terminadosList.TabIndex = 7;
             // 
             // label3
@@ -387,12 +393,65 @@
             this.QuantumValueLabel.TabIndex = 9;
             this.QuantumValueLabel.Text = "Valor de Quantum:";
             // 
+            // PorEntrarSLabel
+            // 
+            this.PorEntrarSLabel.BackColor = System.Drawing.Color.Honeydew;
+            this.PorEntrarSLabel.Controls.Add(this.TamSuspendidoLabel);
+            this.PorEntrarSLabel.Controls.Add(this.IDSuspendidoLabel);
+            this.PorEntrarSLabel.Controls.Add(this.label8);
+            this.PorEntrarSLabel.Controls.Add(this.NSuspendidosLabel);
+            this.PorEntrarSLabel.Location = new System.Drawing.Point(610, 476);
+            this.PorEntrarSLabel.Name = "PorEntrarSLabel";
+            this.PorEntrarSLabel.Size = new System.Drawing.Size(365, 96);
+            this.PorEntrarSLabel.TabIndex = 10;
+            // 
+            // NSuspendidosLabel
+            // 
+            this.NSuspendidosLabel.AutoSize = true;
+            this.NSuspendidosLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.NSuspendidosLabel.Location = new System.Drawing.Point(14, 14);
+            this.NSuspendidosLabel.Name = "NSuspendidosLabel";
+            this.NSuspendidosLabel.Size = new System.Drawing.Size(247, 32);
+            this.NSuspendidosLabel.TabIndex = 8;
+            this.NSuspendidosLabel.Text = "Procesos suspendidos";
+            // 
+            // TamSuspendidoLabel
+            // 
+            this.TamSuspendidoLabel.AutoSize = true;
+            this.TamSuspendidoLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TamSuspendidoLabel.Location = new System.Drawing.Point(99, 66);
+            this.TamSuspendidoLabel.Name = "TamSuspendidoLabel";
+            this.TamSuspendidoLabel.Size = new System.Drawing.Size(64, 20);
+            this.TamSuspendidoLabel.TabIndex = 15;
+            this.TamSuspendidoLabel.Text = "Tamaño:";
+            // 
+            // IDSuspendidoLabel
+            // 
+            this.IDSuspendidoLabel.AutoSize = true;
+            this.IDSuspendidoLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.IDSuspendidoLabel.Location = new System.Drawing.Point(14, 66);
+            this.IDSuspendidoLabel.Name = "IDSuspendidoLabel";
+            this.IDSuspendidoLabel.Size = new System.Drawing.Size(27, 20);
+            this.IDSuspendidoLabel.TabIndex = 14;
+            this.IDSuspendidoLabel.Text = "ID:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(14, 46);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(76, 20);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Por entrar:";
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(987, 629);
+            this.Controls.Add(this.PorEntrarSLabel);
             this.Controls.Add(this.QuantumValueLabel);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.TeclaAccionLabel);
@@ -417,6 +476,8 @@
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.PorEntrarSLabel.ResumeLayout(false);
+            this.PorEntrarSLabel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,5 +517,10 @@
         private Label NuevoIDLabel;
         private Label PorEntrarLabel;
         private Label TamanioLabel;
+        private Panel PorEntrarSLabel;
+        private Label TamSuspendidoLabel;
+        private Label IDSuspendidoLabel;
+        private Label label8;
+        private Label NSuspendidosLabel;
     }
 }

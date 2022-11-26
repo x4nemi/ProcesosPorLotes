@@ -21,20 +21,23 @@ namespace ProcesosPorLotes
             InitializeComponent();
 
             Memoria = m;
+            Tablas();
 
             this.KeyPreview = true;
         }
 
         private void TablaDePaginas_Load(object sender, EventArgs e)
         {
+            
+        }
+
+        private void Tablas() {
             int i = 0;
             foreach (Marco m in Memoria.Lista)
             {
-                string[] row = { i.ToString(), m.ProcesoID.ToString(), m.Ocupados.ToString()+"/5", m.Estado };
+                string[] row = { i.ToString(), (m.ProcesoID == -1 ? (i >= 40 ? "SO" :"N/A") : m.ProcesoID.ToString()), m.Ocupados.ToString()+"/5", m.Estado };
                 if(i % 2 == 0) {
                     dataGridView1.Rows.Add(row);
-                    
-                    
                 }
                 else
                 {
