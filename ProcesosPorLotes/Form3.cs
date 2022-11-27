@@ -248,6 +248,7 @@ namespace ProcesosPorLotes
                     AgregarListosList();
                     suspendido = false;
                     AgregarSuspendidosTXT();
+                    NSuspendidosLabel.Text = "Procesos suspendidos: " + Suspendidos.Tam();
                 }
                 else
                 {
@@ -613,6 +614,7 @@ namespace ProcesosPorLotes
                         {
                             TeclaAccionLabel.Text = "Proceso suspendido";
                             suspendido = true;
+                            
                         }
                         break;
 
@@ -627,6 +629,7 @@ namespace ProcesosPorLotes
                             Memory.AgregarProceso(p);
                             Memory.MarcoBlockListoProceso(p.Id, "Bloqueado");
                             timer3.Start();
+                            NSuspendidosLabel.Text = "Procesos suspendidos: " + Suspendidos.Tam();
                             if (Suspendidos.Tam() > 0)
                             {
                                 IDSuspendidoLabel.Text = "ID: " + Suspendidos.Regresar().Id.ToString();
