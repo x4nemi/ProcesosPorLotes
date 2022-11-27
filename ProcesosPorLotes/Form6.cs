@@ -15,6 +15,7 @@ namespace ProcesosPorLotes
         AlmacenProcesos<Procesos> Nuevos = new AlmacenProcesos<Procesos>();
         AlmacenProcesos<Procesos> Listos = new AlmacenProcesos<Procesos>();
         AlmacenProcesos<Procesos> Terminados = new AlmacenProcesos<Procesos>();
+        AlmacenProcesos<Procesos> Suspendidos = new AlmacenProcesos<Procesos>();
         List<Procesos> Bloqueados = new List<Procesos>();
         Procesos ProcesoEnEjecucion = new Procesos();
 
@@ -25,7 +26,7 @@ namespace ProcesosPorLotes
 
         int quantum;
 
-        public Form6(AlmacenProcesos<Procesos> N, AlmacenProcesos<Procesos> L, AlmacenProcesos<Procesos> T, List<Procesos> Bloqueado, Procesos p, int tiempoGlob, bool r, List<int> tiempoB, int quantumValue)
+        public Form6(AlmacenProcesos<Procesos> N, AlmacenProcesos<Procesos> L, AlmacenProcesos<Procesos> T, List<Procesos> Bloqueado, Procesos p, int tiempoGlob, bool r, List<int> tiempoB, int quantumValue, AlmacenProcesos<Procesos> Sus)
         {
             InitializeComponent();
             Nuevos = N;
@@ -37,6 +38,7 @@ namespace ProcesosPorLotes
             running = r;
             tiempoBloqueado = tiempoB;
             quantum = quantumValue;
+            Suspendidos = Sus;
 
             label1.Text = "Tiempo Global: " + (tiempoGlob-1).ToString() + "s";
             QuantumLabel.Text = "Valor de Quantum: " + quantum.ToString();
@@ -46,6 +48,7 @@ namespace ProcesosPorLotes
             if (!Listos.EsVacia()) AgregarListosLista();
             if (Bloqueados.Count > 0) AgregarBloqueadosLista();
             if(!Terminados.EsVacia()) AgregarTerminadosLista();
+            if (!Suspendidos.EsVacia()) AgregarSuspendidosLista();
 
             this.KeyPreview = true;
 
@@ -85,6 +88,14 @@ namespace ProcesosPorLotes
             foreach(Procesos p in Bloqueados)
             {
                 dataGridView1.Rows.Add(FormatoBloqueados(p));
+            }
+        }
+        
+        private void AgregarSuspendidosLista()
+        {
+            foreach(Procesos p in Suspendidos.Cola)
+            {
+                dataGridView1.Rows.Add(FormatoSuspendidos(p));
             }
         }
 
@@ -139,6 +150,17 @@ namespace ProcesosPorLotes
             string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
             //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante //Tiempo en bloqueado
             string[] row = { p.Id.ToString(), "Bloqueado", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante, tiempoBloqueado[p.Id - 1].ToString() };
+            return row;
+        }
+        
+        private string[] FormatoSuspendidos(Procesos p)
+        {
+            string tiempoServicio = (p.TiempoT -1).ToString();
+            p.TiempoEspera = (TiempoGlobal - p.TiempoLlegada - 1) - Int32.Parse(tiempoServicio);
+            string tiempoRespuesta = p.TiempoRespuesta == -1 ? "Null" : p.TiempoRespuesta.ToString();
+            string tiempoRestante = (p.Tiempo - Int32.Parse(tiempoServicio)).ToString();
+            //              ID                  Operación                                                                     Resultado       TME                     Llegada        Finalización  //Retorno           //Espera             //Respuesta   //Tiempo de Servicio    //Tiempo restante //Tiempo en bloqueado
+            string[] row = { p.Id.ToString(), "Suspendido", p.Num1.ToString() + " " + operador(p.Operacion) + " " + p.Num2.ToString(), "Null", p.Tiempo.ToString(), p.TiempoLlegada.ToString(), "Null", "Null", p.TiempoEspera.ToString(), tiempoRespuesta, tiempoServicio, tiempoRestante, (-tiempoBloqueado[p.Id - 1]).ToString() };
             return row;
         }
 

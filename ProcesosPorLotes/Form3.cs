@@ -239,6 +239,7 @@ namespace ProcesosPorLotes
                 else if (suspendido && i == 0)//tiempoBlocked[p.Id - 1] == tiempoBlocked.Max())
                 {
                     Bloqueado.Remove(p);
+                    tiempoBlocked[p.Id - 1] *= -1;
                     Suspendidos.Agregar(p);
                     IDSuspendidoLabel.Text = "ID: " + Suspendidos.Regresar().Id.ToString();
                     TamSuspendidoLabel.Text = "Tam: " + Suspendidos.Regresar().Tamanio.ToString();
@@ -472,7 +473,7 @@ namespace ProcesosPorLotes
             AgregarBloqueadosList();
             for (int i = 0; i < tiempoBlocked.Count; i++)
             {
-                if (tiempoBlocked[i] != -1) tiempoBlocked[i]++;
+                if (tiempoBlocked[i] > -1) tiempoBlocked[i]++;
 
                 if (tiempoBlocked[i] > 7)
                 {
@@ -566,7 +567,7 @@ namespace ProcesosPorLotes
                             timer3.Stop();
                         }
                         this.Hide();
-                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob, running, tiempoBlocked, quantum);
+                        Form6 form6 = new Form6(Nuevos, Listos, Terminados, Bloqueado, Proceso, TiempoGlob, running, tiempoBlocked, quantum, Suspendidos);
                         form6.ShowDialog();
                         form6 = null;
                         this.Show();
@@ -619,14 +620,17 @@ namespace ProcesosPorLotes
                         if (Suspendidos.Tam() > 0 && Memory.HayEspacio(Suspendidos.Regresar()))
                         {
                             TeclaAccionLabel.Text = "Proceso regresado";
-                            Nuevos.Agregar(Suspendidos.Ejecutar());
-                            DividirListosNuevos();
-                            AgregarListosList();
-                            if(Suspendidos.Tam() > 0)
+                            Procesos p = new();
+                            p = Suspendidos.Ejecutar();
+                            Bloqueado.Add(p);
+                            tiempoBlocked[p.Id - 1] *= -1;
+                            Memory.AgregarProceso(p);
+                            Memory.MarcoBlockListoProceso(p.Id, "Bloqueado");
+                            timer3.Start();
+                            if (Suspendidos.Tam() > 0)
                             {
-                                
-                            IDSuspendidoLabel.Text = "ID: " + Suspendidos.Regresar().Id.ToString();
-                            TamSuspendidoLabel.Text = "Tam: " + Suspendidos.Regresar().Tamanio.ToString();
+                                IDSuspendidoLabel.Text = "ID: " + Suspendidos.Regresar().Id.ToString();
+                                TamSuspendidoLabel.Text = "Tam: " + Suspendidos.Regresar().Tamanio.ToString();
                             }
                             else
                             {
